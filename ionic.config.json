@@ -1,0 +1,7 @@
+{
+  "name": "rst-meet-client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
