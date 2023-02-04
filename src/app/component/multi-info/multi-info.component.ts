@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { ItemInfoComponent } from '../../layout/tab1/item-info/item-info.component';
 
 @Component({
   selector: 'app-multi-info',
@@ -10,12 +11,10 @@ export class MultiInfoComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   ngAfterViewInit (): void {
   }
 
-  moveMeetingRoom () {
-
-  }
 }
