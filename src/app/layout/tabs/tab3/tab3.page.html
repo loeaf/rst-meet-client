@@ -1,17 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-title *ngIf="contentType === 'ChatList'" (click)="onBack()">
+      뒤로가기
+    </ion-title>
     <ion-title>
-      Tab 3
+      챗팅 정보
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-title size="large">챗팅정보</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-history-content></app-history-content>
+  <app-mychat-list-content *ngIf="contentType === 'MyChatList'" (onClickItem)="subClickItem()"></app-mychat-list-content>
+  <app-mychat-chat-content *ngIf="contentType === 'ChatList'"></app-mychat-chat-content>
 </ion-content>

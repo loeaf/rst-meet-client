@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LocationInfoComponent } from './location-info.component';
 import { IonicModule } from '@ionic/angular';
@@ -11,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
     CommonModule,
     IonicModule
   ],
-  exports: [LocationInfoComponent]
+  exports: [LocationInfoComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LocationInfoModule { }

@@ -12,7 +12,7 @@ import { LocationInfoModule } from '../../location-info/location-info.module';
     CommonModule,
     IonicModule,
     RstInfoModule,
-    LocationInfoModule
+    LocationInfoModule,
   ],
   exports: [RstListItemComponent],
   providers: []

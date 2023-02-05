@@ -13,6 +13,13 @@ export class SingleCardComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngAfterViewInit(): void {
+    // swiper card
+
+    var cardSwiper = new Swiper(".cardSwiper", {
+      effect: "cards",
+      grabCursor: true,
+    });
+
     const swiper = new Swiper('.swiper', {
       // Optional parameters
       direction: 'horizontal',

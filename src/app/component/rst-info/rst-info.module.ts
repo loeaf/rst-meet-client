@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RstInfoComponent } from './rst-info.component';
 import { IonicModule } from '@ionic/angular';
 import { TasteRoomListModule } from '../taste-room-list/taste-room-list.module';
+import { CreateChatContentModule } from '../../layout/tabs/tab1/create-chat-content/create-chat-content.module';
 
 
 
@@ -11,7 +12,8 @@ import { TasteRoomListModule } from '../taste-room-list/taste-room-list.module';
   imports: [
     CommonModule,
     IonicModule,
-    TasteRoomListModule
+    TasteRoomListModule,
+    CreateChatContentModule
   ],
   exports: [RstInfoComponent]
 })

@@ -52,4 +52,7 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
     }, 500);
   }
 
+  createChat () {
+
+  }
 }

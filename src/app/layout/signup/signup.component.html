@@ -1,3 +1,35 @@
-<p>
-  signup works!
-</p>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title (click)="onBack()">
+      뒤로가기
+    </ion-title>
+    <ion-title>
+      챗팅 정보
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<div style="width: 100%; height: 100%;
+            display: flex; align-items: center;
+            justify-content: center; flex-direction: column">
+  <ion-item style="width: 100%;">
+    <ion-label position="floating">이메일</ion-label>
+    <ion-input placeholder="Enter text"></ion-input>
+  </ion-item>
+  <ion-item style="width: 100%;">
+    <ion-label position="floating">비밀번호</ion-label>
+    <ion-input placeholder="Enter text"></ion-input>
+  </ion-item>
+  <ion-item style="width: 100%;">
+    <ion-label position="floating">비밀번호 확인</ion-label>
+    <ion-input placeholder="Enter text"></ion-input>
+  </ion-item><ion-list>
+  <ion-item style="width: 100%;">
+    <ion-select style="width: 100%" interface="popover" placeholder="MBTI">
+      <ion-select-option *ngFor="let mbti of mbtis" value="apples">{{mbti}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+  <div style="width: 50%;">
+    <ion-button style="width: 100%;" (click)="enterSignUp()">시작하기</ion-button>
+  </div>
+</div>

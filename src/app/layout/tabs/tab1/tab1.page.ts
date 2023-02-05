@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MainPageContentComponent } from './main-page-content/main-page-content.component';
+import { IonNavLink } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -8,6 +9,7 @@ import { MainPageContentComponent } from './main-page-content/main-page-content.
 })
 export class Tab1Page {
   component: any = MainPageContentComponent;
+
 
   constructor() {}
 

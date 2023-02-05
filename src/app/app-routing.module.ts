@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './layout/login/login.component';
+import { SignupComponent } from './layout/signup/signup.component';
+import { NologinIntroComponent } from './layout/nologin-intro/nologin-intro.component';
+import { TabsPage } from './layout/tabs/tabs.page';
 
 const routes: Routes = [
   {
@@ -8,11 +12,15 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./layout/login/login.module').then(m => m.LoginModule)
+    component: LoginComponent,
   },
   {
     path: 'signup',
-    loadChildren: () => import('./layout/signup/signup.module').then(m => m.SignupModule)
+    component: SignupComponent,
+  },
+  {
+    path: 'nologin-intro',
+    component: NologinIntroComponent,
   }
 ];
 @NgModule({

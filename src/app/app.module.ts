@@ -6,11 +6,21 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginModule } from './layout/login/login.module';
+import { SignupModule } from './layout/signup/signup.module';
+import { NologinIntroModule } from './layout/nologin-intro/nologin-intro.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [
+    BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    LoginModule,
+    SignupModule,
+    NologinIntroModule
+  ],
+  providers: [{
+    provide: RouteReuseStrategy,
+    useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

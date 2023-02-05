@@ -11,4 +11,7 @@ export class TasteListItemComponent implements OnInit {
 
   ngOnInit() {}
 
+  onClickItem () {
+    console.log('clicked');
+  }
 }

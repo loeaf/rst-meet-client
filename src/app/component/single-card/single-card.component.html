@@ -1,44 +1,50 @@
-<ion-card *ngFor="let item of items; let index">
-  <ion-card-header>
-    <ion-card-title>
-      <ion-item>
-        <ion-label style="display: flex; justify-content: space-between">
-          <p>
-            {{ item }}
-          </p>
-        </ion-label>
-        <ion-button size="small" class="bookmark">
-          <ion-icon slot="icon-only" name="bookmark"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <!-- Slider main container -->
-    <div class="swiper">
-      <!-- Additional required wrapper -->
-      <div class="swiper-wrapper">
-        <!-- Slides -->
-        <div class="swiper-slide">
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-        </div>
-        <div class="swiper-slide">
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-        </div>
-        <div class="swiper-slide">
-          <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
-        </div>
-      </div>
+<div class="swiper cardSwiper">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide" *ngFor="let item of items; let index">
+      <ion-card class="cardSwiper-slide" >
+        <ion-card-header>
+          <ion-card-title>
+            <ion-item>
+              <ion-label style="display: flex; justify-content: space-between">
+                <p>
+                  {{ item }}
+                </p>
+              </ion-label>
+              <ion-button size="small" class="bookmark">
+                <ion-icon slot="icon-only" name="bookmark"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <!-- Slider main container -->
+          <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+              </div>
+              <div class="swiper-slide">
+                <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+              </div>
+              <div class="swiper-slide">
+                <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+              </div>
+            </div>
+          </div>
+          <p>~~~ 감성을 느낄 수 있는 글 ~~~</p>
+          <div style="display: flex">
+            <p>#aaa</p>
+            <p>#aaa</p>
+            <p>#aaa</p>
+            <p>#aaa</p>
+          </div>
+          <ion-nav-link router-direction="forward" [component]="component">
+            <ion-button>정보 보기</ion-button>
+          </ion-nav-link>
+        </ion-card-content>
+      </ion-card>
     </div>
-    <p>~~~ 감성을 느낄 수 있는 글 ~~~</p>
-    <div style="display: flex">
-      <p>#aaa</p>
-      <p>#aaa</p>
-      <p>#aaa</p>
-      <p>#aaa</p>
-    </div>
-    <ion-nav-link router-direction="forward" [component]="component">
-      <ion-button>정보 보기</ion-button>
-    </ion-nav-link>
-  </ion-card-content>
-</ion-card>
+  </div>
+</div>

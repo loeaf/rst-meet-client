@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 // core version + navigation, pagination modules:
 import Swiper, { Navigation, Pagination } from 'swiper';
+import { CreateChatContentComponent } from '../../layout/tabs/tab1/create-chat-content/create-chat-content.component';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -10,10 +11,13 @@ Swiper.use([Navigation, Pagination]);
   styleUrls: ['./rst-info.component.scss'],
 })
 export class RstInfoComponent implements OnInit, AfterViewInit {
+  component: any;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.component = CreateChatContentComponent;
+  }
 
   initSwiper() {
     const swiper = new Swiper('.swiper', {

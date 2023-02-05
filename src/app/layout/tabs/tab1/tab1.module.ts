@@ -9,6 +9,8 @@ import { MainPageContentComponent } from './main-page-content/main-page-content.
 import { MultiInfoModule } from '../../../component/multi-info/multi-info.module';
 import { TasteRoomListModule } from '../../../component/taste-room-list/taste-room-list.module';
 import { TasteRoomContentModule } from './taste-room-content/taste-room-content.module';
+import { ChatContentModule } from './chat-content/chat-content.module';
+import { MainCardsContentModule } from './main-cards-content/main-cards-content.module';
 
 @NgModule({
   declarations: [Tab1Page, MainPageContentComponent],
@@ -21,7 +23,9 @@ import { TasteRoomContentModule } from './taste-room-content/taste-room-content.
     FormsModule,
     Tab1PageRoutingModule,
     MultiInfoModule,
-    TasteRoomContentModule
+    TasteRoomContentModule,
+    ChatContentModule,
+    MainCardsContentModule
   ]
 })
 export class Tab1PageModule {}

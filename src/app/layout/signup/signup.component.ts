@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -6,9 +7,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
+  mbtis: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.mbtis = [
+      'ISTJ',
+      'ESTJ',
+      'ISTP',
+      'ISFJ',
+      'ISFP',
+      'ESTP',
+      'ESFJ',
+      'ESFP',
+      'INTJ',
+      'ENTP',
+      'INFP',
+      'INTP',
+      'INFJ',
+      'ENFJ',
+      '모름',
+    ]
+  }
 
+  enterSignUp () {
+    this.router.navigateByUrl('/');
+  }
+
+  onBack () {
+    this.router.navigate(['/login']);
+  }
 }

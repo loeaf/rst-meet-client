@@ -2,7 +2,9 @@
   <ion-row>
     <ion-col style="position:relative;">
       <ion-list>
-        <app-taste-list-item></app-taste-list-item>
+        <ion-nav-link router-direction="forward" [component]="component">
+          <app-taste-list-item (click)="onClickItem('');"></app-taste-list-item>
+        </ion-nav-link>
       </ion-list>
     </ion-col>
   </ion-row>
