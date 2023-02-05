@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ItemInfoComponent } from './item-info.component';
+import { TasteListItemComponent } from './taste-list-item.component';
 import { IonicModule } from '@ionic/angular';
 
 
 
 @NgModule({
-  declarations: [ItemInfoComponent],
+  declarations: [TasteListItemComponent],
   imports: [
     CommonModule,
     IonicModule
   ],
-  exports: [ItemInfoComponent]
+  exports: [TasteListItemComponent]
 })
-export class ItemInfoModule { }
+export class TasteListItemModule { }

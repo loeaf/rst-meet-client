@@ -4,6 +4,8 @@ import { LocationInfoComponent } from '../../location-info/location-info.compone
 import { Clipboard } from '@capacitor/clipboard';
 import { IonToastService } from '../../../utiles/ion-toast.service';
 import { IonButton } from '@ionic/angular';
+import { TasteRoomListComponent } from '../../taste-room-list/taste-room-list.component';
+import { TasteRoomContentComponent } from '../../../layout/tabs/tab1/taste-room-content/taste-room-content.component';
 @Component({
   selector: 'app-rst-list-item',
   templateUrl: './rst-list-item.component.html',
@@ -12,12 +14,14 @@ import { IonButton } from '@ionic/angular';
 export class RstListItemComponent implements OnInit {
   rstInfoComponent: any;
   locationInfoComponent: any;
+  tasteRoomListComponent: any;
 
   constructor(private ionToastService: IonToastService) { }
 
   ngOnInit() {
     this.rstInfoComponent = RstInfoComponent;
     this.locationInfoComponent = LocationInfoComponent;
+    this.tasteRoomListComponent = TasteRoomContentComponent;
   }
   async onCopy (text: string) {
     await Clipboard.write({

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RstInfoComponent } from './rst-info.component';
 import { IonicModule } from '@ionic/angular';
+import { TasteRoomListModule } from '../taste-room-list/taste-room-list.module';
 
 
 
@@ -9,7 +10,8 @@ import { IonicModule } from '@ionic/angular';
   declarations: [RstInfoComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    TasteRoomListModule
   ],
   exports: [RstInfoComponent]
 })

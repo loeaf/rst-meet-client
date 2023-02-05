@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import Swiper from 'swiper';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { ItemInfoComponent } from '../../layout/tab1/item-info/item-info.component';
 
 @Component({
   selector: 'app-single-card',
@@ -39,7 +38,6 @@ export class SingleCardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.generateItems();
-    this.component = ItemInfoComponent;
   }
   private generateItems() {
     const count = this.items.length + 1;

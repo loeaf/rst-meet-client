@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import Swiper from 'swiper';
-import { ItemInfoComponent } from '../item-info/item-info.component';
 
 @Component({
   selector: 'app-main-page-content',
@@ -11,7 +10,6 @@ import { ItemInfoComponent } from '../item-info/item-info.component';
 })
 export class MainPageContentComponent implements OnInit, AfterViewInit {
   items: Array<string> = [];
-  component: any;
   constructor() { }
 
   ngAfterViewInit(): void {
@@ -40,7 +38,6 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.generateItems();
-    this.component = ItemInfoComponent;
   }
   private generateItems() {
     const count = this.items.length + 1;

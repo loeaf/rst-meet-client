@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { ItemInfoComponent } from '../../layout/tab1/item-info/item-info.component';
 
 @Component({
   selector: 'app-multi-info',
