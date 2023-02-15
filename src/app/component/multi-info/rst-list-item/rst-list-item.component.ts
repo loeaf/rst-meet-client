@@ -9,7 +9,7 @@ import { TasteRoomContentComponent } from '../../../layout/tabs/tab1/taste-room-
 import { HttpClient } from '@angular/common/http';
 import { RstListItemService } from './rst-list-item.service';
 import { environment } from '../../../../environments/environment';
-import { Restaurant } from '../../../model/Restaurant';
+import { Restaurant } from '../../../model/restaurant';
 import { Router } from '@angular/router';
 import { RstInfoService } from '../../rst-info/rst-info.service';
 @Component({
@@ -27,7 +27,8 @@ export class RstListItemComponent implements OnInit {
   constructor(private ionToastService: IonToastService,
               private httpClient: HttpClient,
               private rstListItemSvc: RstListItemService,
-              private rstInfoSvc: RstInfoService) { }
+              private rstInfoSvc: RstInfoService,
+              private router: Router) { }
 
   ngOnInit() {
     this.rstInfoComponent = RstInfoComponent;
@@ -62,9 +63,5 @@ export class RstListItemComponent implements OnInit {
   }
 
   moveRastaurantInfo (obj: Restaurant) {
-    // router move
-    this.rstInfoSvc.rstInfoDataEmt.subscribe(p => {
-      this.rstInfo =  p;
-    })
   }
 }

@@ -1,14 +1,11 @@
 <ion-grid [fixed]="true">
   <ion-row>
     <ion-col style="position:relative;">
-      <ion-list>
+      <ion-list *ngFor="let obj of tasteRoomList">
         <ion-nav-link router-direction="forward" [component]="component">
-          <app-taste-list-item (click)="onClickItem('');"></app-taste-list-item>
+          <app-taste-list-item [tasteRoom]="obj"></app-taste-list-item>
         </ion-nav-link>
       </ion-list>
     </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>1</ion-col>
   </ion-row>
 </ion-grid>

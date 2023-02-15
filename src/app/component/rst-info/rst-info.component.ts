@@ -1,7 +1,13 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 // core version + navigation, pagination modules:
 import Swiper, { Navigation, Pagination } from 'swiper';
-import { CreateChatContentComponent } from '../../layout/tabs/tab1/create-chat-content/create-chat-content.component';
+import { CreateTasteRoomContentComponent } from '../../layout/tabs/tab1/create-taste-room-content/create-taste-room-content.component';
+import { RstInfoService } from './rst-info.service';
+import { Restaurant } from '../../model/restaurant';
+import { Menu } from '../../model/menu';
+import { ReView } from '../../model/re-view';
+import { Subscription } from 'rxjs';
+import { NavParams } from '@ionic/angular';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -10,13 +16,15 @@ Swiper.use([Navigation, Pagination]);
   templateUrl: './rst-info.component.html',
   styleUrls: ['./rst-info.component.scss'],
 })
-export class RstInfoComponent implements OnInit, AfterViewInit {
+export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   component: any;
+  rstInfo: Restaurant = new Restaurant();
 
-  constructor() { }
+  constructor(private rstInfoSvc: RstInfoService, public navParams : NavParams) { }
 
   ngOnInit() {
-    this.component = CreateChatContentComponent;
+    this.component = CreateTasteRoomContentComponent;
+    this.rstInfoDataSub();
   }
 
   initSwiper() {
@@ -35,4 +43,19 @@ export class RstInfoComponent implements OnInit, AfterViewInit {
     this.initSwiper();
   }
 
+  rstInfoDataSub(): void {
+    const obj = this.navParams.get("value");
+    this.rstInfo = obj;
+  }
+
+  renderMainMenu (menus: Menu[]) {
+    return menus.filter(p => p.isMain === 'Y')
+  }
+
+  renderReView (reViews: ReView[]) {
+    return reViews.filter(p => p.isMain === 'Y');
+  }
+
+  ngOnDestroy (): void {
+  }
 }

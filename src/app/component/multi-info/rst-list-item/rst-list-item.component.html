@@ -3,8 +3,8 @@
   <div style="position: relative; width: 150px; width: 150px;">
 <!--    <ion-button #favEle style="position: absolute; color: white" (click)="onToggle(favEle)"></ion-button>-->
     <ion-img style="width: 150px; width: 150px;
-          border-radius: 20px;" src="http://localhost:8100/assets/image/999386505AAB2BDC16.png"
-             alt="The Wisconsin State Capitol building in Madison, WI at night">
+       border-radius: 20px;" src="http://localhost:8100/assets/image/999386505AAB2BDC16.png"
+       alt="The Wisconsin State Capitol building in Madison, WI at night">
     </ion-img>
   </div>
   <div style="width: 100%; height: 100%; margin-left: 15px;">
@@ -27,8 +27,8 @@
         <ion-button (click)="onCopy('주소복사')" >주소복사</ion-button>
       </div>
       <div>
-        <ion-nav-link router-direction="forward" [component]="rstInfoComponent">
-          <ion-button (click)="moveRastaurantInfo(obj)">맛집 정보 보기</ion-button>
+        <ion-nav-link router-direction="forward" [component]="rstInfoComponent" [componentProps]="{value: obj}">
+          <ion-button>맛집 정보 보기</ion-button>
         </ion-nav-link>
         <ion-nav-link router-direction="forward" [component]="tasteRoomListComponent">
           <ion-button>맛객 찾기</ion-button>

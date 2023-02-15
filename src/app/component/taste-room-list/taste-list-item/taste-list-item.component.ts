@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TasteRoom } from '../../../model/taste-room';
 
 @Component({
   selector: 'app-taste-list-item',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./taste-list-item.component.scss'],
 })
 export class TasteListItemComponent implements OnInit {
+  @Input()
+  tasteRoom: TasteRoom = new TasteRoom();
 
   constructor() { }
 
