@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MainCardsContentComponent } from './main-cards-content.component';
 import { IonicModule } from '@ionic/angular';
 import { SingleCardModule } from '../../../../component/single-card/single-card.module';
+import { MultiCardsInfoModule } from '../../../../component/multi-cards-info/multi-cards-info.module';
 
 
 
@@ -11,7 +12,8 @@ import { SingleCardModule } from '../../../../component/single-card/single-card.
   imports: [
     CommonModule,
     IonicModule,
-    SingleCardModule
+    SingleCardModule,
+    MultiCardsInfoModule
   ],
   exports: [MainCardsContentComponent]
 })

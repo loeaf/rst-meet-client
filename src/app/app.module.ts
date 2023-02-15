@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginModule } from './layout/login/login.module';
 import { SignupModule } from './layout/signup/signup.module';
 import { NologinIntroModule } from './layout/nologin-intro/nologin-intro.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,7 +17,8 @@ import { NologinIntroModule } from './layout/nologin-intro/nologin-intro.module'
     BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     LoginModule,
     SignupModule,
-    NologinIntroModule
+    NologinIntroModule,
+    HttpClientModule
   ],
   providers: [{
     provide: RouteReuseStrategy,
