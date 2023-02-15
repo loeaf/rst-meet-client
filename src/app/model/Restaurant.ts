@@ -1,3 +1,6 @@
+import { Menu } from './Menu';
+import { ReView } from './ReView';
+
 export interface Restaurant {
   id: string;
   // 맛집번호
@@ -26,4 +29,10 @@ export interface Restaurant {
   holiday: string;
   // 대표메뉴
   representativeMenu: string;
+  // 이미지정보
+  medias: string[];
+  // 메뉴정보
+  menus: Menu[];
+  // 리뷰정보
+  reViews: ReView[];
 }

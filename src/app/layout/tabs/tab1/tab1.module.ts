@@ -7,7 +7,6 @@ import { Tab1Page } from './tab1.page';
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { MainPageContentComponent } from './main-page-content/main-page-content.component';
 import { MultiInfoModule } from '../../../component/multi-info/multi-info.module';
-import { TasteRoomListModule } from '../../../component/taste-room-list/taste-room-list.module';
 import { TasteRoomContentModule } from './taste-room-content/taste-room-content.module';
 import { ChatContentModule } from './chat-content/chat-content.module';
 import { MainCardsContentModule } from './main-cards-content/main-cards-content.module';

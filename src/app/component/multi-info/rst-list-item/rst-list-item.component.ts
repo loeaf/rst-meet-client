@@ -9,6 +9,9 @@ import { TasteRoomContentComponent } from '../../../layout/tabs/tab1/taste-room-
 import { HttpClient } from '@angular/common/http';
 import { RstListItemService } from './rst-list-item.service';
 import { environment } from '../../../../environments/environment';
+import { Restaurant } from '../../../model/Restaurant';
+import { Router } from '@angular/router';
+import { RstInfoService } from '../../rst-info/rst-info.service';
 @Component({
   selector: 'app-rst-list-item',
   templateUrl: './rst-list-item.component.html',
@@ -18,10 +21,13 @@ export class RstListItemComponent implements OnInit {
   rstInfoComponent: any;
   locationInfoComponent: any;
   tasteRoomListComponent: any;
+  rstList: Restaurant[] = [];
+  rstInfo: Restaurant | undefined;
 
   constructor(private ionToastService: IonToastService,
               private httpClient: HttpClient,
-              private rstListItemSvc: RstListItemService) { }
+              private rstListItemSvc: RstListItemService,
+              private rstInfoSvc: RstInfoService) { }
 
   ngOnInit() {
     this.rstInfoComponent = RstInfoComponent;
@@ -48,10 +54,17 @@ export class RstListItemComponent implements OnInit {
 
   subScribeInit() {
     this.rstListItemSvc.renderRstListItem.subscribe(p => {
-      this.httpClient.get(environment.apiServer+'/Restaurant').subscribe(result => {
-        console.log(result);
-        debugger;
+      this.httpClient.get(environment.apiServer+'/Restaurant').subscribe((result: any) => {
+        const data: Restaurant[] = result.data;
+        this.rstList = data;
       });
     });
+  }
+
+  moveRastaurantInfo (obj: Restaurant) {
+    // router move
+    this.rstInfoSvc.rstInfoDataEmt.subscribe(p => {
+      this.rstInfo =  p;
+    })
   }
 }
