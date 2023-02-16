@@ -16,10 +16,19 @@ export class TasteListItemComponent implements OnInit {
   ngOnInit() {}
 
   onClickItem () {
+
     console.log('clicked');
   }
 
   getBeforeDate (createDate: Date) {
     return UtilesService.displayedAt(createDate);
+  }
+
+  setRecruit (length: number, peopleNum: number) {
+    if(length === peopleNum) {
+      return '마감';
+    } else {
+      return '모집중';
+    }
   }
 }

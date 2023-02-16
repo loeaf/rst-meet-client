@@ -1,4 +1,4 @@
-<ion-item style="display: flex; background: #8c8c8c; padding-top: 10px; padding-bottom: 15px; border-bottom: solid" (click)="onClickItem()">
+<ion-item style="display: flex; background: #8c8c8c; padding-top: 10px; padding-bottom: 15px; border-bottom: solid">
   <div style="width: 100%; height: 100%; margin-left: 15px;">
     <ion-label>
       <div style="display: flex; justify-content: space-between; align-items: center">
@@ -16,8 +16,8 @@
       </div>
       <div style="display: flex; justify-content: flex-end">
         <p class="clr" style="margin-right: 10px; background: #3dc2ff">{{tasteRoom.meetPaymentType}}</p>
-        <p class="clr" style="margin-right: 10px; background: #42d77d">모집중</p>
-        <p class="clr" style="margin-right: 10px; background: #6370ff">`1/{{(tasteRoom.peopleNum)}}`</p>
+        <p class="clr" style="margin-right: 10px; background: #42d77d">{{setRecruit(tasteRoom.attendantMembers.length, tasteRoom.peopleNum)}}</p>
+        <p class="clr" style="margin-right: 10px; background: #6370ff">{{tasteRoom.attendantMembers.length}}/{{(tasteRoom.peopleNum)}}</p>
       </div>
     </ion-label>
   </div>

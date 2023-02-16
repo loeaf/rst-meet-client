@@ -1,4 +1,5 @@
-import { Chat } from './chat';
+import { Chatting } from './chatting';
+import { TasteRoomMember } from './taste-room-member';
 
 export class TasteRoom {
   id: string = '';
@@ -7,5 +8,6 @@ export class TasteRoom {
   peopleNum: number = 0;
   meetPaymentType: string = '';
   createDate: Date = new Date();
-  chattings: Chat[] = [];
+  chattings: Chatting[] = [];
+  attendantMembers: TasteRoomMember[] = [];
 }

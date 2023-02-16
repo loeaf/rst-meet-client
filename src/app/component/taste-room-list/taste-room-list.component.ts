@@ -23,7 +23,7 @@ export class TasteRoomListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.component = ChatContentComponent;
     const obj = this.navParams.get("tasteRoomInfo");
-    this.httpClient.get(environment.apiServer+`/TasteRoom?tasteRoomUuid=${obj.id}`).subscribe((p: any) => {
+    this.httpClient.get(environment.apiServer+`/TasteRoom?restaurantId=${obj.id}`).subscribe((p: any) => {
       this.tasteRoomList = p.data;
     })
   }
@@ -31,4 +31,16 @@ export class TasteRoomListComponent implements OnInit, OnDestroy {
   ngOnDestroy (): void {
   }
 
+  async onClickItem (obj: TasteRoom) {
+    debugger;
+    await this.httpClient.post(environment.apiServer+`/TasteRoomMember`, {
+      tasteRoomId: obj.id
+    }).subscribe(p => {
+      alert(p);
+    })
+  }
+
+  async onClickItemEnd (obj: TasteRoom) {
+    alert('해당방에 입장할 수 없습니다.')
+  }
 }

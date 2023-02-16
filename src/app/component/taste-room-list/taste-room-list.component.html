@@ -2,9 +2,19 @@
   <ion-row>
     <ion-col style="position:relative;">
       <ion-list *ngFor="let obj of tasteRoomList">
-        <ion-nav-link router-direction="forward" [component]="component">
-          <app-taste-list-item [tasteRoom]="obj"></app-taste-list-item>
+        <ion-nav-link
+          *ngIf="obj.attendantMembers.length !== obj.peopleNum"
+          router-direction="forward" [component]="component">
+          <app-taste-list-item
+            [tasteRoom]="obj"
+          (click)="onClickItem(obj)">
+          </app-taste-list-item>
         </ion-nav-link>
+        <app-taste-list-item
+          *ngIf="obj.attendantMembers.length === obj.peopleNum"
+          [tasteRoom]="obj"
+          (click)="onClickItemEnd(obj)">
+        </app-taste-list-item>
       </ion-list>
     </ion-col>
   </ion-row>
