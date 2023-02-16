@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TasteRoom } from '../../../model/taste-room';
+import { UtilesService } from '../../../utiles/utiles.service';
 
 @Component({
   selector: 'app-taste-list-item',
@@ -16,5 +17,9 @@ export class TasteListItemComponent implements OnInit {
 
   onClickItem () {
     console.log('clicked');
+  }
+
+  getBeforeDate (createDate: Date) {
+    return UtilesService.displayedAt(createDate);
   }
 }

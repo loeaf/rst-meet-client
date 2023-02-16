@@ -18,7 +18,7 @@
   <ion-list>
     <ion-item>
       <ion-label position="floating">인원</ion-label>
-      <ion-select interface="popover" placeholder="인원">
+      <ion-select [value]="peopleNum" interface="popover" placeholder="인원">
         <ion-select-option value="2">2명</ion-select-option>
         <ion-select-option value="4">4명</ion-select-option>
         <ion-select-option value="6">6명</ion-select-option>
@@ -26,10 +26,10 @@
     </ion-item>
     <ion-item>
       <ion-label position="floating">계산방식</ion-label>
-      <ion-select interface="popover" placeholder="계산방식">
-        <ion-select-option value="N">미정</ion-select-option>
-        <ion-select-option value="D">더치페이</ion-select-option>
-        <ion-select-option value="F">공짜</ion-select-option>
+      <ion-select [value]="meetPaymentType" interface="popover" placeholder="계산방식">
+        <ion-select-option value="DUTCH">더치페이</ion-select-option>
+        <ion-select-option value="UNDECIDED">미정</ion-select-option>
+        <ion-select-option value="FREE">공짜</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>

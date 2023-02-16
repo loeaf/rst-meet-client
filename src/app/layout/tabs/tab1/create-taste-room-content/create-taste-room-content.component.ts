@@ -11,7 +11,9 @@ import { environment } from '../../../../../environments/environment';
 })
 export class CreateTasteRoomContentComponent implements OnInit {
   component: any;
-  uuid: string =  '';
+  obj: string =  '';
+  peopleNum: number = 2;
+  meetPaymentType: string = 'DUTCH';
 
   constructor(private ionNav: IonNav,
               public navParams: NavParams,
@@ -19,7 +21,7 @@ export class CreateTasteRoomContentComponent implements OnInit {
 
   ngOnInit() {
     this.component = ChatContentComponent;
-    this.uuid = this.navParams.get("uuid");
+    this.obj = this.navParams.get("uuid");
   }
 
   async onMove (text: IonInput) {
@@ -27,7 +29,9 @@ export class CreateTasteRoomContentComponent implements OnInit {
     debugger;
     await this.httpClient.post(environment.apiServer+"/TasteRoom", {
       content: text.value,
-      restaurantId: this.uuid
+      restaurantId: this.obj,
+      peopleNum: this.peopleNum,
+      meetPaymentType: this.meetPaymentType
     } ).subscribe(p => {
       this.ionNav.pop();
       this.ionNav.pop();

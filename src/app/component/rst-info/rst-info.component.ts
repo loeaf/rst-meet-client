@@ -44,7 +44,7 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   rstInfoDataSub(): void {
-    const obj = this.navParams.get("value");
+    const obj = this.navParams.get("tasteRoomInfo");
     this.rstInfo = obj;
   }
 

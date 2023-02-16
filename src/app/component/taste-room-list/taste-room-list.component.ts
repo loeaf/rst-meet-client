@@ -22,9 +22,8 @@ export class TasteRoomListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.component = ChatContentComponent;
-    const obj = this.navParams.get("uuid");
-    // @todo 어떤 방에 대한 목록인지 표출해야함..
-    this.httpClient.get(environment.apiServer+"/TasteRoom").subscribe((p: any) => {
+    const obj = this.navParams.get("tasteRoomInfo");
+    this.httpClient.get(environment.apiServer+`/TasteRoom?tasteRoomUuid=${obj.id}`).subscribe((p: any) => {
       this.tasteRoomList = p.data;
     })
   }

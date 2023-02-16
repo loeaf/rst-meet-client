@@ -9,15 +9,15 @@
           </ion-img>
           <h3 class="clr text-bld bg-text" style="margin-left: 10px;">팔팔한 강아지</h3>
         </div>
-        <p class="clr">1min 전</p>
+        <p class="clr">{{getBeforeDate(tasteRoom.createDate)}}</p>
       </div>
       <div style="display: flex">
         <p class="clr">{{tasteRoom.content}}</p>
       </div>
       <div style="display: flex; justify-content: flex-end">
-        <p class="clr" style="margin-right: 10px; background: #3dc2ff">더치페이</p>
+        <p class="clr" style="margin-right: 10px; background: #3dc2ff">{{tasteRoom.meetPaymentType}}</p>
         <p class="clr" style="margin-right: 10px; background: #42d77d">모집중</p>
-        <p class="clr" style="margin-right: 10px; background: #6370ff">(1/4)</p>
+        <p class="clr" style="margin-right: 10px; background: #6370ff">`1/{{(tasteRoom.peopleNum)}}`</p>
       </div>
     </ion-label>
   </div>
