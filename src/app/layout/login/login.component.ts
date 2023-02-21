@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { IonInput } from '@ionic/angular';
+import { AuthInterceptor } from '../../config/AuthInterceptor';
 
 @Component({
   selector: 'app-login',
@@ -7,16 +10,37 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild('id') id?: IonInput;
+  @ViewChild('password') password?: IonInput;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private httpClient: HttpClient,
+              private authIntercept: AuthInterceptor) { }
 
   ngOnInit() {}
 
-  enterSignUp () {
-    this.router.navigateByUrl('/signup');
+  async enterSignUp () {
+    await this.router.navigateByUrl('/signup')
   }
 
-  onLogin () {
-    this.router.navigate(['/']);
+  async onLogin () {
+    if(this.id?.value === '') {
+      alert('아이디를 입력해주세요.')
+      return;
+    }
+    if(this.password?.value === '') {
+      alert('비밀번호를 입력해주세요.')
+      return;
+    }
+    await this.httpClient.post('http://localhost:8080/login', {
+      loginId: this.id?.value,
+      password: this.password?.value,
+      accountType: 'EMAIL',
+    }).subscribe(async (p: any) => {
+      // this.authIntercept.setToken(p.data);
+      window.localStorage.clear();
+      window.localStorage.setItem('token', p.data);
+      await this.router.navigate(['/']);
+    });
   }
 }

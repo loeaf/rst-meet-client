@@ -8,6 +8,7 @@ import { Menu } from '../../model/menu';
 import { ReView } from '../../model/re-view';
 import { Subscription } from 'rxjs';
 import { NavParams } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -20,7 +21,9 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   component: any;
   rstInfo: Restaurant = new Restaurant();
 
-  constructor(private rstInfoSvc: RstInfoService, public navParams : NavParams) { }
+  constructor(private rstInfoSvc: RstInfoService,
+              public navParams : NavParams,
+              private httpClient: HttpClient) { }
 
   ngOnInit() {
     this.component = CreateTasteRoomContentComponent;
@@ -44,15 +47,23 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   rstInfoDataSub(): void {
-    const obj = this.navParams.get("tasteRoomInfo");
-    this.rstInfo = obj;
+    const id = this.navParams.get("tasteRoomInfo").id;
+    this.httpClient.get(`http://localhost:8080/Restaurant?id=${id}`).subscribe((p: any) => {
+      this.rstInfo = p.data;
+    });
   }
 
   renderMainMenu (menus: Menu[]) {
+    if(!menus) {
+      return [];
+    }
     return menus.filter(p => p.isMain === 'Y')
   }
 
   renderReView (reViews: ReView[]) {
+    if(!reViews) {
+      return [];
+    }
     return reViews.filter(p => p.isMain === 'Y');
   }
 

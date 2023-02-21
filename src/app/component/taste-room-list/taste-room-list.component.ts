@@ -32,11 +32,10 @@ export class TasteRoomListComponent implements OnInit, OnDestroy {
   }
 
   async onClickItem (obj: TasteRoom) {
-    debugger;
     await this.httpClient.post(environment.apiServer+`/TasteRoomMember`, {
       tasteRoomId: obj.id
     }).subscribe(p => {
-      alert(p);
+      console.log(p);
     })
   }
 

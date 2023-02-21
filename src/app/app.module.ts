@@ -9,7 +9,8 @@ import { AppComponent } from './app.component';
 import { LoginModule } from './layout/login/login.module';
 import { SignupModule } from './layout/signup/signup.module';
 import { NologinIntroModule } from './layout/nologin-intro/nologin-intro.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './config/AuthInterceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [{
     provide: RouteReuseStrategy,
-    useClass: IonicRouteStrategy }],
+    useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
