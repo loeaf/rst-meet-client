@@ -1,9 +1,48 @@
 <ion-grid [fixed]="true">
   <ion-row>
-    <ion-col style="position:relative;">
-      <ion-list>
-        <app-rst-list-item></app-rst-list-item>
-      </ion-list>
+    <ion-col size="6"
+              *ngFor="let obj of rstList"
+              style="position: relative;">
+        <ion-nav-link
+          class="ion-activatable"
+          router-direction="forward" [component]="rstInfoComponent" [componentProps]="{tasteRoomInfo: obj}">
+          <img
+            src='http://localhost:8100/assets/image/999386505AAB2BDC16.png'
+            style="width: 100%; height: 100%;"/>
+          <div style="position: absolute; top: 0; margin-left: 10px; margin-top:5px; color: white;"><i class="fa-brands fa-instagram" style="margin-right: 3px;"></i>hooninstag</div>
+          <div style="position: absolute; bottom: 0px; margin-left: 10px; margin-bottom: 5px; font-size: 20px; color: white; font-weight: bold"># {{obj.name}}</div>
+
+          <ion-ripple-effect>
+          </ion-ripple-effect>
+        </ion-nav-link>
+      <!--  <div style="width: 100%; height: 100%; margin-left: 15px;">-->
+      <!--    <ion-label>-->
+      <!--      <div style="display: flex">-->
+      <!--        <p class="clr">(5km)</p>-->
+      <!--      </div>-->
+      <!--      <div style="display: flex">-->
+      <!--        <p class="clr">5개의 모임</p>-->
+      <!--        <p class="clr">★3.5</p>-->
+      <!--      </div>-->
+      <!--      <div style="display: flex; white-space: normal">-->
+      <!--        <p class="clr">즉석에서 면을뽑는것치곤 탄성 장난아니에요!!!.</p>-->
+      <!--      </div>-->
+      <!--      <div style="display: flex">-->
+      <!--        <ion-nav-link router-direction="forward" [component]="locationInfoComponent">-->
+      <!--          <ion-button>위치확인</ion-button>-->
+      <!--        </ion-nav-link>-->
+      <!--        <ion-button (click)="onCopy('주소복사')" >주소복사</ion-button>-->
+      <!--      </div>-->
+      <!--      <div>-->
+<!--              <ion-nav-link router-direction="forward" [component]="rstInfoComponent" [componentProps]="{tasteRoomInfo: obj}">-->
+<!--                <ion-button>맛집 정보 보기</ion-button>-->
+<!--              </ion-nav-link>-->
+      <!--        <ion-nav-link router-direction="forward" [component]="tasteRoomListComponent">-->
+      <!--          <ion-button>맛객 찾기</ion-button>-->
+      <!--        </ion-nav-link>-->
+      <!--      </div>-->
+      <!--    </ion-label>-->
+      <!--  </div>-->
     </ion-col>
   </ion-row>
 </ion-grid>

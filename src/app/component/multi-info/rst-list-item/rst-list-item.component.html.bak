@@ -1,0 +1,38 @@
+<ion-item *ngFor="let obj of rstList"
+  style="display: flex; background: #8c8c8c; padding-top: 10px; padding-bottom: 15px; border-bottom: solid">
+  <div style="position: relative; width: 150px; width: 150px;">
+    <ion-img style="width: 150px; width: 150px;
+       border-radius: 20px;" src="http://localhost:8100/assets/image/999386505AAB2BDC16.png"
+       alt="The Wisconsin State Capitol building in Madison, WI at night">
+    </ion-img>
+  </div>
+  <div style="width: 100%; height: 100%; margin-left: 15px;">
+    <ion-label>
+      <div style="display: flex">
+        <p class="clr text-bld bg-text">{{obj.name}}</p>
+        <p class="clr">(5km)</p>
+      </div>
+      <div style="display: flex">
+        <p class="clr">5개의 모임</p>
+        <p class="clr">★3.5</p>
+      </div>
+      <div style="display: flex; white-space: normal">
+        <p class="clr">즉석에서 면을뽑는것치곤 탄성 장난아니에요!!!.</p>
+      </div>
+      <div style="display: flex">
+        <ion-nav-link router-direction="forward" [component]="locationInfoComponent">
+          <ion-button>위치확인</ion-button>
+        </ion-nav-link>
+        <ion-button (click)="onCopy('주소복사')" >주소복사</ion-button>
+      </div>
+      <div>
+        <ion-nav-link router-direction="forward" [component]="rstInfoComponent" [componentProps]="{tasteRoomInfo: obj}">
+          <ion-button>맛집 정보 보기</ion-button>
+        </ion-nav-link>
+        <ion-nav-link router-direction="forward" [component]="tasteRoomListComponent">
+          <ion-button>맛객 찾기</ion-button>
+        </ion-nav-link>
+      </div>
+    </ion-label>
+  </div>
+</ion-item>

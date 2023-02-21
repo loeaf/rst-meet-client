@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import Swiper from 'swiper';
-
+import { KR } from 'country-flag-icons/string/3x2'
 @Component({
   selector: 'app-main-page-content',
   templateUrl: './main-page-content.component.html',
@@ -9,6 +9,7 @@ import Swiper from 'swiper';
   encapsulation: ViewEncapsulation.None
 })
 export class MainPageContentComponent implements OnInit, AfterViewInit {
+  @ViewChild('emojiEle') emojiEle?: ElementRef;
   items: Array<string> = [];
   constructor() { }
 
@@ -34,6 +35,13 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
         el: '.swiper-scrollbar',
       },
     });
+    function htmlToElement(html: any) {
+      var template = document.createElement('template');
+      html = html.trim(); // Never return a text node of whitespace as the result
+      template.innerHTML = html;
+      return template.content.firstChild;
+    }
+    this.emojiEle?.nativeElement.append(htmlToElement(KR));
     }
 
   ngOnInit() {
@@ -55,4 +63,5 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
   createChat () {
 
   }
+
 }
