@@ -8,6 +8,7 @@
 </ion-header>
 <ion-content [fullscreen]="true" class="ion-padding">
 <div class="ion-content-scroll-host ion-padding">
+
   <div class="swiper">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
@@ -30,18 +31,28 @@
     </div>
     <div class="swiper-pagination"></div>
   </div>
-  <div style="display: flex; align-items: flex-end">
-    <h1>{{rstInfo.name}}</h1>
-    <span style="margin-bottom: 10px;">(1km)</span>
+  <div style="display: flex; align-items: flex-end; margin-bottom: 10px;">
+    <div class="font23 bold">{{rstInfo.name}}</div>
+    <div class="font13 gray">(1km)</div>
   </div>
-  <h2>{{rstInfo.representativeMenu}} 전문점</h2>
-  <p *ngFor="let menu of renderMainMenu(rstInfo.menus)">{{menu.name}} - {{menu.price}}</p>
-  <p>{{rstInfo.roadAddress}}</p>
-  <p>{{rstInfo.jibunAddress}}</p>
-  <p>{{rstInfo.englishAddress}}</p>
-  <p *ngFor="let review of renderReView(rstInfo.reViews)">- {{review.content}}</p>
+  <div class="font13 gray" style="margin-bottom: 10px; margin-top: -11px;">
+    {{rstInfo.representativeMenu}} 전문점
+  </div>
+  <div *ngFor="let menu of renderMainMenu(rstInfo.menus)"
+       style="margin-bottom: 10px;">
+  </div>
+  <div  class="font13">{{rstInfo.name}}</div>
+  <div  class="font13">{{rstInfo.roadAddress}}</div>
+  <div  class="font13">{{rstInfo.jibunAddress}}</div>
+  <div  class="font13" style=" margin-bottom: 12px;">{{rstInfo.englishAddress}}</div>
+  <div  class="font13" style=" margin-bottom: 10px;" *ngFor="let review of renderReView(rstInfo.reViews)">
+    - {{review.content}}
+  </div>
   <div>
-    <h2>맛객 정보</h2>
+    OOO 시간전에 작성
+  </div>
+  <div style="display: flex; align-items: center; justify-content: space-between;">
+    <div class="font23">모임 정보</div>
     <ion-nav-link router-direction="forward" [component]="component" [componentProps]="{uuid: rstInfo.id}">
       <ion-button>생성하기</ion-button>
     </ion-nav-link>

@@ -35,4 +35,6 @@ export class Restaurant {
   menus: Menu[] = [];
   // 리뷰정보
   reViews: ReView[] = [];
+  imagePath: string = '';
+  imageName: string = '';
 }

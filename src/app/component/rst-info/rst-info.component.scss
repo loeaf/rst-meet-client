@@ -7,3 +7,20 @@
   width: 100%;
   overflow-y: auto;
 }
+
+ion-button {
+  --background: #ffffff;
+  --background-hover: #e0e0e0;
+  --background-activated: #e0e0e0;
+  --background-focused: #e0e0e0;
+  --height: 46px;
+  --color: black;
+
+  --border-radius: 20px;
+  --border-color: #727272;
+  --border-style: solid;
+  --border-width: 0.5px;
+
+
+  --ripple-color: #bbbbbb;
+}

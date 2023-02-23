@@ -7,11 +7,10 @@
           class="ion-activatable"
           router-direction="forward" [component]="rstInfoComponent" [componentProps]="{tasteRoomInfo: obj}">
           <img
-            src='http://localhost:8100/assets/image/999386505AAB2BDC16.png'
+            src="http://localhost:8100/assets/image/{{obj.imagePath}}"
             style="width: 100%; height: 100%;"/>
-          <div style="position: absolute; top: 0; margin-left: 10px; margin-top:5px; color: white;"><i class="fa-brands fa-instagram" style="margin-right: 3px;"></i>hooninstag</div>
-          <div style="position: absolute; bottom: 0px; margin-left: 10px; margin-bottom: 5px; font-size: 20px; color: white; font-weight: bold"># {{obj.name}}</div>
-
+          <div class="outline" style="position: absolute; top: 0; margin-left: 10px; margin-top:5px; color: white;"><i class="fa-brands fa-instagram" style="margin-right: 3px;"></i>hooninstag</div>
+          <div class="outline" style="position: absolute; bottom: 0px; margin-left: 10px; margin-bottom: 5px; font-size: 20px; color: white; font-weight: bold"># {{obj.name}}</div>
           <ion-ripple-effect>
           </ion-ripple-effect>
         </ion-nav-link>

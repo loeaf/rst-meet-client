@@ -31,3 +31,22 @@
 
 @import "assets/static/css/default.css";
 @import "assets/static/css/fonts.css";
+
+.gray {
+  color: rgb(128, 128, 128);
+}
+.bold {
+  font-weight: bold;
+}
+.font23 {
+  font-size: 23px;
+}
+.font13 {
+  font-size: 13px;
+}
+.shadow {
+  --box-shadow: 0 2px 6px 0 rgba(59, 59, 59, 0.25);
+}
+.outline {
+  text-shadow: -1px -1px 0 rgba(59, 59, 59, 0.25), 1px -1px 0 rgba(59, 59, 59, 0.25), -1px 1px 0 rgba(59, 59, 59, 0.25), 1px 1px 0 rgba(59, 59, 59, 0.25);
+}
