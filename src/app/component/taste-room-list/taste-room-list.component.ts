@@ -6,6 +6,7 @@ import { ChatContentComponent } from '../../layout/tabs/tab1/chat-content/chat-c
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { NavParams } from '@ionic/angular';
+import { UtilesService } from '../../utiles/utiles.service';
 
 @Component({
   selector: 'app-taste-room-list',
@@ -25,6 +26,9 @@ export class TasteRoomListComponent implements OnInit, OnDestroy {
     const obj = this.navParams.get("tasteRoomInfo");
     this.httpClient.get(environment.apiServer+`/TasteRoom?restaurantId=${obj.id}`).subscribe((p: any) => {
       this.tasteRoomList = p.data;
+    }, error => {
+      console.log(error);
+      UtilesService.tokenCheck(error);
     })
   }
 
@@ -36,6 +40,9 @@ export class TasteRoomListComponent implements OnInit, OnDestroy {
       tasteRoomId: obj.id
     }).subscribe(p => {
       console.log(p);
+    }, error => {
+      console.log(error);
+      UtilesService.tokenCheck(error);
     })
   }
 

@@ -1,24 +1,38 @@
-<ion-item style="display: flex; background: #8c8c8c; padding-top: 10px; padding-bottom: 15px; border-bottom: solid">
-  <div style="width: 100%; height: 100%; margin-left: 15px;">
-    <ion-label>
-      <div style="display: flex; justify-content: space-between; align-items: center">
-        <div style="display: flex; align-items: center">
-          <ion-img class="ion-activatable ripple-parent circle" style="width: 25px; width: 40px;"
-                   src="http://localhost:8100/assets/image/logo.png"
-                   alt="The Wisconsin State Capitol building in Madison, WI at night">
-          </ion-img>
-          <h3 class="clr text-bld bg-text" style="margin-left: 10px;">팔팔한 강아지</h3>
-        </div>
-        <p class="clr">{{getBeforeDate(tasteRoom.createDate)}}</p>
-      </div>
-      <div style="display: flex">
-        <p class="clr">{{tasteRoom.content}}</p>
-      </div>
-      <div style="display: flex; justify-content: flex-end">
-        <p class="clr" style="margin-right: 10px; background: #3dc2ff">{{tasteRoom.meetPaymentType}}</p>
-        <p class="clr" style="margin-right: 10px; background: #42d77d">{{setRecruit(tasteRoom.attendantMembers.length, tasteRoom.peopleNum)}}</p>
-        <p class="clr" style="margin-right: 10px; background: #6370ff">{{tasteRoom.attendantMembers.length}}/{{(tasteRoom.peopleNum)}}</p>
-      </div>
-    </ion-label>
+<ion-item style="display: flex; margin-top: 20px; margin-bottom: 15px;">
+  <div style="width: 60px; height: 60px;">
+    <ion-img class="ion-activatable ripple-parent circle" style="width: 100%; height: 100%; border: 1px solid gray; border-radius: 50px;"
+             src="http://localhost:8100/assets/image/logo.png"
+             alt="The Wisconsin State Capitol building in Madison, WI at night">
+    </ion-img>
+  </div>
+  <div style="display: flex; flex-direction: column">
+    <div style="margin-left: 15px; margin-bottom: 10px; display: flex; align-items: flex-end">
+      <div class="clr font16 bold" >팔팔한 강아지</div>
+      <div class="clr font13 chat-meta" style="margin-left: 10px; background: #3dc2ff">{{tasteRoom.meetPaymentType}}</div>
+      <div class="clr font13 chat-meta" style="margin-left: 10px; background: #6370ff">{{tasteRoom.attendantMembers.length}}/{{(tasteRoom.peopleNum)}}</div>
+      <div class="clr font13" style="margin-left: 10px;">{{getBeforeDate(tasteRoom.createDate)}}</div>
+    </div>
+    <div style="margin-left: 15px; display: flex; align-items: center">
+      <div class="clr font13 chat-meta" style="background: #42d77d">{{setRecruit(tasteRoom.attendantMembers.length, tasteRoom.peopleNum)}}</div>
+      <div class="clr font16" style="margin-left: 10px;">{{tasteRoom.content}}</div>
+    </div>
   </div>
 </ion-item>
+
+<!--<div style="width: 100%; height: 100%; margin-left: 15px;">-->
+
+<!--  <ion-label>-->
+<!--    <div style="display: flex; justify-content: space-between; align-items: center">-->
+
+
+<!--    </div>-->
+<!--    <div style="display: flex">-->
+<!--      <p class="clr">{{tasteRoom.content}}</p>-->
+<!--    </div>-->
+<!--    <div style="display: flex; justify-content: flex-end">-->
+<!--      <p class="clr" style="margin-right: 10px; background: #3dc2ff">{{tasteRoom.meetPaymentType}}</p>-->
+<!--      <p class="clr" style="margin-right: 10px; background: #42d77d">{{setRecruit(tasteRoom.attendantMembers.length, tasteRoom.peopleNum)}}</p>-->
+<!--      <p class="clr" style="margin-right: 10px; background: #6370ff">{{tasteRoom.attendantMembers.length}}/{{(tasteRoom.peopleNum)}}</p>-->
+<!--    </div>-->
+<!--  </ion-label>-->
+<!--</div>-->

@@ -34,4 +34,11 @@ export class UtilesService {
     const years = days / 365
     return `${Math.floor(years)}년 전`
   }
+
+  static tokenCheck(error: any) {
+    if(error.status === 401) {
+      localStorage.clear();
+      location.href = '/login';
+    }
+  }
 }

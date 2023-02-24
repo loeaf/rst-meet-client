@@ -9,6 +9,7 @@ import { ReView } from '../../model/re-view';
 import { Subscription } from 'rxjs';
 import { NavParams } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
+import { UtilesService } from '../../utiles/utiles.service';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -50,6 +51,9 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
     const id = this.navParams.get("tasteRoomInfo").id;
     this.httpClient.get(`http://localhost:8080/Restaurant?id=${id}`).subscribe((p: any) => {
       this.rstInfo = p.data;
+    }, error => {
+      console.log(error);
+      UtilesService.tokenCheck(error);
     });
   }
 

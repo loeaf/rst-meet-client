@@ -1,7 +1,7 @@
 <ion-grid [fixed]="true">
   <ion-row>
     <ion-col style="position:relative;">
-      <ion-list *ngFor="let obj of tasteRoomList">
+      <ion-list *ngFor="let obj of tasteRoomList" style="padding: 0px;">
         <ion-nav-link
           *ngIf="obj.attendantMembers.length !== obj.peopleNum"
           router-direction="forward" [component]="component">

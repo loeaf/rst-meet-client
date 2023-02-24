@@ -11,6 +11,7 @@ import { TasteRoomContentComponent } from '../../layout/tabs/tab1/taste-room-con
 import { Clipboard } from '@capacitor/clipboard';
 import { IonButton } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
+import { UtilesService } from '../../utiles/utiles.service';
 
 @Component({
   selector: 'app-multi-info',
@@ -58,6 +59,8 @@ export class MultiInfoComponent  implements OnInit {
       this.httpClient.get(environment.apiServer+'/Restaurant').subscribe((result: any) => {
         const data: Restaurant[] = result.data;
         this.rstList = data;
+      }, error => {
+        UtilesService.tokenCheck(error);
       });
     });
   }
