@@ -4,6 +4,7 @@ import { Tab4Component } from './tab4.component';
 import { MypageContentComponent } from './mypage-content/mypage-content.component';
 import { IonicModule } from '@ionic/angular';
 import { Tab4PageRoutingModule } from './tab4-routing.module';
+import { RstInfoModule } from '../../../component/rst-info/rst-info.module';
 
 
 
@@ -13,6 +14,7 @@ import { Tab4PageRoutingModule } from './tab4-routing.module';
     CommonModule,
     IonicModule,
     Tab4PageRoutingModule,
+    RstInfoModule,
   ],
   exports: [Tab4Component]
 })

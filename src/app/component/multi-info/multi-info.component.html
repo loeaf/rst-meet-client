@@ -2,7 +2,7 @@
   <ion-row>
     <ion-col size="6"
               *ngFor="let obj of rstList"
-              style="position: relative;">
+              style="position: relative; padding: 1px; height: 210px;">
         <ion-nav-link
           class="ion-activatable"
           router-direction="forward" [component]="rstInfoComponent" [componentProps]="{tasteRoomInfo: obj}">
@@ -10,7 +10,7 @@
             src="http://localhost:8100/assets/image/{{obj.imagePath}}"
             style="width: 100%; height: 100%;"/>
           <div class="outline" style="position: absolute; top: 0; margin-left: 10px; margin-top:5px; color: white;"><i class="fa-brands fa-instagram" style="margin-right: 3px;"></i>hooninstag</div>
-          <div class="outline" style="position: absolute; bottom: 0px; margin-left: 10px; margin-bottom: 5px; font-size: 20px; color: white; font-weight: bold"># {{obj.name}}</div>
+          <div class="outline" style="position: absolute; bottom: 0px; width: 100%; margin-bottom: 5px; font-size: 20px; color: white; font-weight: bold"># {{obj.name}}</div>
           <ion-ripple-effect>
           </ion-ripple-effect>
         </ion-nav-link>

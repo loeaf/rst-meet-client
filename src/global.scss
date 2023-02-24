@@ -41,12 +41,28 @@
 .font23 {
   font-size: 23px;
 }
+.font20 {
+  font-size: 20px;
+}
+.font16 {
+  font-size: 16px;
+}
 .font13 {
   font-size: 13px;
+}
+.marginl30 {
+  margin-left: 30px;
 }
 .shadow {
   --box-shadow: 0 2px 6px 0 rgba(59, 59, 59, 0.25);
 }
 .outline {
   text-shadow: -1px -1px 0 rgba(59, 59, 59, 0.25), 1px -1px 0 rgba(59, 59, 59, 0.25), -1px 1px 0 rgba(59, 59, 59, 0.25), 1px 1px 0 rgba(59, 59, 59, 0.25);
+}
+
+.bline {
+  width: calc(100% - 60px);
+  margin-left: 30px;
+  margin-right: 30px;
+  border-bottom: 1px solid #e0e0e0;
 }
