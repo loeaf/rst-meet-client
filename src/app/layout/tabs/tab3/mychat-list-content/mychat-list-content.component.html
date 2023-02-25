@@ -3,7 +3,7 @@
     <ion-col style="position:relative;">
       <ion-list>
         <ion-nav-link *ngFor="let tasteRoom of tasteRooms" router-direction="forward">
-          <app-taste-list-item [tasteRoom]="tasteRoom" (click)="onClickItem.emit('')"></app-taste-list-item>
+          <app-taste-list-item [tasteRoom]="tasteRoom" (click)="onClickItem()"></app-taste-list-item>
         </ion-nav-link>
       </ion-list>
     </ion-col>

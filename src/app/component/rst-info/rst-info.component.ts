@@ -7,9 +7,10 @@ import { Restaurant } from '../../model/restaurant';
 import { Menu } from '../../model/menu';
 import { ReView } from '../../model/re-view';
 import { Subscription } from 'rxjs';
-import { NavParams } from '@ionic/angular';
+import { IonNav, NavParams } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { UtilesService } from '../../utiles/utiles.service';
+import { Router } from '@angular/router';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -24,6 +25,7 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private rstInfoSvc: RstInfoService,
               public navParams : NavParams,
+              private ionNav: IonNav,
               private httpClient: HttpClient) { }
 
   ngOnInit() {
@@ -72,5 +74,9 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy (): void {
+  }
+
+  back () {
+    this.ionNav.pop();
   }
 }

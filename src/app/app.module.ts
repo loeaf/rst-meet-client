@@ -11,6 +11,7 @@ import { SignupModule } from './layout/signup/signup.module';
 import { NologinIntroModule } from './layout/nologin-intro/nologin-intro.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './config/AuthInterceptor';
+import { ChatContentModule } from './layout/popup/chat-content/chat-content.module';
 
 @NgModule({
   declarations: [AppComponent],

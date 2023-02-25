@@ -8,7 +8,6 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { MainPageContentComponent } from './main-page-content/main-page-content.component';
 import { MultiInfoModule } from '../../../component/multi-info/multi-info.module';
 import { TasteRoomContentModule } from './taste-room-content/taste-room-content.module';
-import { ChatContentModule } from './chat-content/chat-content.module';
 import { MainCardsContentModule } from './main-cards-content/main-cards-content.module';
 
 @NgModule({
@@ -23,7 +22,6 @@ import { MainCardsContentModule } from './main-cards-content/main-cards-content.
     Tab1PageRoutingModule,
     MultiInfoModule,
     TasteRoomContentModule,
-    ChatContentModule,
     MainCardsContentModule
   ]
 })

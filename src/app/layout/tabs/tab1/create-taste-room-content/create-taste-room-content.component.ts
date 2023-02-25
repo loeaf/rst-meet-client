@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatContentComponent } from '../chat-content/chat-content.component';
 import { IonInput, IonNav, IonNavLink, NavParams } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
+import { ChatContentComponent } from '../../../popup/chat-content/chat-content.component';
 
 @Component({
   selector: 'app-create-taste-room-content',

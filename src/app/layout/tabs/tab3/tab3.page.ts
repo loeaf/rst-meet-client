@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChatContentService } from '../../popup/chat-content/chat-content.service';
+import { MainPageContentComponent } from './main-page-content/main-page-content.component';
 
 @Component({
   selector: 'app-tab3',
@@ -7,25 +9,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class Tab3Page implements OnInit, OnDestroy {
   contentType: any;
+  component: any;
 
-  constructor() {}
+  constructor(private ChatContentSvc: ChatContentService) {}
 
   ngOnDestroy (): void {
   }
 
   ngOnInit (): void {
-    this.contentType = Page3ContentType.MyChatList;
+    this.component = MainPageContentComponent
   }
-
-  subClickItem () {
-    this.contentType = Page3ContentType.ChatList;
-  }
-
-  onBack () {
-    this.contentType = Page3ContentType.MyChatList;
-  }
-}
-export enum Page3ContentType {
-  MyChatList = 'MyChatList',
-  ChatList = 'ChatList',
 }

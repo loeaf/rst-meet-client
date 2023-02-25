@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ChatContentComponent } from './chat-content.component';
-import { TasteRoomListModule } from '../../../../component/taste-room-list/taste-room-list.module';
-import { ChatListModule } from '../../../../component/chat-list/chat-list.module';
+import { ChatListModule } from '../../../component/chat-list/chat-list.module';
 
 
 
@@ -12,8 +11,7 @@ import { ChatListModule } from '../../../../component/chat-list/chat-list.module
   imports: [
     CommonModule,
     IonicModule,
-    TasteRoomListModule,
-    ChatListModule
+    ChatListModule,
   ],
   exports: [ChatContentComponent]
 })

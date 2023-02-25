@@ -2,11 +2,11 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { TasteRoomContentService } from '../../layout/tabs/tab1/taste-room-content/taste-room-content.service';
 import { TasteRoom } from '../../model/taste-room';
 import { ComponentFixture } from '@angular/core/testing';
-import { ChatContentComponent } from '../../layout/tabs/tab1/chat-content/chat-content.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { NavParams } from '@ionic/angular';
 import { UtilesService } from '../../utiles/utiles.service';
+import { ChatContentComponent } from '../../layout/popup/chat-content/chat-content.component';
 
 @Component({
   selector: 'app-taste-room-list',
