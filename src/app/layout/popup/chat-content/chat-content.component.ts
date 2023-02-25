@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ChatContentService } from './chat-content.service';
-import { IonNav } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 const $ = require( "jquery" );
 
 @Component({
@@ -11,19 +12,14 @@ const $ = require( "jquery" );
 export class ChatContentComponent implements OnInit {
   @ViewChild('chatContent') chatContent?: ElementRef;
 
-  constructor(private chatContentSvc: ChatContentService, private ionNav: IonNav) { }
+  constructor(private chatContentSvc: ChatContentService,
+              private router: Router,
+              private location: Location) { }
 
   ngOnInit() {
-    this.chatContentSvc.chatContentVisible.subscribe(p => {
-      if (p) {
-        $(this.chatContent?.nativeElement).show();
-      } else {
-        $(this.chatContent?.nativeElement).hide();
-      }
-    })
   }
 
   onBack () {
-    this.ionNav.pop();
+    this.location.back();
   }
 }

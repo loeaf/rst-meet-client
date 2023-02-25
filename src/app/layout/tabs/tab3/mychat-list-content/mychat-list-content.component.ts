@@ -2,8 +2,7 @@ import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { TasteRoom } from '../../../../model/taste-room';
-import { ChatContentComponent } from '../../../popup/chat-content/chat-content.component';
-import { IonNav } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mychat-list-content',
@@ -14,7 +13,7 @@ export class MychatListContentComponent implements OnInit, AfterViewInit {
   tasteRooms: TasteRoom[] = [];
   component: any;
 
-  constructor(private httpClient: HttpClient, private ionNav: IonNav) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   async ngOnInit() {
   }
@@ -30,6 +29,6 @@ export class MychatListContentComponent implements OnInit, AfterViewInit {
   }
 
   onClickItem () {
-    this.ionNav.push(ChatContentComponent);
+    this.router.navigate(['/chat-content']);
   }
 }

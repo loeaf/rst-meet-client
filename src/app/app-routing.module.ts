@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './layout/login/login.component';
 import { SignupComponent } from './layout/signup/signup.component';
 import { NologinIntroComponent } from './layout/nologin-intro/nologin-intro.component';
-import { TabsPage } from './layout/tabs/tabs.page';
+import { ChatContentComponent } from './layout/popup/chat-content/chat-content.component';
 
 const routes: Routes = [
   {
@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'nologin-intro',
     component: NologinIntroComponent,
+  },
+  {
+    path: 'chat-content',
+    component: ChatContentComponent,
   }
 ];
 @NgModule({

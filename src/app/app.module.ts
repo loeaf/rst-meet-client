@@ -20,7 +20,8 @@ import { ChatContentModule } from './layout/popup/chat-content/chat-content.modu
     LoginModule,
     SignupModule,
     NologinIntroModule,
-    HttpClientModule
+    HttpClientModule,
+    ChatContentModule
   ],
   providers: [{
     provide: RouteReuseStrategy,

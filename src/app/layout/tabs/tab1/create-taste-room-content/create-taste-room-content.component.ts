@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonInput, IonNav, IonNavLink, NavParams } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
-import { ChatContentComponent } from '../../../popup/chat-content/chat-content.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-taste-room-content',
@@ -17,10 +17,10 @@ export class CreateTasteRoomContentComponent implements OnInit {
 
   constructor(private ionNav: IonNav,
               public navParams: NavParams,
+              public router: Router,
               public httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.component = ChatContentComponent;
     this.obj = this.navParams.get("uuid");
   }
 
@@ -35,7 +35,7 @@ export class CreateTasteRoomContentComponent implements OnInit {
     } ).subscribe(p => {
       this.ionNav.pop();
       this.ionNav.pop();
-      this.ionNav.push(ChatContentComponent);
+      this.router.navigate(['/chat-cotent']);
     })
   }
 }
