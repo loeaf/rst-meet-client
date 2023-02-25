@@ -76,6 +76,6 @@ export class SignupComponent implements OnInit {
   }
 
   onBack () {
-    this.router.navigate(['/login']);
+    this.router.navigate(['..']);
   }
 }

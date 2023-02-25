@@ -4,6 +4,8 @@ import { LoginComponent } from './layout/login/login.component';
 import { SignupComponent } from './layout/signup/signup.component';
 import { NologinIntroComponent } from './layout/nologin-intro/nologin-intro.component';
 import { ChatContentComponent } from './layout/popup/chat-content/chat-content.component';
+import { SelectLocationComponent } from './layout/popup/select-location/select-location.component';
+import { UserNoticeComponent } from './layout/popup/user-notice/user-notice.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,14 @@ const routes: Routes = [
   {
     path: 'chat-content',
     component: ChatContentComponent,
+  },
+  {
+    path: 'select-location',
+    component: SelectLocationComponent,
+  },
+  {
+    path: 'user-notice',
+    component: UserNoticeComponent,
   }
 ];
 @NgModule({

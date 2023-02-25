@@ -12,6 +12,8 @@ import { NologinIntroModule } from './layout/nologin-intro/nologin-intro.module'
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './config/AuthInterceptor';
 import { ChatContentModule } from './layout/popup/chat-content/chat-content.module';
+import { UserNoticeModule } from './layout/popup/user-notice/user-notice.module';
+import { SelectLocationModule } from './layout/popup/select-location/select-location.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +23,9 @@ import { ChatContentModule } from './layout/popup/chat-content/chat-content.modu
     SignupModule,
     NologinIntroModule,
     HttpClientModule,
-    ChatContentModule
+    ChatContentModule,
+    UserNoticeModule,
+    SelectLocationModule
   ],
   providers: [{
     provide: RouteReuseStrategy,
