@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-location',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./select-location.component.scss'],
 })
 export class SelectLocationComponent implements OnInit {
+  selectedTab: any = 'tab1';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
 
+  onClick () {
+    this.router.navigate(['..']);
+  }
 }

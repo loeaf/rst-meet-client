@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulat
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import Swiper from 'swiper';
 import { KR } from 'country-flag-icons/string/3x2'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-main-page-content',
   templateUrl: './main-page-content.component.html',
@@ -11,7 +12,7 @@ import { KR } from 'country-flag-icons/string/3x2'
 export class MainPageContentComponent implements OnInit, AfterViewInit {
   @ViewChild('emojiEle') emojiEle?: ElementRef;
   items: Array<string> = [];
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngAfterViewInit(): void {
     const swiper = new Swiper('.swiper', {
@@ -64,4 +65,11 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
 
   }
 
+  selectLocation () {
+    this.router.navigate(['select-location']);
+  }
+
+  viewNotice () {
+    this.router.navigate(['user-notice']);
+  }
 }
