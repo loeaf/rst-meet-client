@@ -11,6 +11,8 @@ import { IonNav, NavParams } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { UtilesService } from '../../utiles/utiles.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+import { Code } from '../../model/get-nation';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);

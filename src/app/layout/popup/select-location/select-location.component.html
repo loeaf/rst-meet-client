@@ -1,32 +1,23 @@
 <div style="height: 50px; display: flex; justify-content: space-between;
 vertical-align: center; align-items: center; border-bottom: 1px solid #d9d9d9">
     <div class="font16 MAR5 MAL10 bold" style="display: flex;">
-      <i style="margin-right: 2px;margin-top: 3px;" class="fa-solid fa-check"></i>
       <div style="margin-left: 10px;">국가</div>
     </div>
-  <div class="MAR10" style="margin-left: 10px;" (click)="onClick()">확인</div>
+  <div class="font16 MAR10" style="margin-left: 10px;" (click)="onClick()">확인</div>
 </div>
 <div style="width: 100%; height: 100%;">
   <div class="font16 MAL10 MAT5">국가 선택</div>
   <ion-radio-group [allowEmptySelection]="true" value="turtles">
-    <ion-item>
-      <ion-label class="font16">한국</ion-label>
-      <ion-radio class="font16" slot="end" value="dogs"></ion-radio>
-    </ion-item>
-    <ion-item>
-      <ion-label>일본</ion-label>
-      <ion-radio slot="end" value="cats"></ion-radio>
+    <ion-item *ngFor="let nation of nations" (click)="selectNation(nation)">
+      <ion-label class="font16">{{nation.codeName}}</ion-label>
+      <ion-radio class="font16" slot="end" [value]="nation.id"></ion-radio>
     </ion-item>
   </ion-radio-group>
   <div class="font16 MAL10 MAT30">나라 선택</div>
-  <ion-radio-group [allowEmptySelection]="true" value="turtles">
-    <ion-item>
-      <ion-label>한국</ion-label>
-      <ion-radio slot="end" value="dogs"></ion-radio>
-    </ion-item>
-    <ion-item>
-      <ion-label>일본</ion-label>
-      <ion-radio slot="end" value="cats"></ion-radio>
+  <ion-radio-group [(ngModel)]="selectedValue" [allowEmptySelection]="true" value="turtles">
+    <ion-item *ngFor="let city of cites">
+      <ion-label>{{city.codeName}}</ion-label>
+      <ion-radio slot="end" [value]="city.id" ></ion-radio>
     </ion-item>
   </ion-radio-group>
 
