@@ -8,8 +8,8 @@ const phraseGen = new PhraseGen();
 export class UtilesService {
 
   constructor() { }
-  async getGeolocation() {
-    return await Geolocation.getCurrentPosition();
+  static getGeolocation() {
+    return Geolocation.getCurrentPosition();
   }
 
   async gernatePhrase() {
@@ -40,5 +40,13 @@ export class UtilesService {
       localStorage.clear();
       location.href = '/login';
     }
+  }
+
+  static createQueryString (queryMap: Map<string, string>) {
+    let query = '';
+    queryMap.forEach((value, key) => {
+      query += `${key}=${value}&`;
+    });
+    return query;
   }
 }

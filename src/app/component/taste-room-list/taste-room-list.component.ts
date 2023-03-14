@@ -18,13 +18,15 @@ export class TasteRoomListComponent implements OnInit, OnDestroy {
   tasteRoomList: TasteRoom[] = [];
 
   constructor(private tasteRoomContentSvc: TasteRoomContentService,
-              private httpClient: HttpClient, public navParams : NavParams
+              private httpClient: HttpClient,
+              // public navParams : NavParams
               ) { }
 
   ngOnInit() {
     this.component = ChatContentComponent;
-    const obj = this.navParams.get("tasteRoomInfo");
-    this.httpClient.get(environment.apiServer+`/TasteRoom?restaurantId=${obj.id}`).subscribe((p: any) => {
+    // const obj = this.navParams.get("tasteRoomInfo");
+    const obj: any = {};
+    this.httpClient.get(environment.apiServer + ''+`/TasteRoom?restaurantId=${obj.id}`).subscribe((p: any) => {
       this.tasteRoomList = p.data;
     }, error => {
       console.log(error);
@@ -36,7 +38,7 @@ export class TasteRoomListComponent implements OnInit, OnDestroy {
   }
 
   async onClickItem (obj: TasteRoom) {
-    await this.httpClient.post(environment.apiServer+`/TasteRoomMember`, {
+    await this.httpClient.post(environment.apiServer + ''+`/TasteRoomMember`, {
       tasteRoomId: obj.id
     }).subscribe(p => {
       console.log(p);

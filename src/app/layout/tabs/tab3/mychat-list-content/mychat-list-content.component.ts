@@ -19,7 +19,7 @@ export class MychatListContentComponent implements OnInit, AfterViewInit {
   }
 
   async getChatList() {
-    await this.httpClient.get(environment.apiServer + '/TasteRoom/my').subscribe((p: any) => {
+    await this.httpClient.get(environment.apiServer + '' + '/TasteRoom/my').subscribe((p: any) => {
       this.tasteRooms = p.data;
     })
   }

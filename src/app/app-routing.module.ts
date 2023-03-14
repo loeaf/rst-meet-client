@@ -6,6 +6,7 @@ import { NologinIntroComponent } from './layout/nologin-intro/nologin-intro.comp
 import { ChatContentComponent } from './layout/popup/chat-content/chat-content.component';
 import { SelectLocationComponent } from './layout/popup/select-location/select-location.component';
 import { UserNoticeComponent } from './layout/popup/user-notice/user-notice.component';
+import { RstInfoComponent } from './layout/popup/rst-info/rst-info.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'user-notice',
     component: UserNoticeComponent,
+  },
+  {
+    path: 'rst-info',
+    component: RstInfoComponent,
   }
 ];
 @NgModule({

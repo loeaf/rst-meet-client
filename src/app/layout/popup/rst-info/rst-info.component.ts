@@ -1,18 +1,19 @@
 import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 // core version + navigation, pagination modules:
 import Swiper, { Navigation, Pagination } from 'swiper';
-import { CreateTasteRoomContentComponent } from '../../layout/tabs/tab1/create-taste-room-content/create-taste-room-content.component';
 import { RstInfoService } from './rst-info.service';
-import { Restaurant } from '../../model/restaurant';
-import { Menu } from '../../model/menu';
-import { ReView } from '../../model/re-view';
 import { Subscription } from 'rxjs';
-import { IonNav, NavParams } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { UtilesService } from '../../utiles/utiles.service';
-import { Router } from '@angular/router';
-import { environment } from '../../../environments/environment';
-import { Code } from '../../model/get-nation';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Restaurant } from '../../../model/restaurant';
+import {
+  CreateTasteRoomContentComponent
+} from '../../tabs/tab1/create-taste-room-content/create-taste-room-content.component';
+import { UtilesService } from '../../../utiles/utiles.service';
+import { Menu } from '../../../model/menu';
+import { ReView } from '../../../model/re-view';
+import { environment } from '../../../../environments/environment';
+import { Location } from '@angular/common';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -26,9 +27,10 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   rstInfo: Restaurant = new Restaurant();
 
   constructor(private rstInfoSvc: RstInfoService,
-              public navParams : NavParams,
-              private ionNav: IonNav,
-              private httpClient: HttpClient) { }
+              private httpClient: HttpClient,
+              private activatedRoute: ActivatedRoute,
+              private location: Location,
+              private router: Router) { }
 
   ngOnInit() {
     this.component = CreateTasteRoomContentComponent;
@@ -52,12 +54,15 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   rstInfoDataSub(): void {
-    const id = this.navParams.get("tasteRoomInfo").id;
-    this.httpClient.get(`http://localhost:8080/Restaurant?id=${id}`).subscribe((p: any) => {
-      this.rstInfo = p.data;
-    }, error => {
-      console.log(error);
-      UtilesService.tokenCheck(error);
+    this.activatedRoute.queryParams.subscribe((p: any) => {
+      debugger;
+      const obj = JSON.parse(p.rstInfo);
+      this.httpClient.get(environment.apiServer+`/Restaurant?id=${obj.id}`).subscribe((p: any) => {
+        this.rstInfo = p.data;
+      }, error => {
+        console.log(error);
+        UtilesService.tokenCheck(error);
+      });
     });
   }
 
@@ -79,6 +84,7 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   back () {
-    this.ionNav.pop();
+    // this.ionNav.pop();
+    this.location.back();
   }
 }

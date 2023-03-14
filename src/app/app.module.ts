@@ -14,6 +14,7 @@ import { AuthInterceptor } from './config/AuthInterceptor';
 import { ChatContentModule } from './layout/popup/chat-content/chat-content.module';
 import { UserNoticeModule } from './layout/popup/user-notice/user-notice.module';
 import { SelectLocationModule } from './layout/popup/select-location/select-location.module';
+import { RstInfoModule } from './layout/popup/rst-info/rst-info.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { SelectLocationModule } from './layout/popup/select-location/select-loca
     HttpClientModule,
     ChatContentModule,
     UserNoticeModule,
-    SelectLocationModule
+    SelectLocationModule,
+    RstInfoModule
   ],
   providers: [{
     provide: RouteReuseStrategy,

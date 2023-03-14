@@ -32,8 +32,7 @@ export class SelectLocationComponent implements OnInit {
   }
 
   getNation () {
-    this.httpClient.get(environment.apiServer+`/CmmnCode/getNation`).subscribe((p: any) => {
-      debugger;
+    this.httpClient.get(environment.apiServer + ''+`/CmmnCode/getNation`).subscribe((p: any) => {
       this.nations = p.result;
     }, error => {
       console.log(error);

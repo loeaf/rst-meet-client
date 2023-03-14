@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RstInfoComponent } from '../../rst-info/rst-info.component';
 import { LocationInfoComponent } from '../../location-info/location-info.component';
 import { Clipboard } from '@capacitor/clipboard';
 import { IonToastService } from '../../../utiles/ion-toast.service';
@@ -11,7 +10,7 @@ import { RstListItemService } from './rst-list-item.service';
 import { environment } from '../../../../environments/environment';
 import { Restaurant } from '../../../model/restaurant';
 import { Router } from '@angular/router';
-import { RstInfoService } from '../../rst-info/rst-info.service';
+import { RstInfoService } from '../../../layout/popup/rst-info/rst-info.service';
 @Component({
   selector: 'app-rst-list-item',
   templateUrl: './rst-list-item.component.html',
@@ -31,7 +30,6 @@ export class RstListItemComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.rstInfoComponent = RstInfoComponent;
     this.locationInfoComponent = LocationInfoComponent;
     this.tasteRoomListComponent = TasteRoomContentComponent;
     this.subScribeInit();
@@ -55,7 +53,7 @@ export class RstListItemComponent implements OnInit {
 
   subScribeInit() {
     this.rstListItemSvc.renderRstListItem.subscribe(p => {
-      this.httpClient.get(environment.apiServer+'/Restaurant').subscribe((result: any) => {
+      this.httpClient.get(environment.apiServer + ''+'/Restaurant').subscribe((result: any) => {
         const data: Restaurant[] = result.data;
         this.rstList = data;
       });
@@ -63,5 +61,10 @@ export class RstListItemComponent implements OnInit {
   }
 
   moveRastaurantInfo (obj: Restaurant) {
+    const queryParams = {
+      rstInfo: obj
+      // add more parameters as needed
+    };
+    this.router.navigate(['/rst-info'], { queryParams });
   }
 }

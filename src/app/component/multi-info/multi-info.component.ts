@@ -3,15 +3,16 @@ import { Restaurant } from '../../model/restaurant';
 import { IonToastService } from '../../utiles/ion-toast.service';
 import { HttpClient } from '@angular/common/http';
 import { RstListItemService } from './rst-list-item/rst-list-item.service';
-import { RstInfoService } from '../rst-info/rst-info.service';
 import { Router } from '@angular/router';
-import { RstInfoComponent } from '../rst-info/rst-info.component';
 import { LocationInfoComponent } from '../location-info/location-info.component';
 import { TasteRoomContentComponent } from '../../layout/tabs/tab1/taste-room-content/taste-room-content.component';
 import { Clipboard } from '@capacitor/clipboard';
 import { IonButton } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
 import { UtilesService } from '../../utiles/utiles.service';
+import { lastValueFrom } from 'rxjs';
+import { MultiInfoService } from './multi-info.service';
+import { RstInfoService } from '../../layout/popup/rst-info/rst-info.service';
 
 @Component({
   selector: 'app-multi-info',
@@ -19,7 +20,6 @@ import { UtilesService } from '../../utiles/utiles.service';
   styleUrls: ['./multi-info.component.scss'],
 })
 export class MultiInfoComponent  implements OnInit {
-  rstInfoComponent: any;
   locationInfoComponent: any;
   tasteRoomListComponent: any;
   rstList: Restaurant[] = [];
@@ -29,10 +29,10 @@ export class MultiInfoComponent  implements OnInit {
               private httpClient: HttpClient,
               private rstListItemSvc: RstListItemService,
               private rstInfoSvc: RstInfoService,
+              private multiInfoSvc: MultiInfoService,
               private router: Router) { }
 
   ngOnInit() {
-    this.rstInfoComponent = RstInfoComponent;
     this.locationInfoComponent = LocationInfoComponent;
     this.tasteRoomListComponent = TasteRoomContentComponent;
     this.subScribeInit();
@@ -55,16 +55,26 @@ export class MultiInfoComponent  implements OnInit {
   }
 
   subScribeInit() {
-    this.rstListItemSvc.renderRstListItem.subscribe(p => {
-      this.httpClient.get(environment.apiServer+'/Restaurant').subscribe((result: any) => {
-        const data: Restaurant[] = result.data;
+    this.rstListItemSvc.renderRstListItem.subscribe(async p => {
+      try {
+        // create get query map by map
+        // console.log(location);
+        const data = await this.multiInfoSvc.getNearRstList();
         this.rstList = data;
-      }, error => {
-        UtilesService.tokenCheck(error);
-      });
+      } catch (e) {
+        UtilesService.tokenCheck(e);
+      }
     });
   }
 
   moveRastaurantInfo (obj: Restaurant) {
+  }
+
+  async enterRstinfo (obj: Restaurant) {
+    const queryParams = {
+      rstInfo: JSON.stringify(obj)
+      // add more parameters as needed
+    };
+    await this.router.navigate(['/rst-info'], { queryParams });
   }
 }

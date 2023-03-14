@@ -26,8 +26,7 @@ export class CreateTasteRoomContentComponent implements OnInit {
 
   async onMove (text: IonInput) {
     // 등록
-    debugger;
-    await this.httpClient.post(environment.apiServer+"/TasteRoom", {
+    await this.httpClient.post(environment.apiServer + ''+"/TasteRoom", {
       content: text.value,
       restaurantId: this.obj,
       peopleNum: this.peopleNum,

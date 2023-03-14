@@ -5,7 +5,7 @@
               style="position: relative; padding: 1px; height: 210px;">
         <ion-nav-link
           class="ion-activatable"
-          router-direction="forward" [component]="rstInfoComponent" [componentProps]="{tasteRoomInfo: obj}">
+          router-direction="forward" (click)="enterRstinfo(obj)">
           <img
             src="http://localhost:8100/assets/image/{{obj.imagePath}}"
             style="width: 100%; height: 100%;"/>

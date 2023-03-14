@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { IonInput } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
 import { AuthInterceptor } from '../../config/AuthInterceptor';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -45,18 +46,19 @@ export class SignupComponent implements OnInit {
     await this.postSignUp();
   }
   async postSignUp () {
-    debugger;
-    await this.httpClient.post(environment.apiServer+'/users/signUp', {
-      loginId: this.email?.value,
-      password: this.password1?.value,
-      accountType: "EMAIL",
-    }).subscribe(async (p: any) => {
+    try {
+      const res: any = await lastValueFrom(await this.httpClient.post(environment.apiServer + ''+'/users/signUp', {
+        loginId: this.email?.value,
+        password: this.password1?.value,
+        accountType: "EMAIL",
+      }));
       // await this.authIntercept.setToken(p.data);
-      debugger;
       window.localStorage.clear();
-      window.localStorage.setItem('token', p.data);
+      window.localStorage.setItem('token', res.data);
       await this.router.navigateByUrl('/');
-    })
+    } catch (e) {
+      console.error(e);
+    };
   }
 
   checkCondition() {
