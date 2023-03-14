@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit } from '@angu
 // core version + navigation, pagination modules:
 import Swiper, { Navigation, Pagination } from 'swiper';
 import { RstInfoService } from './rst-info.service';
-import { Subscription } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Restaurant } from '../../../model/restaurant';
@@ -23,7 +23,6 @@ Swiper.use([Navigation, Pagination]);
   styleUrls: ['./rst-info.component.scss'],
 })
 export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
-  component: any;
   rstInfo: Restaurant = new Restaurant();
 
   constructor(private rstInfoSvc: RstInfoService,
@@ -33,8 +32,6 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit() {
-    this.component = CreateTasteRoomContentComponent;
-    this.rstInfoDataSub();
   }
 
   initSwiper() {
@@ -49,21 +46,24 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngAfterViewInit (): void {
+  async ngAfterViewInit () {
     this.initSwiper();
+    await this.rstInfoDataSub();
   }
 
-  rstInfoDataSub(): void {
-    this.activatedRoute.queryParams.subscribe((p: any) => {
-      debugger;
-      const obj = JSON.parse(p.rstInfo);
-      this.httpClient.get(environment.apiServer+`/Restaurant?id=${obj.id}`).subscribe((p: any) => {
-        this.rstInfo = p.data;
-      }, error => {
-        console.log(error);
-        UtilesService.tokenCheck(error);
-      });
-    });
+
+  async rstInfoDataSub() {
+    const id = location.search.replace('?rstInfo=', '');
+    console.log(id)
+    try {
+      const rstObj: any = await lastValueFrom(this.httpClient.post(environment.apiServer+'/Restaurant'
+      , {id: id}));
+      console.log(rstObj.data)
+      this.rstInfo = rstObj.data;
+    } catch (error) {
+      console.log(error);
+      UtilesService.tokenCheck(error);
+    }
   }
 
   renderMainMenu (menus: Menu[]) {
@@ -86,5 +86,9 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   back () {
     // this.ionNav.pop();
     this.location.back();
+  }
+
+  async enterTasteRoom () {
+    await this.rstInfoDataSub();
   }
 }

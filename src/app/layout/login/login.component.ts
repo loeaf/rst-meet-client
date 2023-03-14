@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { IonInput } from '@ionic/angular';
 import { AuthInterceptor } from '../../config/AuthInterceptor';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
       alert('비밀번호를 입력해주세요.')
       return;
     }
-    await this.httpClient.post('http://localhost:8080/login', {
+    await this.httpClient.post(environment.apiServer+'/login', {
       loginId: this.id?.value,
       password: this.password?.value,
       accountType: 'EMAIL',

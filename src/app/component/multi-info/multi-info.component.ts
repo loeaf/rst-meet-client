@@ -72,7 +72,7 @@ export class MultiInfoComponent  implements OnInit {
 
   async enterRstinfo (obj: Restaurant) {
     const queryParams = {
-      rstInfo: JSON.stringify(obj)
+      rstInfo: obj.id
       // add more parameters as needed
     };
     await this.router.navigate(['/rst-info'], { queryParams });

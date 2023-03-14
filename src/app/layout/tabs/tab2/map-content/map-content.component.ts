@@ -18,6 +18,7 @@ import { MultiInfoService } from '../../../../component/multi-info/multi-info.se
 import { Select } from 'ol/interaction';
 import {altKeyOnly, click, pointerMove} from 'ol/events/condition.js';
 import { Router } from '@angular/router';
+import { UtilesService } from '../../../../utiles/utiles.service';
 
 @Component({
   selector: 'app-map-content',
@@ -35,19 +36,24 @@ export class MapContentComponent implements OnInit, AfterViewInit {
   map: any = null;
   listenerKey: any = null;
   flashGeom: any = null;
-
+  longitude = 0;
+  latitude = 0;
   start = Date.now();
   constructor(private multiInfoSvc: MultiInfoService,
               private router: Router) { }
 
-  ngOnInit() {}
+  async ngOnInit() {
+  }
 
-  ngAfterViewInit (): void {
+  async ngAfterViewInit () {
+    const p = await UtilesService.getGeolocation();
+    this.longitude = p.coords.longitude;
+    this.latitude = p.coords.latitude;
     // Define the EPSG:4326 projection
-    const proj4326 = new Projection({
-      code: 'EPSG:4326',
-      units: 'degrees',
-    });
+    // const proj4326 = new Projection({
+    //   code: 'EPSG:4326',
+    //   units: 'degrees',
+    // });
     const tileLayer = new TileLayer({
       source: new OSM(),
     })
@@ -97,9 +103,9 @@ export class MapContentComponent implements OnInit, AfterViewInit {
       target: 'map',
       layers: [this.tileLayer, this.myLocationPoint, this.rstPoint],
       view: new View({
-        center: [127.28782174876, 36.477895749037],
+        center: [this.longitude, this.latitude],
         zoom: 15,
-        projection: proj4326, // Set the projection as the default projection for the view
+        // projection: proj4326, // Set the projection as the default projection for the view
         multiWorld: true,
       }),
     });
@@ -109,29 +115,9 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     });
     const that = this;
 
-    const feature = this.addMyLocationFeature(127.28782174876, 36.477895749037);
-    this.renderRestaurants();
-    // this.myLocationSource.on('addfeature', function (e: any) {
-    //   debugger;
-    // });
+    const feature = this.addMyLocationFeature(this.longitude, this.latitude);
+    await this.renderRestaurants();
     this.listenerKey = this.tileLayer.on('postrender', this.animate.bind(this));
-    // window.setInterval(this.addFeature, 1000);
-  // Get the user's location
-  // navigator.geolocation.watchPosition(
-  //   (position) => {
-  //     const { latitude, longitude } = position.coords;
-  //     const userLocation = transform([longitude, latitude], 'EPSG:4326', 'EPSG:3857'); // transform the user's location to match the map's projection
-  //     // @ts-ignore
-  //     const marker = markerLayer.getSource().getFeatures()[0];
-  //     marker.setGeometry(new Point(userLocation)); // update the marker's position
-  //     map.getView().setCenter(userLocation); // center the map on the user's location
-  //   },
-  //   (error) => {
-  //     console.error(error);
-  //   }
-  // );
-
-
 
     const selectClick = new Select({
       condition: click
@@ -141,7 +127,7 @@ export class MapContentComponent implements OnInit, AfterViewInit {
       selectClick.on('select', async (e) => {
         const obj: any = e.selected[0].getProperties();
         const queryParams = {
-          rstInfo: JSON.stringify(obj.rstInfo)
+          rstInfo: obj.rstInfo.id
           // add more parameters as needed
         };
         await this.router.navigate(['/rst-info'], { queryParams });

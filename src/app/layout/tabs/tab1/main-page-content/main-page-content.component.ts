@@ -53,7 +53,6 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
       } else {
         alert(params.get('nation'));
       }
-
     });
   }
   private generateItems() {
