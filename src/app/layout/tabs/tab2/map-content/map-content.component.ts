@@ -49,11 +49,12 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     const p = await UtilesService.getGeolocation();
     this.longitude = p.coords.longitude;
     this.latitude = p.coords.latitude;
+    console.log(this.longitude, ',',  this.latitude);
     // Define the EPSG:4326 projection
-    // const proj4326 = new Projection({
-    //   code: 'EPSG:4326',
-    //   units: 'degrees',
-    // });
+    const proj4326 = new Projection({
+      code: 'EPSG:4326',
+      units: 'degrees',
+    });
     const tileLayer = new TileLayer({
       source: new OSM(),
     })
@@ -105,7 +106,7 @@ export class MapContentComponent implements OnInit, AfterViewInit {
       view: new View({
         center: [this.longitude, this.latitude],
         zoom: 15,
-        // projection: proj4326, // Set the projection as the default projection for the view
+        projection: proj4326, // Set the projection as the default projection for the view
         multiWorld: true,
       }),
     });
