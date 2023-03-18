@@ -15,6 +15,9 @@ import { ChatContentModule } from './layout/popup/chat-content/chat-content.modu
 import { UserNoticeModule } from './layout/popup/user-notice/user-notice.module';
 import { SelectLocationModule } from './layout/popup/select-location/select-location.module';
 import { RstInfoModule } from './layout/popup/rst-info/rst-info.module';
+import {
+  CreateTasteRoomContentModule
+} from './layout/popup/create-taste-room-content/create-taste-room-content.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +30,8 @@ import { RstInfoModule } from './layout/popup/rst-info/rst-info.module';
     ChatContentModule,
     UserNoticeModule,
     SelectLocationModule,
-    RstInfoModule
+    RstInfoModule,
+    CreateTasteRoomContentModule
   ],
   providers: [{
     provide: RouteReuseStrategy,

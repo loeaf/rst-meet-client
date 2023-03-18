@@ -7,6 +7,9 @@ import { ChatContentComponent } from './layout/popup/chat-content/chat-content.c
 import { SelectLocationComponent } from './layout/popup/select-location/select-location.component';
 import { UserNoticeComponent } from './layout/popup/user-notice/user-notice.component';
 import { RstInfoComponent } from './layout/popup/rst-info/rst-info.component';
+import {
+  CreateTasteRoomContentComponent
+} from './layout/popup/create-taste-room-content/create-taste-room-content.component';
 
 const routes: Routes = [
   {
@@ -40,6 +43,10 @@ const routes: Routes = [
   {
     path: 'rst-info',
     component: RstInfoComponent,
+  },
+  {
+    path: 'create-chat-taste-room',
+    component: CreateTasteRoomContentComponent,
   }
 ];
 @NgModule({

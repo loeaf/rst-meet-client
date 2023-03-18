@@ -16,15 +16,11 @@ export class MultiInfoService {
     // const queryMap = new Map<string, string>();
     // queryMap.set('params.longitude', 127.28782174876+'');
     // queryMap.set('params.latitude', 36.477895749037+'');
-    const p = await UtilesService.getGeolocation();
+    const p: any = await UtilesService.getGeolocation();
     const params = {
       longitude: p.coords.longitude,
       latitude: p.coords.latitude
     }
-    // const params = {
-    //   longitude: 127.28782174876,
-    //   latitude: 36.477895749037
-    // }
     const result: any = await lastValueFrom(this.httpClient.post(environment.apiServer + '/Restaurant',params));
     console.log(result);
     const data: Restaurant[] = result.data;

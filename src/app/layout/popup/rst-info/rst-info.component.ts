@@ -6,9 +6,6 @@ import { lastValueFrom, Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Restaurant } from '../../../model/restaurant';
-import {
-  CreateTasteRoomContentComponent
-} from '../../tabs/tab1/create-taste-room-content/create-taste-room-content.component';
 import { UtilesService } from '../../../utiles/utiles.service';
 import { Menu } from '../../../model/menu';
 import { ReView } from '../../../model/re-view';
@@ -54,10 +51,10 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async rstInfoDataSub() {
     const id = location.search.replace('?rstInfo=', '');
+    debugger;
     console.log(id)
     try {
-      const rstObj: any = await lastValueFrom(this.httpClient.post(environment.apiServer+'/Restaurant'
-      , {id: id}));
+      const rstObj: any = await lastValueFrom(this.httpClient.post(environment.apiServer+'/Restaurant', {id: id}));
       console.log(rstObj.data)
       this.rstInfo = rstObj.data;
     } catch (error) {
@@ -79,6 +76,12 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     return reViews.filter(p => p.isMain === 'Y');
   }
+  renderMenu (menus: Menu[]) {
+    if(!menus) {
+      return [];
+    }
+    return menus.filter(p => p.isMain === 'Y');
+  }
 
   ngOnDestroy (): void {
   }
@@ -88,7 +91,13 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
     this.location.back();
   }
 
-  async enterTasteRoom () {
-    await this.rstInfoDataSub();
+  async enterTasteRoom (id: string) {
+    const queryParams = {
+      rstInfoId: id
+      // add more parameters as needed
+    };
+    // router
+    await this.router.navigate(['/create-chat-taste-room'], {queryParams});
+    // await this.rstInfoDataSub();
   }
 }

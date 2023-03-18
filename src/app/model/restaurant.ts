@@ -1,5 +1,6 @@
 import { Menu } from './menu';
 import { ReView } from './re-view';
+import { TasteRoom } from './taste-room';
 
 export class Restaurant {
   id: string = '';
@@ -35,6 +36,8 @@ export class Restaurant {
   menus: Menu[] = [];
   // 리뷰정보
   reViews: ReView[] = [];
+  // 챗방
+  tasteRooms: TasteRoom[] = [];
   imagePath: string = '';
   imageName: string = '';
 }

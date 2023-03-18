@@ -46,7 +46,7 @@ export class MapContentComponent implements OnInit, AfterViewInit {
   }
 
   async ngAfterViewInit () {
-    const p = await UtilesService.getGeolocation();
+    const p: any = await UtilesService.getGeolocation();
     this.longitude = p.coords.longitude;
     this.latitude = p.coords.latitude;
     console.log(this.longitude, ',',  this.latitude);

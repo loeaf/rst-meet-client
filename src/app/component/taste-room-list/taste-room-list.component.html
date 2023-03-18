@@ -4,10 +4,10 @@
       <ion-list *ngFor="let obj of tasteRoomList" style="padding: 0px;">
         <ion-nav-link
           *ngIf="obj.attendantMembers.length !== obj.peopleNum"
-          router-direction="forward" [component]="component">
-          <app-taste-list-item
-            [tasteRoom]="obj"
+          router-direction="forward"
           (click)="onClickItem(obj)">
+          <app-taste-list-item
+            [tasteRoom]="obj">
           </app-taste-list-item>
         </ion-nav-link>
         <app-taste-list-item

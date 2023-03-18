@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IonRouterOutlet } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UtilesService } from '../../../../utiles/utiles.service';
 import { AlertController } from '@ionic/angular';
-import { map } from 'rxjs/operators';
-import { lastValueFrom } from 'rxjs';
-import { environment } from '../../../../../environments/environment';
 @Component({
   selector: 'app-mypage-content',
   templateUrl: './mypage-content.component.html',
@@ -23,7 +19,7 @@ export class MypageContentComponent implements OnInit {
   }
 
   async test () {
-    const p = await UtilesService.getGeolocation();
+    const p: any = await UtilesService.getGeolocation();
     console.log(p.coords.longitude, ',',  p.coords.latitude);
     // navigator.geolocation.getCurrentPosition((position) => {
     //   debugger;

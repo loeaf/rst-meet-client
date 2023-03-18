@@ -9,7 +9,19 @@ export class UtilesService {
 
   constructor() { }
   static getGeolocation() {
+    if(true) {
+      return new Promise((resolve, reject) => {
+        const p: any = {
+          coords: {
+            longitude: 127.28782174876,
+            latitude: 36.477895749037
+          }
+        }
+        resolve(p)
+      });
+    }
     return Geolocation.getCurrentPosition();
+
   }
 
   async gernatePhrase() {

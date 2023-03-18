@@ -50,17 +50,27 @@
     <div  class="font16">{{rstInfo.roadAddress}}</div>
     <div  class="font16">{{rstInfo.jibunAddress}}</div>
     <div  class="font16" style=" margin-bottom: 10px;">{{rstInfo.englishAddress}}</div>
+    <div class="font16 gray bold">
+      대표메뉴
+    </div>
+    <div  class="font16" style="" *ngFor="let menu of renderMenu(rstInfo.menus)">
+      - [음식량 - {{menu.menuAmount}}]{{menu.name}} {{menu.price}}원
+    </div>
+    <div class="font16 gray bold">
+      AI 요약후기
+    </div>
     <div  class="font16" style="" *ngFor="let review of renderReView(rstInfo.reViews)">
       - {{review.content}}
     </div>
     <div style="margin-bottom: 10px;"></div>
     <div style="margin-top:30px; display: flex; align-items: center; justify-content: space-between;">
       <div class="font20">모임 정보</div>
-      <ion-nav-link router-direction="forward" (click)="enterTasteRoom()">
-        <app-rst-button [text]="'생성하기'"></app-rst-button>
+      <ion-nav-link
+        class="ion-activatable">
+        <app-rst-button [text]="'생성하기'" (click)="enterTasteRoom(rstInfo.id)"></app-rst-button>
       </ion-nav-link>
     </div>
-    <app-taste-room-list></app-taste-room-list>
+    <app-taste-room-list [tasteRoomList]="rstInfo.tasteRooms"></app-taste-room-list>
   </div>
 </div>
 </ion-content>

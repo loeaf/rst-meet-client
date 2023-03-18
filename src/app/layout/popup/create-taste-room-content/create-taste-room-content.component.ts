@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IonInput, IonNav, IonNavLink, NavParams } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../../environments/environment';
 import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-create-taste-room-content',
@@ -15,13 +15,12 @@ export class CreateTasteRoomContentComponent implements OnInit {
   peopleNum: number = 2;
   meetPaymentType: string = 'DUTCH';
 
-  constructor(private ionNav: IonNav,
-              public navParams: NavParams,
-              public router: Router,
+  constructor(public router: Router,
               public httpClient: HttpClient) { }
 
   ngOnInit() {
-    this.obj = this.navParams.get("uuid");
+    const id = location.search.replace('?rstInfoId=', '');
+    this.obj = id;
   }
 
   async onMove (text: IonInput) {
@@ -32,9 +31,7 @@ export class CreateTasteRoomContentComponent implements OnInit {
       peopleNum: this.peopleNum,
       meetPaymentType: this.meetPaymentType
     } ).subscribe(p => {
-      this.ionNav.pop();
-      this.ionNav.pop();
-      this.router.navigate(['/chat-cotent']);
+      this.router.navigate(['/chat-content']);
     })
   }
 }
