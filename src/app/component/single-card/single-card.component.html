@@ -2,27 +2,28 @@
   <div class="swiper-wrapper" style="margin-left: -30px;">
     <div class="swiper-slide"
          style="padding: 20px;  background:rgba(255, 255, 255, 0.8)"
-         *ngFor="let item of items; let index">
+         *ngFor="let item of items; let index" (click)="clickItem(item)">
       <div style="display: flex; flex-direction: column;">
         <img class="content-img no-alpha"
              style="width: 100%; display: flex; align-items: center; justify-content: center"
             alt="Silhouette of mountains"
-             src="/assets/image/Rectangle%20380.png" />
+             src="/assets/image/Rectangle%20380.png" ion-ripple-effect />
         <div
           style="width: 100%;
           margin-top: 40px;
           display: flex;
           justify-content: space-between;
           align-items: center">
-          <div class="bold b-font" style="font-size: 28px">
+          <div class="bold b-font">
             딱조아막창 본점
           </div>
           <img src="/assets/image/Vector%2041.svg">
         </div>
-        <div class="bold l-font" style="font-size: 14px;letter-spacing : -2px; margin-top: 10px;">
+        <div class="l-font" style="margin-top: 10px;">
           대구광역시 북구 대불서길 58-1
         </div>
       </div>
     </div>
   </div>
 </div>
+

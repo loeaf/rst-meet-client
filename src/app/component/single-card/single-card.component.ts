@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import Swiper from 'swiper';
+import { Restaurant } from '../../model/restaurant';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-single-card',
@@ -10,7 +12,7 @@ import Swiper from 'swiper';
 export class SingleCardComponent implements OnInit, AfterViewInit {
   items: Array<string> = [];
   component: any;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngAfterViewInit(): void {
     const swiper = new Swiper('.mySwiper', {
@@ -49,4 +51,11 @@ export class SingleCardComponent implements OnInit, AfterViewInit {
     }, 500);
   }
 
+  async clickItem (item: string) {
+    const queryParams = {
+      rstInfo: 1
+      // add more parameters as needed
+    };
+    await this.router.navigate(['/rst-info'], { queryParams });
+  }
 }

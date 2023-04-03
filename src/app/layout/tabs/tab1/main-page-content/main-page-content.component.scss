@@ -1,0 +1,15 @@
+.ripple-parent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid #ddd;
+
+  user-select: none;
+
+  width: 100%;
+  border-radius: 8px;
+}

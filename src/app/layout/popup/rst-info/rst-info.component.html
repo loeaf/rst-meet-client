@@ -1,66 +1,130 @@
-<!--<ion-header>-->
-<!--  <ion-toolbar>-->
-<!--    <ion-buttons slot="start">-->
-<!--      <ion-back-button icon="caret-back"></ion-back-button>-->
-<!--    </ion-buttons>-->
-<!--    <ion-title>{{rstInfo.name}}</ion-title>-->
-<!--  </ion-toolbar>-->
-<!--</ion-header>-->
-<ion-content [fullscreen]="true">
-<div class="ion-content-scroll-host">
-  <div style="position: relative;">
-    <div class="font23" (click)="back()"
-         style="position: absolute; margin-left: 20px; margin-top: 10px; z-index: 100">
-      <i class="fa-solid fa-caret-left"></i>
-    </div>
+<div style="overflow: auto">
+  <div style="width: 100%; position: absolute; display: flex; align-items: center; justify-content: space-between">
+    <img style="margin-left: 20px; margin-top: 20px;" src="/assets/image/Vector%205.svg" (click)="back()">
+    <img style="margin-right: 27px; margin-top: 21px;" src="/assets/image/more.svg">
   </div>
-  <div class="swiper">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-      <!-- Slides -->
-      <div class="swiper-slide" *ngFor="let image of images">
-        <img alt="rhino standing near grass"
-             onerror="this.src='/assets/image/noimage.jpg'"
-             [src]="initImage(image.filename)" />
+  <div style="display: flex; flex-direction: column">
+    <img
+      src="/assets/image/Rectangle%20380.png"
+      style="width: 100%"
+    >
+    <div style="margin-top: 30px; margin-left: 20px; margin-right: 20px;">
+      <div
+        style="width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center">
+        <div class="bold b-font">
+          딱조아막창 본점
+        </div>
+        <img src="/assets/image/Property%201=1.svg">
+      </div>
+      <div class="m-font" style="margin-top: 10px; color: #585B5E">
+        생막창이 끝내주는 경대 북문 막창 맛집
+      </div>
+      <div class="r-font" style="margin-top: 42px;">
+        대구광역시 북구 대불서길 58-1
+      </div>
+      <div class="l-font" style="color: #B0B5BC; display: flex; align-items: center;">
+        <img src="/assets/image/mdi_map-marker-black.svg">
+        내 위치에서 1KM 이내
+      </div>
+
+      <div class="ion-activatable ripple-parent l-font"
+           style="border: 1px solid #60CE6B;
+    height: 40px;
+    color: #5ECC69;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;">
+        네이버에서 상세정보 보기
+        <img src="/assets/image/material-symbols_arrow-outward.svg">
+        <ion-ripple-effect style="height: 40px;"></ion-ripple-effect>
+      </div>
+
+      <div class="m-font bold" style="margin-top: 60px; color: #000000;margin-bottom: 30px;">
+        근처의 다른 핫플
+      </div>
+      <div style="margin-bottom: 20px; display: flex; align-items: center;">
+        <img src="/assets/image/Rectangle%20380.png" style="border-radius: 5px; width: 65px; height: 65px;">
+        <div class="m-font semi-bold" style="color: #000000; margin-left: 15px;">
+          호랑이 쌀국수
+        </div>
+      </div>
+
+      <div class="ion-activatable ripple-parent l-font"
+         style="border: 1px solid #60CE6B;
+          height: 40px;
+          color: white;
+          background-color: black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 20px;
+          margin-bottom: 60px;">
+        지도에서 더 보기
+        <ion-ripple-effect style="height: 40px;"></ion-ripple-effect>
       </div>
     </div>
-    <div class="swiper-pagination"></div>
   </div>
-  <div class="mgl15 mgr15  MAT20">
-    <div style="display: flex; align-items: flex-end; margin-bottom: 10px;">
-      <div class="font23 bold">{{rstInfo.name}}</div>
-      <div class="font16 gray">(1km)</div>
-    </div>
-    <div class="font16 gray" style="margin-bottom: 10px; margin-top: -11px;">
-      {{rstInfo.representativeMenu}} 전문점
-    </div>
-    <div *ngFor="let menu of renderMainMenu(rstInfo.menus)"
-         style="margin-bottom: 10px;">
-    </div>
-    <div  class="font16">{{rstInfo.roadAddress}}</div>
-    <div  class="font16">{{rstInfo.jibunAddress}}</div>
-    <div  class="font16" style=" margin-bottom: 10px;">{{rstInfo.englishAddress}}</div>
-    <div class="font16 gray bold">
-      대표메뉴
-    </div>
-    <div  class="font16" style="" *ngFor="let menu of renderMenu(rstInfo.menus)">
-      - [음식량 - {{menu.menuAmount}}]{{menu.name}} {{menu.price}}원
-    </div>
-    <div class="font16 gray bold">
-      AI 요약후기
-    </div>
-    <div  class="font16" style="" *ngFor="let review of renderReView(rstInfo.reViews)">
-      - {{review.content}}
-    </div>
-    <div style="margin-bottom: 10px;"></div>
-    <div style="margin-top:30px; display: flex; align-items: center; justify-content: space-between;">
-      <div class="font20">모임 정보</div>
-      <ion-nav-link
-        class="ion-activatable">
-        <app-rst-button [text]="'생성하기'" (click)="enterTasteRoom(rstInfo.id)"></app-rst-button>
-      </ion-nav-link>
-    </div>
-    <app-taste-room-list [tasteRoomList]="rstInfo.tasteRooms"></app-taste-room-list>
-  </div>
+  <!--<ion-content [fulen]="true">-->
+  <!--<div class="ion-content-scroll-host">-->
+  <!--  <div style="position: relative;">-->
+  <!--    <div class="font23" (click)="back()"-->
+  <!--         style="position: absolute; margin-left: 20px; margin-top: 10px; z-index: 100">-->
+  <!--      <i class="fa-solid fa-caret-left"></i>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--  <div class="swiper">-->
+  <!--    &lt;!&ndash; Additional required wrapper &ndash;&gt;-->
+  <!--    <div class="swiper-wrapper">-->
+  <!--      &lt;!&ndash; Slides &ndash;&gt;-->
+  <!--      <div class="swiper-slide" *ngFor="let image of images">-->
+  <!--        <img alt="rhino standing near grass"-->
+  <!--             onerror="this.src='/assets/image/noimage.jpg'"-->
+  <!--             [src]="initImage(image.filename)" />-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--    <div class="swiper-pagination"></div>-->
+  <!--  </div>-->
+  <!--  <div class="mgl15 mgr15  MAT20">-->
+  <!--    <div style="display: flex; align-items: flex-end; margin-bottom: 10px;">-->
+  <!--      <div class="font23 bold">{{rstInfo.name}}</div>-->
+  <!--      <div class="font16 gray">(1km)</div>-->
+  <!--    </div>-->
+  <!--    <div class="font16 gray" style="margin-bottom: 10px; margin-top: -11px;">-->
+  <!--      {{rstInfo.representativeMenu}} 전문점-->
+  <!--    </div>-->
+  <!--    <div *ngFor="let menu of renderMainMenu(rstInfo.menus)"-->
+  <!--         style="margin-bottom: 10px;">-->
+  <!--    </div>-->
+  <!--    <div  class="font16">{{rstInfo.roadAddress}}</div>-->
+  <!--    <div  class="font16">{{rstInfo.jibunAddress}}</div>-->
+  <!--    <div  class="font16" style=" margin-bottom: 10px;">{{rstInfo.englishAddress}}</div>-->
+  <!--    <div class="font16 gray bold">-->
+  <!--      대표메뉴-->
+  <!--    </div>-->
+  <!--    <div  class="font16" style="" *ngFor="let menu of renderMenu(rstInfo.menus)">-->
+  <!--      - [음식량 - {{menu.menuAmount}}]{{menu.name}} {{menu.price}}원-->
+  <!--    </div>-->
+  <!--    <div class="font16 gray bold">-->
+  <!--      AI 요약후기-->
+  <!--    </div>-->
+  <!--    <div  class="font16" style="" *ngFor="let review of renderReView(rstInfo.reViews)">-->
+  <!--      - {{review.content}}-->
+  <!--    </div>-->
+  <!--    <div style="margin-bottom: 10px;"></div>-->
+  <!--    <div style="margin-top:30px; display: flex; align-items: center; justify-content: space-between;">-->
+  <!--      <div class="font20">모임 정보</div>-->
+  <!--      <ion-nav-link-->
+  <!--        class="ion-activatable">-->
+  <!--        <app-rst-button [text]="'생성하기'" (click)="enterTasteRoom(rstInfo.id)"></app-rst-button>-->
+  <!--      </ion-nav-link>-->
+  <!--    </div>-->
+  <!--    <app-taste-room-list [tasteRoomList]="rstInfo.tasteRooms"></app-taste-room-list>-->
+  <!--  </div>-->
+  <!--</div>-->
+  <!--</ion-content>-->
+
 </div>
-</ion-content>

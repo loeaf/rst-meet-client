@@ -52,7 +52,6 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async rstInfoDataSub() {
     const id = location.search.replace('?rstInfo=', '');
-    debugger;
     console.log(id)
     try {
       const rstObj: any = await lastValueFrom(this.httpClient.post(environment.apiServer+'/Restaurant', {id: id}));
