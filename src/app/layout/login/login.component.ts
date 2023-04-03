@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { IonInput } from '@ionic/angular';
 import { AuthInterceptor } from '../../config/AuthInterceptor';
 import { environment } from '../../../environments/environment';
-
+import { KakaoService } from './kakao.service';
+declare const Kakao: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,9 +17,11 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
               private httpClient: HttpClient,
+              private kakao: KakaoService,
               private authIntercept: AuthInterceptor) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   async enterSignUp () {
     await this.router.navigateByUrl('/signup')
@@ -42,6 +45,12 @@ export class LoginComponent implements OnInit {
       window.localStorage.clear();
       window.localStorage.setItem('token', p.data);
       await this.router.navigate(['/']);
+    });
+  }
+
+  onLoginByKakao () {
+    this.kakao.login().then((access_token: any) => {
+      console.log('access_token', access_token);
     });
   }
 }

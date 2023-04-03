@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import Swiper from 'swiper';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-single-card',
@@ -13,33 +13,23 @@ export class SingleCardComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngAfterViewInit(): void {
-    // swiper card
-
-    var cardSwiper = new Swiper(".cardSwiper", {
-      effect: "cards",
-      grabCursor: true,
+    const swiper = new Swiper('.mySwiper', {
+      slidesPerView: "auto",
+      centeredSlides: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      spaceBetween: 10,
     });
 
-    const swiper = new Swiper('.swiper', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: true,
-
-      // If we need pagination
-      pagination: {
-        el: '.swiper-pagination',
-      },
-
-      // Navigation arrows
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-
-      // And if we need scrollbar
-      scrollbar: {
-        el: '.swiper-scrollbar',
-      },
+    swiper.on('init', function() {
+      var container: any = document.querySelector('.swiper-container');
+      var slide: any = document.querySelector('.swiper-slide');
+      container.style.height = slide.offsetHeight + 'px';
+      container.style.display = 'flex';
+      container.style.justifyContent = 'center';
+      container.style.alignItems = 'center';
     });
   }
 

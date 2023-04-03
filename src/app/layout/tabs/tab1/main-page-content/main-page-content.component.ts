@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import Swiper from 'swiper';
 import { KR } from 'country-flag-icons/string/3x2'
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
@@ -15,27 +14,6 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngAfterViewInit(): void {
-    const swiper = new Swiper('.swiper', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: true,
-
-      // If we need pagination
-      pagination: {
-        el: '.swiper-pagination',
-      },
-
-      // Navigation arrows
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-
-      // And if we need scrollbar
-      scrollbar: {
-        el: '.swiper-scrollbar',
-      },
-    });
     function htmlToElement(html: any) {
       var template = document.createElement('template');
       html = html.trim(); // Never return a text node of whitespace as the result
@@ -78,5 +56,8 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
 
   viewNotice () {
     this.router.navigate(['user-notice']);
+  }
+  refresh() {
+
   }
 }

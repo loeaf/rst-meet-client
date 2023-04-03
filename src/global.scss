@@ -30,8 +30,8 @@
 @import "swiper/swiper-bundle.min.css";
 
 @import "assets/static/css/default.css";
-@import "assets/static/css/fonts.css";
 @import "node_modules/ol/ol.css";
+@import "assets/font/pretendard.css";
 
 .gray {
   color: rgb(128, 128, 128);
@@ -47,6 +47,9 @@
 }
 .font16 {
   font-size: 16px;
+}
+.font14 {
+  font-size: 14px;
 }
 .font13 {
   font-size: 13px;
@@ -65,6 +68,15 @@
 }
 .outline {
   text-shadow: -1px -1px 0 rgba(59, 59, 59, 0.25), 1px -1px 0 rgba(59, 59, 59, 0.25), -1px 1px 0 rgba(59, 59, 59, 0.25), 1px 1px 0 rgba(59, 59, 59, 0.25);
+}
+.mgr5 {
+  margin-left: 5px;
+}
+.b-font {
+  font-family: Pretendard;
+}
+.l-font {
+  font-family: Pretendard Medium;
 }
 
 .bline {

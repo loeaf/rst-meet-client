@@ -9,6 +9,7 @@ import { MainPageContentComponent } from './main-page-content/main-page-content.
 import { TasteRoomContentModule } from './taste-room-content/taste-room-content.module';
 import { MainCardsContentModule } from './main-cards-content/main-cards-content.module';
 import { MultiInfoModule } from '../../../component/multi-info/multi-info.module';
+import { SingleCardModule } from '../../../component/single-card/single-card.module';
 
 @NgModule({
   declarations: [Tab1Page, MainPageContentComponent],
@@ -22,7 +23,8 @@ import { MultiInfoModule } from '../../../component/multi-info/multi-info.module
     Tab1PageRoutingModule,
     MultiInfoModule,
     TasteRoomContentModule,
-    MainCardsContentModule
+    MainCardsContentModule,
+    SingleCardModule
   ]
 })
 export class Tab1PageModule {}

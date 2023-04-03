@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  apiServer: 'http://localhost:8080'
+  apiServer: 'http://localhost:8080',
+  objectServer: 'https://dhk.ha.nso.li',
+  kakao: {
+    web_key: 'web_key',
+  },
 };
 
 /*

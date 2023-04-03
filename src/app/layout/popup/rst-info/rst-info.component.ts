@@ -21,6 +21,7 @@ Swiper.use([Navigation, Pagination]);
 })
 export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   rstInfo: Restaurant = new Restaurant();
+  images: any;
 
   constructor(private rstInfoSvc: RstInfoService,
               private httpClient: HttpClient,
@@ -32,7 +33,7 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   initSwiper() {
-    const swiper = new Swiper('.swiper', {
+    const swiper = new Swiper('.mySwiper', {
       // Optional parameters
       direction: 'horizontal',
       grabCursor: true,
@@ -99,5 +100,9 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
     // router
     await this.router.navigate(['/create-chat-taste-room'], {queryParams});
     // await this.rstInfoDataSub();
+  }
+
+  initImage (filename: string) {
+    return environment.objectServer + '/image/' + filename;
   }
 }
