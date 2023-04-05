@@ -21,7 +21,7 @@ export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.swiper = new Swiper('.mySwiper', {
       slidesPerView: "auto",
-      centeredSlides: true,
+      // centeredSlides: true,
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
