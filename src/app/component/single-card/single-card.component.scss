@@ -18,23 +18,6 @@
   --padding-top: 10px;
   --padding-bottom: 10px;
 }
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-
-  align-items: center;
-  justify-content: space-between;
-  text-align: center;
-
-  height: 300px;
-  width: 300px;
-
-  margin: 0 auto;
-}
-b {
-  width: 100%;
-}
-
 .swiper {
   width: 100%;
   height: 100%;
@@ -42,7 +25,6 @@ b {
 
 .swiper-slide {
   width: 320px !important;
-  height: 440px;
   border: 1px solid #B1B8DD;
   border-radius: 10px;
   font-size: 18px;
@@ -50,7 +32,48 @@ b {
 }
 .content-img {
   width: 100%;
+  height: 280px;
 }
 .swiper-slide ion-ripple-effect {
   --ion-ripple-color: blue;
+}
+
+.media-bt {
+  margin-bottom: 30px;
+}
+
+@media (max-height:700px){
+  .content-img {
+    width: 100%;
+    height: 200px;
+  }
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+  .media-bt {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 360px){
+  .content-img {
+    width: 100%;
+    height: 200px;
+  }
+  .swiper {
+    width: 80%;
+    height: 100%;
+    padding-left: 10px;
+  }
+  .media-bt {
+    margin-bottom: 30px;
+  }
+  .swiper-slide {
+    width: 100% !important;
+    border: 1px solid #B1B8DD;
+    border-radius: 10px;
+    font-size: 18px;
+    background: #fff;
+  }
 }

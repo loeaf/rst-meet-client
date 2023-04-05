@@ -10,11 +10,13 @@ import { TasteRoomContentModule } from './taste-room-content/taste-room-content.
 import { MainCardsContentModule } from './main-cards-content/main-cards-content.module';
 import { MultiInfoModule } from '../../../component/multi-info/multi-info.module';
 import { SingleCardModule } from '../../../component/single-card/single-card.module';
+import { HeaderInfoModule } from '../../../component/header-info/header-info.module';
+import { BackgroundInfoModule } from '../../../component/background-info/background-info.module';
 
 @NgModule({
   declarations: [Tab1Page, MainPageContentComponent],
   exports: [
-    MainPageContentComponent
+    MainPageContentComponent,
   ],
   imports: [
     IonicModule,
@@ -24,7 +26,9 @@ import { SingleCardModule } from '../../../component/single-card/single-card.mod
     MultiInfoModule,
     TasteRoomContentModule,
     MainCardsContentModule,
-    SingleCardModule
+    SingleCardModule,
+    HeaderInfoModule,
+    BackgroundInfoModule
   ]
 })
 export class Tab1PageModule {}

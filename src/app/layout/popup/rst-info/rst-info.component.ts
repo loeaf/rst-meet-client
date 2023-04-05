@@ -11,6 +11,7 @@ import { Menu } from '../../../model/menu';
 import { ReView } from '../../../model/re-view';
 import { environment } from '../../../../environments/environment';
 import { Location } from '@angular/common';
+import { ActionSheetController} from '@ionic/angular';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -27,6 +28,7 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
               private httpClient: HttpClient,
               private activatedRoute: ActivatedRoute,
               private location: Location,
+              public actionSheet: ActionSheetController,
               private router: Router) { }
 
   ngOnInit() {
@@ -93,7 +95,7 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   async enterTasteRoom (id: string) {
     const queryParams = {
-      rstInfoId: id
+      rstInfoId: 1
       // add more parameters as needed
     };
     // router
@@ -103,5 +105,18 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
 
   initImage (filename: string) {
     return environment.objectServer + '/image/' + filename;
+  }
+
+  async moveLink () {
+    const action = await this.actionSheet.create({
+      buttons: [{
+        text: 'Open link',
+        icon: 'link-outline',
+        handler: () => {
+          window.open('https://map.naver.com/v5/smart-around/place/1567503530?c=15,0,0,0,dh');
+        }
+      }]
+    });
+    await action.present();
   }
 }

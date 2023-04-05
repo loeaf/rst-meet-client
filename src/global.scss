@@ -15,7 +15,7 @@
 /* Basic CSS for apps built with Ionic */
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
-@import "~@ionic/angular/css/typography.css";
+//@import "~@ionic/angular/css/typography.css";
 @import '~@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
@@ -29,10 +29,9 @@
 @import "swiper/swiper.min.css";
 @import "swiper/swiper-bundle.min.css";
 
+@import "assets/font/pretendard.css";
 @import "assets/static/css/default.css";
 @import "node_modules/ol/ol.css";
-@import "assets/font/pretendard.css";
-
 .gray {
   color: rgb(128, 128, 128);
 }
@@ -76,19 +75,18 @@
   margin-left: 5px;
 }
 .b-font {
-  font-family: Pretendard;
   font-size: 28px;
 }
+.bm-font {
+  font-size: 23px;
+}
 .m-font {
-  font-family: Pretendard;
   font-size: 18px;
 }
 .r-font {
-  font-family: Pretendard;
   font-size: 16px;
 }
 .l-font {
-  font-family: Pretendard;
   font-size: 14px;
 }
 

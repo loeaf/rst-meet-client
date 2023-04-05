@@ -6,6 +6,8 @@ import { Tab2Page } from './tab2.page';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { MapContentModule } from './map-content/map-content.module';
+import { Tab1PageModule } from '../tab1/tab1.module';
+import { HeaderInfoModule } from '../../../component/header-info/header-info.module';
 
 @NgModule({
   imports: [
@@ -13,7 +15,9 @@ import { MapContentModule } from './map-content/map-content.module';
     CommonModule,
     FormsModule,
     Tab2PageRoutingModule,
-    MapContentModule
+    MapContentModule,
+    Tab1PageModule,
+    HeaderInfoModule
   ],
   declarations: [Tab2Page]
 })

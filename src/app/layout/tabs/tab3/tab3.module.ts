@@ -11,6 +11,7 @@ import { MainPageContentModule } from './main-page-content/main-page-content.mod
 import { MychatListContentModule } from './mychat-list-content/mychat-list-content.module';
 import { MainPageContentComponent } from './main-page-content/main-page-content.component';
 import { RstInfoModule } from '../../popup/rst-info/rst-info.module';
+import { BackgroundInfoModule } from '../../../component/background-info/background-info.module';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { RstInfoModule } from '../../popup/rst-info/rst-info.module';
     TasteListItemModule,
     RstInfoModule,
     MainPageContentModule,
-    MychatListContentModule
+    MychatListContentModule,
+    BackgroundInfoModule
   ],
   exports: [
     MainPageContentComponent

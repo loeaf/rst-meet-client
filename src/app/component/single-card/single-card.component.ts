@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import Swiper from 'swiper';
 import { Restaurant } from '../../model/restaurant';
@@ -9,23 +9,26 @@ import { Router } from '@angular/router';
   templateUrl: './single-card.component.html',
   styleUrls: ['./single-card.component.scss'],
 })
-export class SingleCardComponent implements OnInit, AfterViewInit {
+export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
   items: Array<string> = [];
   component: any;
+  swiper: any;
   constructor(private router: Router) { }
 
   ngAfterViewInit(): void {
-    const swiper = new Swiper('.mySwiper', {
+  }
+
+  ngOnInit() {
+    this.swiper = new Swiper('.mySwiper', {
       slidesPerView: "auto",
       centeredSlides: true,
       pagination: {
         el: ".swiper-pagination",
         clickable: true,
-      },
-      spaceBetween: 10,
+      }
     });
 
-    swiper.on('init', function() {
+    this.swiper.on('init', function() {
       var container: any = document.querySelector('.swiper-container');
       var slide: any = document.querySelector('.swiper-slide');
       container.style.height = slide.offsetHeight + 'px';
@@ -33,9 +36,6 @@ export class SingleCardComponent implements OnInit, AfterViewInit {
       container.style.justifyContent = 'center';
       container.style.alignItems = 'center';
     });
-  }
-
-  ngOnInit() {
     this.generateItems();
   }
   private generateItems() {
@@ -57,5 +57,8 @@ export class SingleCardComponent implements OnInit, AfterViewInit {
       // add more parameters as needed
     };
     await this.router.navigate(['/rst-info'], { queryParams });
+  }
+
+  ngOnDestroy (): void {
   }
 }
