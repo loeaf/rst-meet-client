@@ -56,9 +56,22 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
     const id = location.search.replace('?rstInfo=', '');
     console.log(id)
     try {
-      const rstObj: any = await lastValueFrom(this.httpClient.post(environment.apiServer+'/Restaurant', {id: id}));
+      const p: any = await UtilesService.getGeolocation();
+      const params = {
+        longitude: p.coords.longitude,
+        latitude: p.coords.latitude
+      }
+
+      const rstObj: any = await lastValueFrom(this.httpClient.post(environment.apiServer+'/Restaurant',
+        {
+                id: id,
+                longitude: params.longitude,
+                latitude: params.latitude
+            }
+          )
+      );
       console.log(rstObj.data)
-      this.rstInfo = rstObj.data;
+      this.rstInfo = rstObj.data[0];
     } catch (error) {
       console.log(error);
       UtilesService.tokenCheck(error);
@@ -118,5 +131,13 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
       }]
     });
     await action.present();
+  }
+
+  async moveMap () {
+    const queryParams = {
+      rstInfoId: 1
+      // add more parameters as needed
+    };
+    await this.router.navigate(['/tabs/tab2'], {queryParams});
   }
 }

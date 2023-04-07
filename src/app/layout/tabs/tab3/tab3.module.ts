@@ -12,6 +12,9 @@ import { MychatListContentModule } from './mychat-list-content/mychat-list-conte
 import { MainPageContentComponent } from './main-page-content/main-page-content.component';
 import { RstInfoModule } from '../../popup/rst-info/rst-info.module';
 import { BackgroundInfoModule } from '../../../component/background-info/background-info.module';
+import { LikeListContentModule } from './like-list-content/like-list-content.module';
+import { LikeListContentComponent } from './like-list-content/like-list-content.component';
+import { LikeButtonModule } from '../../../component/like-button/like-button.module';
 
 @NgModule({
   imports: [
@@ -24,11 +27,12 @@ import { BackgroundInfoModule } from '../../../component/background-info/backgro
     RstInfoModule,
     MainPageContentModule,
     MychatListContentModule,
-    BackgroundInfoModule
+    BackgroundInfoModule,
+    LikeButtonModule
   ],
   exports: [
     MainPageContentComponent
   ],
-  declarations: [Tab3Page, MainPageContentComponent, MychatListContentComponent]
+  declarations: [Tab3Page, MainPageContentComponent, MychatListContentComponent, LikeListContentComponent]
 })
 export class Tab3PageModule {}

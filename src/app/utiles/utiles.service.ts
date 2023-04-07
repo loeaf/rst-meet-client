@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import PhraseGen from 'korean-random-words';
+import { HttpClient } from '@angular/common/http';
 const phraseGen = new PhraseGen();
 @Injectable({
   providedIn: 'root'
 })
 export class UtilesService {
-
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
   static getGeolocation() {
+    // 임시로 위치를 고정시킴
     if(true) {
       return new Promise((resolve, reject) => {
         const p: any = {
           coords: {
-            longitude: 127.28782174876,
-            latitude: 36.477895749037
+            longitude: 127.28982174876,
+            latitude: 36.479895749037
           }
         }
         resolve(p)
       });
     }
     return Geolocation.getCurrentPosition();
-
   }
 
   async gernatePhrase() {

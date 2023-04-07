@@ -2,12 +2,14 @@
   <div class="swiper-wrapper">
     <div class="swiper-slide MAR20"
          style="padding: 1.1em;background:rgba(255, 255, 255, 0.8);"
-         *ngFor="let item of items; let index" (click)="clickItem(item)">
+         *ngFor="let item of rstList; let index" (click)="clickItem(item.id)">
       <div style="display: flex; flex-direction: column;">
         <div style="display: flex; align-items: center; justify-content: center;">
           <img class="content-img no-alpha"
                alt="Silhouette of mountains"
-               src="/assets/image/Rectangle_380.png"/>
+               src="/assets/image/{{item.imagePath}}"
+               onerror="this.src='/assets/image/noimage.jpg'"
+          />
         </div>
         <div
           class="MAT40"
@@ -15,12 +17,12 @@
           display: flex;
           justify-content: space-between;">
           <div class="bold b-font">
-            딱조아막창 본점
+            {{item.name}}
           </div>
           <img src="/assets/image/Vector-41.svg">
         </div>
         <div class="r-font MAT10 FontWeight500 media-bt" style="">
-          대구광역시 북구 대불서길 58-1
+          {{item.roadAddress}}
         </div>
       </div>
     </div>

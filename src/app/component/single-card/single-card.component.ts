@@ -3,6 +3,10 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import Swiper from 'swiper';
 import { Restaurant } from '../../model/restaurant';
 import { Router } from '@angular/router';
+import { RstListItemService } from '../multi-info/rst-list-item/rst-list-item.service';
+import { UtilesService } from '../../utiles/utiles.service';
+import { MultiInfoService } from '../multi-info/multi-info.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-single-card',
@@ -10,17 +14,24 @@ import { Router } from '@angular/router';
   styleUrls: ['./single-card.component.scss'],
 })
 export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
-  items: Array<string> = [];
+  rstList: Restaurant[] = [];
   component: any;
   swiper: any;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private rstListItemSvc: RstListItemService,
+              private multiInfoSvc: MultiInfoService,) { }
 
   ngAfterViewInit(): void {
   }
 
   ngOnInit() {
+    this.subScribeInit();
+    this.rstListItemSvc.renderRstListItem.emit(1);
+    this.swiperInit();
+  }
+  swiperInit() {
     this.swiper = new Swiper('.mySwiper', {
       slidesPerView: "auto",
+      loopedSlides: 3,
       // centeredSlides: true,
       pagination: {
         el: ".swiper-pagination",
@@ -36,24 +47,24 @@ export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
       container.style.justifyContent = 'center';
       container.style.alignItems = 'center';
     });
-    this.generateItems();
   }
-  private generateItems() {
-    const count = this.items.length + 1;
-    for (let i = 0; i < 5; i++) {
-      this.items.push(`Item ${count + i}`);
-    }
-  }
-  onIonInfinite(ev: Event) {
-    this.generateItems();
-    setTimeout(() => {
-      (ev as InfiniteScrollCustomEvent).target.complete();
-    }, 500);
+  subScribeInit() {
+    this.rstListItemSvc.renderRstListItem.subscribe(async p => {
+      debugger;
+      try {
+        // create get query map by map
+        // console.log(location);
+        const data = await this.multiInfoSvc.getNearRstList();
+        this.rstList = data;
+      } catch (e) {
+        UtilesService.tokenCheck(e);
+      }
+    });
   }
 
   async clickItem (item: string) {
     const queryParams = {
-      rstInfo: 1
+      rstInfo: item
       // add more parameters as needed
     };
     await this.router.navigate(['/rst-info'], { queryParams });
@@ -61,4 +72,5 @@ export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy (): void {
   }
+
 }

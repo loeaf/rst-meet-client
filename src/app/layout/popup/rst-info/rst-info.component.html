@@ -1,4 +1,4 @@
-<div style="overflow: auto">
+<div style="overflow: auto; background-color: white">
   <div style="width: 100%; position: absolute; display: flex; align-items: center; justify-content: space-between">
     <img style="margin-left: 20px; margin-top: 20px; width: 20px; height: 20px;" src="/assets/image/Vector_5.svg" (click)="back()">
     <img style="margin-right: 20px; margin-top: 20px; width: 20px; height: 20px;" src="/assets/image/more.svg">
@@ -15,24 +15,26 @@
           justify-content: space-between;
           align-items: center">
         <div class="bold b-font">
-          딱조아막창 본점
+          {{rstInfo.name}}
         </div>
-        <img src="/assets/image/Property_1.svg">
+        <app-like-button></app-like-button>
       </div>
       <div class="m-font" style="margin-top: 10px; color: #585B5E">
         생막창이 끝내주는 경대 북문 막창 맛집
       </div>
-      <div class="r-font" style="margin-top: 42px;">
-        대구광역시 북구 대불서길 58-1
+      <div class="MAT20 MAB20" style="border: 1px solid #F3F6FB; transform: scaleY(0.5)">
+      </div>
+      <div class="r-font">
+        {{rstInfo.roadAddress}}
       </div>
       <div class="l-font" style="color: #B0B5BC; display: flex; align-items: center;">
         <img src="/assets/image/mdi_map-marker-black.svg">
-        내 위치에서 1KM 이내
+        내 위치에서 {{rstInfo.distance | number: '1.1-2'}}KM 이내
       </div>
-
-      <div class="ion-activatable ripple-parent l-font"
+      <div class="ion-activatable ripple-parent l-font MAB30"
            style="border: 1px solid #60CE6B;
           height: 40px;
+          border-radius: 5px;
           color: #5ECC69;
           display: flex;
           align-items: center;
@@ -42,89 +44,32 @@
         <img src="/assets/image/material-symbols_arrow-outward.svg">
         <ion-ripple-effect style="height: 40px;"></ion-ripple-effect>
       </div>
-
-      <div class="m-font bold" style="margin-top: 60px; color: #000000;margin-bottom: 30px;">
-        근처의 다른 핫플
+    </div>
+  </div>
+  <div class="PAT30 PAB30 PAL20 PAR20" style="color: #000000; background-color: #F7F8FA">
+    <div class="m-font bold MAB30">
+      근처의 다른 핫플
+    </div>
+    <div style="margin-bottom: 20px; display: flex; align-items: center;">
+      <img src="/assets/image/Rectangle_380.png" style="border-radius: 20%; width: 65px; height: 65px;">
+      <div class="m-font semi-bold" style="color: #000000; margin-left: 15px;">
+        호랑이 쌀국수
       </div>
-      <div style="margin-bottom: 20px; display: flex; align-items: center;">
-        <img src="/assets/image/Rectangle_380.png" style="border-radius: 5px; width: 65px; height: 65px;">
-        <div class="m-font semi-bold" style="color: #000000; margin-left: 15px;">
-          호랑이 쌀국수
-        </div>
-      </div>
+    </div>
 
-      <div class="ion-activatable ripple-parent l-font"
-         style="border: 1px solid #60CE6B;
+    <div class="ion-activatable ripple-parent l-font"
+         style="
           height: 40px;
           color: white;
+          border-radius: 5px;
           background-color: black;
           display: flex;
           align-items: center;
           justify-content: center;
           margin-top: 20px;
-          margin-bottom: 60px;">
-        지도에서 더 보기
-        <ion-ripple-effect style="height: 40px;"></ion-ripple-effect>
-      </div>
+          margin-bottom: 60px;" (click)="moveMap()">
+      지도에서 더 보기
+      <ion-ripple-effect style="height: 40px;"></ion-ripple-effect>
     </div>
   </div>
-  <!--<ion-content [fulen]="true">-->
-  <!--<div class="ion-content-scroll-host">-->
-  <!--  <div style="position: relative;">-->
-  <!--    <div class="font23" (click)="back()"-->
-  <!--         style="position: absolute; margin-left: 20px; margin-top: 10px; z-index: 100">-->
-  <!--      <i class="fa-solid fa-caret-left"></i>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--  <div class="swiper">-->
-  <!--    &lt;!&ndash; Additional required wrapper &ndash;&gt;-->
-  <!--    <div class="swiper-wrapper">-->
-  <!--      &lt;!&ndash; Slides &ndash;&gt;-->
-  <!--      <div class="swiper-slide" *ngFor="let image of images">-->
-  <!--        <img alt="rhino standing near grass"-->
-  <!--             onerror="this.src='/assets/image/noimage.jpg'"-->
-  <!--             [src]="initImage(image.filename)" />-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--    <div class="swiper-pagination"></div>-->
-  <!--  </div>-->
-  <!--  <div class="mgl15 mgr15  MAT20">-->
-  <!--    <div style="display: flex; align-items: flex-end; margin-bottom: 10px;">-->
-  <!--      <div class="font23 bold">{{rstInfo.name}}</div>-->
-  <!--      <div class="font16 gray">(1km)</div>-->
-  <!--    </div>-->
-  <!--    <div class="font16 gray" style="margin-bottom: 10px; margin-top: -11px;">-->
-  <!--      {{rstInfo.representativeMenu}} 전문점-->
-  <!--    </div>-->
-  <!--    <div *ngFor="let menu of renderMainMenu(rstInfo.menus)"-->
-  <!--         style="margin-bottom: 10px;">-->
-  <!--    </div>-->
-  <!--    <div  class="font16">{{rstInfo.roadAddress}}</div>-->
-  <!--    <div  class="font16">{{rstInfo.jibunAddress}}</div>-->
-  <!--    <div  class="font16" style=" margin-bottom: 10px;">{{rstInfo.englishAddress}}</div>-->
-  <!--    <div class="font16 gray bold">-->
-  <!--      대표메뉴-->
-  <!--    </div>-->
-  <!--    <div  class="font16" style="" *ngFor="let menu of renderMenu(rstInfo.menus)">-->
-  <!--      - [음식량 - {{menu.menuAmount}}]{{menu.name}} {{menu.price}}원-->
-  <!--    </div>-->
-  <!--    <div class="font16 gray bold">-->
-  <!--      AI 요약후기-->
-  <!--    </div>-->
-  <!--    <div  class="font16" style="" *ngFor="let review of renderReView(rstInfo.reViews)">-->
-  <!--      - {{review.content}}-->
-  <!--    </div>-->
-  <!--    <div style="margin-bottom: 10px;"></div>-->
-  <!--    <div style="margin-top:30px; display: flex; align-items: center; justify-content: space-between;">-->
-  <!--      <div class="font20">모임 정보</div>-->
-  <!--      <ion-nav-link-->
-  <!--        class="ion-activatable">-->
-  <!--        <app-rst-button [text]="'생성하기'" (click)="enterTasteRoom(rstInfo.id)"></app-rst-button>-->
-  <!--      </ion-nav-link>-->
-  <!--    </div>-->
-  <!--    <app-taste-room-list [tasteRoomList]="rstInfo.tasteRooms"></app-taste-room-list>-->
-  <!--  </div>-->
-  <!--</div>-->
-  <!--</ion-content>-->
-
 </div>

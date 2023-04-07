@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RstButtonComponent } from '../../../component/rst-button/rst-button.component';
 import { TasteRoomListModule } from '../../../component/taste-room-list/taste-room-list.module';
 import { CreateTasteRoomContentModule } from '../create-taste-room-content/create-taste-room-content.module';
+import { LikeButtonModule } from '../../../component/like-button/like-button.module';
 
 
 
@@ -14,7 +15,8 @@ import { CreateTasteRoomContentModule } from '../create-taste-room-content/creat
     CommonModule,
     IonicModule,
     TasteRoomListModule,
-    CreateTasteRoomContentModule
+    CreateTasteRoomContentModule,
+    LikeButtonModule
   ],
   exports: [RstInfoComponent, RstButtonComponent]
 })
