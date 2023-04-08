@@ -50,7 +50,6 @@ export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   subScribeInit() {
     this.rstListItemSvc.renderRstListItem.subscribe(async p => {
-      debugger;
       try {
         // create get query map by map
         // console.log(location);
