@@ -40,14 +40,23 @@ export class LikeListContentComponent implements OnInit {
 
   }
 
-  async clickLike (id: string, $event: boolean) {
+  async clickLike (id: string, $event: any) {
     // 세션체크
     if (!UtilesService.isLogin()) {
       alert('로그인 페이지로 이동합니다');
       UtilesService.moveLogin();
     }
-    debugger;
     await this.rstSvc.likeToogleRst(id);
     await this.getItems();
+  }
+
+  async clickItem (id: string) {
+    const queryParams = {
+      rstInfo: id
+      // add more parameters as needed
+    };
+    // sleep 2
+    await UtilesService.sleep(100);
+    await this.router.navigate(['/rst-info'], { queryParams });
   }
 }
