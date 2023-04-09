@@ -6,8 +6,8 @@ import { RstButtonComponent } from '../../../component/rst-button/rst-button.com
 import { TasteRoomListModule } from '../../../component/taste-room-list/taste-room-list.module';
 import { CreateTasteRoomContentModule } from '../create-taste-room-content/create-taste-room-content.module';
 import { LikeButtonModule } from '../../../component/like-button/like-button.module';
-
-
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [RstInfoComponent, RstButtonComponent],
@@ -16,7 +16,9 @@ import { LikeButtonModule } from '../../../component/like-button/like-button.mod
     IonicModule,
     TasteRoomListModule,
     CreateTasteRoomContentModule,
-    LikeButtonModule
+    LikeButtonModule,
+    ScrollingModule,
+    MatRippleModule,
   ],
   exports: [RstInfoComponent, RstButtonComponent]
 })

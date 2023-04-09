@@ -18,11 +18,14 @@ import { RstInfoModule } from './layout/popup/rst-info/rst-info.module';
 import {
   CreateTasteRoomContentModule
 } from './layout/popup/create-taste-room-content/create-taste-room-content.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListContentModule } from './layout/tabs/tab2/list-content/list-content.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    BrowserAnimationsModule,
     LoginModule,
     SignupModule,
     NologinIntroModule,

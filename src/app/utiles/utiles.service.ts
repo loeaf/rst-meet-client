@@ -28,6 +28,10 @@ export class UtilesService {
     return phraseGen.generatePhrase();
   }
 
+  static sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
   static displayedAt(createdAt: any) {
     const date: any = new Date();
     const milliSeconds = date - createdAt;
@@ -52,6 +56,34 @@ export class UtilesService {
       localStorage.clear();
       location.href = '/login';
     }
+  }
+
+  static getToken() {
+    let Authorization = window.localStorage.getItem('token');
+    return Authorization;
+  }
+
+  static getBearerToken() {
+    let Authorization = window.localStorage.getItem('token');
+    Authorization = `Bearer ${Authorization}`;
+    return Authorization;
+  }
+
+  static moveLogin() {
+    localStorage.clear();
+    location.href = '/login';
+  }
+
+  static localStogareClear() {
+    localStorage.clear();
+  }
+
+  static isLogin() {
+    const token = window.localStorage.getItem('token');
+    if(token) {
+      return true;
+    }
+    return false;
   }
 
   static createQueryString (queryMap: Map<string, string>) {

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { UtilesService } from '../../utiles/utiles.service';
 import { lastValueFrom } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Restaurant } from '../../model/restaurant';
+import { UtilesService } from '../utiles/utiles.service';
+import { environment } from '../../environments/environment';
+import { Restaurant } from '../model/restaurant';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MultiInfoService {
+export class RstService {
 
   constructor(private httpClient: HttpClient) { }
 
@@ -25,5 +25,18 @@ export class MultiInfoService {
     console.log(result);
     const data: Restaurant[] = result.data;
     return data;
+  }
+
+  /**
+   * 좋아요에 성공하면 true, 해제하면 false 리턴
+   * @param restaurantId
+   */
+  async likeToogleRst(restaurantId: string) {
+    const result: any = await lastValueFrom(
+      this.httpClient.post(environment.apiServer + '/likeList/toggle',{
+        restaurantId: restaurantId
+      })
+    );
+    return result;
   }
 }

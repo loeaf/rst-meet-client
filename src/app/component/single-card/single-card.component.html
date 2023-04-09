@@ -1,9 +1,9 @@
 <div class="swiper mySwiper">
   <div class="swiper-wrapper">
-    <div class="swiper-slide MAR20"
+    <div [@cardAnimation] class="swiper-slide MAR20 ripple-container"
          style="padding: 1.1em;background:rgba(255, 255, 255, 0.8);"
          *ngFor="let item of rstList; let index" (click)="clickItem(item.id)">
-      <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: column; position: relative">
         <div style="display: flex; align-items: center; justify-content: center;">
           <img class="content-img no-alpha"
                alt="Silhouette of mountains"
@@ -24,6 +24,7 @@
         <div class="r-font MAT10 FontWeight500 media-bt" style="">
           {{item.roadAddress}}
         </div>
+        <ion-ripple-effect style="width: 100%; height: 100%; position: absolute;"></ion-ripple-effect>
       </div>
     </div>
   </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-page-content',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainPageContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {}
 
+  async moveLogin () {
+    await this.router.navigate(['/login']);
+  }
 }

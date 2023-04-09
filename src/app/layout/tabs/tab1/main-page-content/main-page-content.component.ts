@@ -2,6 +2,11 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewEncapsulat
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { KR } from 'country-flag-icons/string/3x2'
 import { ActivatedRoute, Router } from '@angular/router';
+import { Restaurant } from '../../../../model/restaurant';
+import { UtilesService } from '../../../../utiles/utiles.service';
+import { lastValueFrom } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-main-page-content',
   templateUrl: './main-page-content.component.html',
@@ -11,7 +16,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MainPageContentComponent implements OnInit, AfterViewInit {
   @ViewChild('emojiEle') emojiEle?: ElementRef;
   items: Array<string> = [];
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  rstList: Restaurant[] = [];
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private httpClient: HttpClient) { }
 
   ngAfterViewInit(): void {
     function htmlToElement(html: any) {
@@ -21,26 +29,32 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
       return template.content.firstChild;
     }
     this.emojiEle?.nativeElement.append(htmlToElement(KR));
-    }
+  }
 
-  ngOnInit() {
-    this.generateItems();
-    this.activatedRoute.queryParams.subscribe((params: any) => {
-      if (Object.keys(params).length === 0) {
-        console.log('The object is empty');
-      } else {
-        alert(params.get('nation'));
-      }
-    });
+  async ngOnInit() {
+    // this.activatedRoute.queryParams.subscribe((params: any) => {
+    //   if (Object.keys(params).length === 0) {
+    //     console.log('The object is empty');
+    //   } else {
+    //     alert(params.get('nation'));
+    //   }
+    // });
+    await this.initRestaurants();
   }
-  private generateItems() {
-    const count = this.items.length + 1;
-    for (let i = 0; i < 5; i++) {
-      this.items.push(`Item ${count + i}`);
+
+  async initRestaurants() {
+    const p: any = await UtilesService.getGeolocation();
+    const params = {
+      longitude: p.coords.longitude,
+      latitude: p.coords.latitude
     }
+    const result: any = await lastValueFrom(this.httpClient.post(environment.apiServer + '/Restaurant',params));
+    console.log(result);
+    const data: Restaurant[] = result.data;
+    this.rstList = data;
   }
+
   onIonInfinite(ev: Event) {
-    this.generateItems();
     setTimeout(() => {
       (ev as InfiniteScrollCustomEvent).target.complete();
     }, 500);
@@ -57,7 +71,9 @@ export class MainPageContentComponent implements OnInit, AfterViewInit {
   viewNotice () {
     this.router.navigate(['user-notice']);
   }
-  refresh() {
-
+  async refresh(event: number) {
+    if(event === 1) {
+      await this.initRestaurants();
+    }
   }
 }

@@ -15,6 +15,7 @@ import { BackgroundInfoModule } from '../../../component/background-info/backgro
 import { LikeListContentModule } from './like-list-content/like-list-content.module';
 import { LikeListContentComponent } from './like-list-content/like-list-content.component';
 import { LikeButtonModule } from '../../../component/like-button/like-button.module';
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { LikeButtonModule } from '../../../component/like-button/like-button.mod
     MainPageContentModule,
     MychatListContentModule,
     BackgroundInfoModule,
-    LikeButtonModule
+    LikeButtonModule,
+    MatRippleModule
   ],
   exports: [
     MainPageContentComponent

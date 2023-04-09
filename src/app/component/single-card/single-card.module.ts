@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SingleCardComponent } from './single-card.component';
 import { IonicModule } from '@ionic/angular';
+import { MatRippleModule } from '@angular/material/core';
 
 
 
@@ -9,7 +10,8 @@ import { IonicModule } from '@ionic/angular';
   declarations: [SingleCardComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    MatRippleModule
   ],
   exports: [SingleCardComponent]
 })

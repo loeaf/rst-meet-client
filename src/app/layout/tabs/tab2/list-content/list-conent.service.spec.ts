@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MultiInfoService } from './rst.service';
+import { ListConentService } from './list-conent.service';
 
-describe('MultiInfoService', () => {
-  let service: MultiInfoService;
+describe('ListConentService', () => {
+  let service: ListConentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MultiInfoService);
+    service = TestBed.inject(ListConentService);
   });
 
   it('should be created', () => {

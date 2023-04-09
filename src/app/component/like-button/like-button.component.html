@@ -1,4 +1,4 @@
 <div (click)="toggleHeart()">
-  <i *ngIf="!isHeartRegular" class="fa-regular fa-heart" style="color: #000000; font-size: 24px;"></i>
-  <i *ngIf="isHeartRegular" class="fa-solid fa-heart" style="color: #000000; font-size: 24px;"></i>
+  <i [@heartAnimation] *ngIf="!isHeartRegular" class="fa-regular fa-heart" style="color: #000000; font-size: 24px;"></i>
+  <i [@heartAnimation] *ngIf="isHeartRegular" class="fa-solid fa-heart" style="color: #000000; font-size: 24px;"></i>
 </div>

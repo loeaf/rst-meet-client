@@ -14,11 +14,12 @@ import CircleStyle from 'ol/style/Circle';
 import { unByKey } from 'ol/Observable';
 import {getVectorContext} from 'ol/render.js';
 import {easeOut} from 'ol/easing.js';
-import { MultiInfoService } from '../../../../component/multi-info/multi-info.service';
 import { Select } from 'ol/interaction';
 import {altKeyOnly, click, pointerMove} from 'ol/events/condition.js';
 import { Router } from '@angular/router';
 import { UtilesService } from '../../../../utiles/utiles.service';
+import { RstService } from '../../../../service/rst.service';
+import { MapContentService } from './map-content.service';
 
 @Component({
   selector: 'app-map-content',
@@ -39,10 +40,14 @@ export class MapContentComponent implements OnInit, AfterViewInit {
   longitude = 0;
   latitude = 0;
   start = Date.now();
-  constructor(private multiInfoSvc: MultiInfoService,
+  constructor(private multiInfoSvc: RstService,
+              private mapContentService: MapContentService,
               private router: Router) { }
-
   async ngOnInit() {
+    this.mapContentService.mapRender.subscribe(async (p: any) => {
+      this.removeRstFeature()
+      await this.renderRestaurants();
+    });
   }
 
   async ngAfterViewInit () {
@@ -50,6 +55,30 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     this.longitude = p.coords.longitude;
     this.latitude = p.coords.latitude;
     console.log(this.longitude, ',',  this.latitude);
+    this.initMap();
+    this.mapContentService.mapRender.emit();
+    this.addMyLocationFeature(this.longitude, this.latitude);
+    this.listenerKey = this.tileLayer.on('postrender', this.animate.bind(this));
+    this.clickMark();
+  }
+
+  private clickMark () {
+    const selectClick = new Select({
+      condition: click
+    });
+    if (selectClick !== null) {
+      this.map.addInteraction(selectClick);
+      selectClick.on('select', async (e) => {
+        const obj: any = e.selected[0].getProperties();
+        const queryParams = {
+          rstInfo: obj.rstInfo.id
+        };
+        await this.router.navigate(['/rst-info'], { queryParams });
+      });
+    }
+  }
+
+  private initMap () {
     // Define the EPSG:4326 projection
     const proj4326 = new Projection({
       code: 'EPSG:4326',
@@ -99,7 +128,6 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     this.myLocationPoint = myLocationPoint;
     this.rstPoint = rstPoint;
     this.tileLayer = tileLayer;
-
     this.map = new Map({
       target: 'map',
       layers: [this.tileLayer, this.myLocationPoint, this.rstPoint],
@@ -114,26 +142,6 @@ export class MapContentComponent implements OnInit, AfterViewInit {
       console.log('VectorLayer clicked!', event.coordinate);
       // Perform any other actions you need here
     });
-    const that = this;
-
-    const feature = this.addMyLocationFeature(this.longitude, this.latitude);
-    await this.renderRestaurants();
-    this.listenerKey = this.tileLayer.on('postrender', this.animate.bind(this));
-
-    const selectClick = new Select({
-      condition: click
-    });;
-    if (selectClick !== null) {
-      this.map.addInteraction(selectClick);
-      selectClick.on('select', async (e) => {
-        const obj: any = e.selected[0].getProperties();
-        const queryParams = {
-          rstInfo: obj.rstInfo.id
-          // add more parameters as needed
-        };
-        await this.router.navigate(['/rst-info'], { queryParams });
-      });
-    }
   }
 
   async renderRestaurants() {
@@ -150,6 +158,14 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     });
     this.rstSource.addFeature(feature);
   }
+  // removeRstFeature
+  removeRstFeature() {
+    if (this.rstSource === null) {
+      return;
+    }
+    this.rstSource.clear();
+  }
+
   addMyLocationFeature(lon: number, lat: number) {
     const geom = new Point([lon, lat]);
     const feature: any = new Feature(geom);

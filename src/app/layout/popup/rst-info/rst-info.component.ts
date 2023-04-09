@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, OnDestroy, OnInit, ViewChild } from '@angular/core';
 // core version + navigation, pagination modules:
 import Swiper, { Navigation, Pagination } from 'swiper';
 import { RstInfoService } from './rst-info.service';
@@ -12,6 +12,8 @@ import { ReView } from '../../../model/re-view';
 import { environment } from '../../../../environments/environment';
 import { Location } from '@angular/common';
 import { ActionSheetController} from '@ionic/angular';
+import { RstService } from '../../../service/rst.service';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -23,12 +25,15 @@ Swiper.use([Navigation, Pagination]);
 export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   rstInfo: Restaurant = new Restaurant();
   images: any;
+  nearRst: Restaurant[] = [];
+  @ViewChild('rstInfoEle') rstInfoEle?: ElementRef;
+  @ViewChild('hotPlaceEle') hotPlaceEle?: CdkVirtualScrollViewport;
 
-  constructor(private rstInfoSvc: RstInfoService,
-              private httpClient: HttpClient,
+  constructor(private httpClient: HttpClient,
               private activatedRoute: ActivatedRoute,
               private location: Location,
               public actionSheet: ActionSheetController,
+              public rstSvc: RstService,
               private router: Router) { }
 
   ngOnInit() {
@@ -47,35 +52,42 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async ngAfterViewInit () {
+    const id = location.search.replace('?rstInfo=', '');
     this.initSwiper();
-    await this.rstInfoDataSub();
+    await this.initRstInfo(id);
   }
 
-
-  async rstInfoDataSub() {
-    const id = location.search.replace('?rstInfo=', '');
-    console.log(id)
+  async initRstInfo(id: string) {
     try {
-      const p: any = await UtilesService.getGeolocation();
-      const params = {
-        longitude: p.coords.longitude,
-        latitude: p.coords.latitude
-      }
-
-      const rstObj: any = await lastValueFrom(this.httpClient.post(environment.apiServer+'/Restaurant',
-        {
-                id: id,
-                longitude: params.longitude,
-                latitude: params.latitude
-            }
-          )
-      );
-      console.log(rstObj.data)
+      const rstObj = await this.getRstInfo(id);
       this.rstInfo = rstObj.data[0];
+      const rstList = await this.rstSvc.getNearRstList();
+      this.nearRst = rstList.filter(p => p.id !== this.rstInfo.id);
+      if (!this.rstInfoEle || !this.hotPlaceEle)
+        return;
+      this.rstInfoEle.nativeElement.scrollTo({ top: 0, behavior: 'smooth' });
+      this.hotPlaceEle.scrollToIndex(0, 'smooth');
     } catch (error) {
       console.log(error);
       UtilesService.tokenCheck(error);
     }
+  }
+
+  async getRstInfo (id: string) {
+    const p: any = await UtilesService.getGeolocation();
+    const params = {
+      longitude: p.coords.longitude,
+      latitude: p.coords.latitude
+    }
+    const rstObj: any = await lastValueFrom(this.httpClient.post(environment.apiServer + '/Restaurant',
+        {
+          id: id,
+          longitude: params.longitude,
+          latitude: params.latitude
+        }
+      )
+    );
+    return rstObj;
   }
 
   renderMainMenu (menus: Menu[]) {
@@ -139,5 +151,14 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
       // add more parameters as needed
     };
     await this.router.navigate(['/tabs/tab2'], {queryParams});
+  }
+
+  async onClick ($event: boolean) {
+    // 세션체크
+    if (!UtilesService.isLogin()) {
+      alert('로그인 페이지로 이동합니다');
+      UtilesService.moveLogin();
+    }
+    await this.rstSvc.likeToogleRst(this.rstInfo.id);
   }
 }

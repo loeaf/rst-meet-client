@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MultiInfoService } from './rst.service';
+import { MapContentService } from './map-content.service';
 
-describe('MultiInfoService', () => {
-  let service: MultiInfoService;
+describe('MapContentService', () => {
+  let service: MapContentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MultiInfoService);
+    service = TestBed.inject(MapContentService);
   });
 
   it('should be created', () => {

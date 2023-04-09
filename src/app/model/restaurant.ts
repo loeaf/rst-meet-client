@@ -41,4 +41,5 @@ export class Restaurant {
   imagePath: string = '';
   imageName: string = '';
   distance: number = 0;
+  liked: boolean = false;
 }

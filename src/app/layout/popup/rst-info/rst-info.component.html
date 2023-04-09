@@ -1,4 +1,4 @@
-<div style="overflow: auto; background-color: white">
+<div #rstInfoEle style="overflow: auto; background-color: white">
   <div style="width: 100%; position: absolute; display: flex; align-items: center; justify-content: space-between">
     <img style="margin-left: 20px; margin-top: 20px; width: 20px; height: 20px;" src="/assets/image/Vector_5.svg" (click)="back()">
     <img style="margin-right: 20px; margin-top: 20px; width: 20px; height: 20px;" src="/assets/image/more.svg">
@@ -17,7 +17,7 @@
         <div class="bold b-font">
           {{rstInfo.name}}
         </div>
-        <app-like-button></app-like-button>
+        <app-like-button [isHeartRegular]="rstInfo.liked" (onClick)="onClick($event)" ></app-like-button>
       </div>
       <div class="m-font" style="margin-top: 10px; color: #585B5E">
         생막창이 끝내주는 경대 북문 막창 맛집
@@ -46,17 +46,19 @@
       </div>
     </div>
   </div>
-  <div class="PAT30 PAB30 PAL20 PAR20" style="color: #000000; background-color: #F7F8FA">
-    <div class="m-font bold MAB30">
+  <div class="PAT30 PAB30 PAR20" style="color: #000000; background-color: #F7F8FA">
+    <div class="m-font bold MAB30 PAL20">
       근처의 다른 핫플
     </div>
-    <div style="margin-bottom: 20px; display: flex; align-items: center;">
-      <img src="/assets/image/Rectangle_380.png" style="border-radius: 20%; width: 65px; height: 65px;">
-      <div class="m-font semi-bold" style="color: #000000; margin-left: 15px;">
-        호랑이 쌀국수
+    <cdk-virtual-scroll-viewport #hotPlaceEle itemSize="50" class="viewport BATB10">
+      <div matRipple class="PAT10 PAB10 PAL20" style="display: flex; align-items: center;"
+            *cdkVirtualFor="let item of nearRst" (click)="initRstInfo(item.id)">
+        <img src="/assets/image/Rectangle_380.png" style="border-radius: 20%; width: 65px; height: 65px;">
+        <div class="m-font semi-bold" style="color: #000000; margin-left: 15px;">
+          {{item.name}}
+        </div>
       </div>
-    </div>
-
+    </cdk-virtual-scroll-viewport>
     <div class="ion-activatable ripple-parent l-font"
          style="
           height: 40px;
@@ -68,7 +70,7 @@
           justify-content: center;
           margin-top: 20px;
           margin-bottom: 60px;" (click)="moveMap()">
-      지도에서 더 보기
+      지도에서 주변 맛집정보 보기
       <ion-ripple-effect style="height: 40px;"></ion-ripple-effect>
     </div>
   </div>

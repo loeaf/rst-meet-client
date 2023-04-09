@@ -28,4 +28,14 @@ export class MypageContentComponent implements OnInit {
     //   console.log(error);
     // });
   }
+
+  async onLogout () {
+    UtilesService.localStogareClear();
+    await this.router.navigate(['/tabs/tab1']);
+  }
+
+  isLogin () {
+    return UtilesService.isLogin();
+
+  }
 }

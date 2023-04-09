@@ -1,31 +1,44 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import Swiper from 'swiper';
 import { Restaurant } from '../../model/restaurant';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { RstListItemService } from '../multi-info/rst-list-item/rst-list-item.service';
 import { UtilesService } from '../../utiles/utiles.service';
-import { MultiInfoService } from '../multi-info/multi-info.service';
 import { environment } from '../../../environments/environment';
+import { RstService } from '../../service/rst.service';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-single-card',
   templateUrl: './single-card.component.html',
   styleUrls: ['./single-card.component.scss'],
+  animations: [
+    trigger('cardAnimation', [
+      transition('void => *', [
+        style({
+          transform: 'scale(0)',
+        }),
+        animate('0.2s ease-in-out', style({ transform: 'scale(1.2)' })),
+        animate('0.2s ease-in-out', style({ transform: 'scale(1)' })),
+      ]),
+    ]),
+  ],
 })
 export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
+  @Input()
   rstList: Restaurant[] = [];
   component: any;
   swiper: any;
-  constructor(private router: Router, private rstListItemSvc: RstListItemService,
-              private multiInfoSvc: MultiInfoService,) { }
+  constructor(private router: Router,
+              private rstListItemSvc: RstListItemService,
+              private multiInfoSvc: RstService,) {
+  }
 
   ngAfterViewInit(): void {
   }
 
   ngOnInit() {
-    this.subScribeInit();
-    this.rstListItemSvc.renderRstListItem.emit(1);
     this.swiperInit();
   }
   swiperInit() {
@@ -48,24 +61,14 @@ export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
       container.style.alignItems = 'center';
     });
   }
-  subScribeInit() {
-    this.rstListItemSvc.renderRstListItem.subscribe(async p => {
-      try {
-        // create get query map by map
-        // console.log(location);
-        const data = await this.multiInfoSvc.getNearRstList();
-        this.rstList = data;
-      } catch (e) {
-        UtilesService.tokenCheck(e);
-      }
-    });
-  }
 
   async clickItem (item: string) {
     const queryParams = {
       rstInfo: item
       // add more parameters as needed
     };
+    // sleep 2
+    await UtilesService.sleep(100);
     await this.router.navigate(['/rst-info'], { queryParams });
   }
 

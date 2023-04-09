@@ -11,8 +11,8 @@ import { IonButton } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
 import { UtilesService } from '../../utiles/utiles.service';
 import { lastValueFrom } from 'rxjs';
-import { MultiInfoService } from './multi-info.service';
 import { RstInfoService } from '../../layout/popup/rst-info/rst-info.service';
+import { RstService } from '../../service/rst.service';
 
 @Component({
   selector: 'app-multi-info',
@@ -29,7 +29,7 @@ export class MultiInfoComponent  implements OnInit {
               private httpClient: HttpClient,
               private rstListItemSvc: RstListItemService,
               private rstInfoSvc: RstInfoService,
-              private multiInfoSvc: MultiInfoService,
+              private multiInfoSvc: RstService,
               private router: Router) { }
 
   ngOnInit() {

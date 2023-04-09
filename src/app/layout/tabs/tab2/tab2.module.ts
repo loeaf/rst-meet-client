@@ -8,6 +8,7 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { MapContentModule } from './map-content/map-content.module';
 import { Tab1PageModule } from '../tab1/tab1.module';
 import { HeaderInfoModule } from '../../../component/header-info/header-info.module';
+import { ListContentModule } from './list-content/list-content.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { HeaderInfoModule } from '../../../component/header-info/header-info.mod
     Tab2PageRoutingModule,
     MapContentModule,
     Tab1PageModule,
-    HeaderInfoModule
+    HeaderInfoModule,
+    ListContentModule
   ],
   declarations: [Tab2Page]
 })

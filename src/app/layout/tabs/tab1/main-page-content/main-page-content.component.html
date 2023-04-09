@@ -1,10 +1,11 @@
-<app-header-info></app-header-info>
+<app-header-info [headerInfoType]="1" (refechClick)="refresh($event)" ></app-header-info>
 <app-background-info
   style="
     position: absolute;
     width: 100%;
+    z-index: -1;
     height: 100%;">
 </app-background-info>
 <img class="tab1-title" src="/assets/image/title.svg">
-<app-single-card class="card-view"></app-single-card>
+<app-single-card class="card-view" [rstList]="rstList" ></app-single-card>
 
