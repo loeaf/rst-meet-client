@@ -1,13 +1,15 @@
 <div #rstInfoEle style="overflow: auto; background-color: white">
-  <div style="width: 100%; position: absolute; display: flex; align-items: center; justify-content: space-between">
-    <img style="margin-left: 20px; margin-top: 20px; width: 20px; height: 20px;" src="/assets/image/Vector_5.svg" (click)="back()">
-    <img style="margin-right: 20px; margin-top: 20px; width: 20px; height: 20px;" src="/assets/image/more.svg">
-  </div>
   <div style="display: flex; flex-direction: column">
-    <img
-      src="/assets/image/Rectangle_380.png"
-      style="width: 100%"
-    >
+    <div style="position: relative;">
+      <div style="width: 100%; position: absolute; display: flex; align-items: center; justify-content: space-between">
+        <img style="margin-left: 20px; margin-top: 20px; width: 20px; height: 20px;" src="/assets/image/Vector_5.svg" (click)="back()">
+        <app-like-button class="MAR20 MAT20" [isHeartRegular]="rstInfo.liked" (onClick)="onClick($event)" ></app-like-button>
+      </div>
+      <img
+        src="/assets/image/Rectangle_380.png"
+        style="width: 100%"
+      >
+    </div>
     <div style="margin-top: 30px; margin-left: 20px; margin-right: 20px;">
       <div
         style="width: 100%;
@@ -17,7 +19,7 @@
         <div class="bold b-font">
           {{rstInfo.name}}
         </div>
-        <app-like-button [isHeartRegular]="rstInfo.liked" (onClick)="onClick($event)" ></app-like-button>
+        <div class="m-font" style="color: #585B5E">식사</div>
       </div>
       <div class="m-font" style="margin-top: 10px; color: #585B5E">
         생막창이 끝내주는 경대 북문 막창 맛집
@@ -25,10 +27,10 @@
       <div class="MAT20 MAB20" style="border: 1px solid #F3F6FB; transform: scaleY(0.5)">
       </div>
       <div class="r-font">
+        <img src="/assets/image/mdi_map-marker-black.svg">
         {{rstInfo.roadAddress}}
       </div>
-      <div class="l-font" style="color: #B0B5BC; display: flex; align-items: center;">
-        <img src="/assets/image/mdi_map-marker-black.svg">
+      <div class="l-font MAL25" style="color: #B0B5BC; display: flex; align-items: center;">
         내 위치에서 {{rstInfo.distance | number: '1.1-2'}}KM 이내
       </div>
       <div class="ion-activatable ripple-parent l-font MAB30"

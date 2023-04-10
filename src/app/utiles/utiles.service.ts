@@ -12,10 +12,12 @@ export class UtilesService {
     // 임시로 위치를 고정시킴
     if(true) {
       return new Promise((resolve, reject) => {
+        // 126.497984, 33.488383 제주도
+        // 127.28982174876, 36.479895749037 서초
         const p: any = {
           coords: {
-            longitude: 127.28982174876,
-            latitude: 36.479895749037
+            longitude: 126.497984,
+            latitude: 33.488383
           }
         }
         resolve(p)

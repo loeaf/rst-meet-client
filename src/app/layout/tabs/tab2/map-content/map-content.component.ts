@@ -20,7 +20,8 @@ import { Router } from '@angular/router';
 import { UtilesService } from '../../../../utiles/utiles.service';
 import { RstService } from '../../../../service/rst.service';
 import { MapContentService } from './map-content.service';
-
+import Text from 'ol/style/Text';
+import { Options } from 'ol/style/Text';
 @Component({
   selector: 'app-map-content',
   templateUrl: './map-content.component.html',
@@ -120,7 +121,27 @@ export class MapContentComponent implements OnInit, AfterViewInit {
             color: '#787efd',
             width: 4,
           }),
-        })
+        }),
+        text: new Text({
+          text: '',
+          font: 'bold 12px Pretendard',
+          fill: new Fill({
+            color: '#000000'
+          }),
+          stroke: new Stroke({
+            color: '#FFFFFF',
+            width: 2
+          }),
+          offsetY: 10,
+          minResolution: 500,
+          maxResolution: 5000,
+          textAlign: 'center',
+          textBaseline: 'top',
+          overflow: true,
+          maxAngle: Math.PI / 6,
+          exceedLength: true,
+          placement: 'point'
+        } as Options)
       }),
     });
     this.myLocationSource = myLocationSource;
@@ -153,9 +174,43 @@ export class MapContentComponent implements OnInit, AfterViewInit {
   addRstFeature(datum: any) {
     const geom = new Point([datum.longitude, datum.latitude]);
     const feature = new Feature(geom);
+    debugger;
     feature.setProperties({
-      rstInfo: datum
+      rstInfo: datum,
+      text: datum.name
     });
+    feature.setStyle(
+      new Style({
+        image: new CircleStyle({
+          radius: 6,
+          fill: new Fill({
+            color: 'rgba(255, 255, 255, 0.2)',
+          }),
+          stroke: new Stroke({
+            color: '#787efd',
+            width: 4,
+          }),
+        }),
+        text: new Text({
+          text: datum.name,
+          font: 'bold 12px Pretendard',
+          fill: new Fill({
+            color: '#000000'
+          }),
+          stroke: new Stroke({
+            color: '#FFFFFF',
+            width: 2
+          }),
+          offsetY: 10,
+          textAlign: 'center',
+          textBaseline: 'top',
+          overflow: true,
+          maxAngle: Math.PI / 6,
+          exceedLength: true,
+          placement: 'point'
+        } as Options)
+      })
+    );
     this.rstSource.addFeature(feature);
   }
   // removeRstFeature
