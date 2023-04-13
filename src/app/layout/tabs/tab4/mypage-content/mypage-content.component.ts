@@ -38,4 +38,8 @@ export class MypageContentComponent implements OnInit {
     return UtilesService.isLogin();
 
   }
+
+  async onLogin () {
+    await this.router.navigate(['/login']);
+  }
 }

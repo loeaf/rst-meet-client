@@ -16,6 +16,7 @@ import { LikeListContentModule } from './like-list-content/like-list-content.mod
 import { LikeListContentComponent } from './like-list-content/like-list-content.component';
 import { LikeButtonModule } from '../../../component/like-button/like-button.module';
 import { MatRippleModule } from '@angular/material/core';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { MatRippleModule } from '@angular/material/core';
     MychatListContentModule,
     BackgroundInfoModule,
     LikeButtonModule,
-    MatRippleModule
+    MatRippleModule,
+    ScrollingModule
   ],
   exports: [
     MainPageContentComponent

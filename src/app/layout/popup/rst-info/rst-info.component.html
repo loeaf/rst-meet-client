@@ -1,15 +1,30 @@
 <div #rstInfoEle style="overflow: auto; background-color: white">
   <div style="display: flex; flex-direction: column">
     <div style="position: relative;">
-      <div style="width: 100%; position: absolute; display: flex; align-items: center; justify-content: space-between">
+      <div style="width: 100%;
+                  position: absolute;
+                  display: flex;
+                  justify-content: space-between;
+                  background: linear-gradient(to bottom, rgba(58,58,58,0.77), rgba(0, 0, 0, 0));
+                  height: 60px;">
         <img style="margin-left: 20px; margin-top: 20px; width: 20px; height: 20px;" src="/assets/image/Vector_5.svg" (click)="back()">
         <app-like-button class="MAR20 MAT20" [isHeartRegular]="rstInfo.liked" (onClick)="onClick($event)" ></app-like-button>
       </div>
-      <img
-        src="/assets/image/Rectangle_380.png"
-        style="width: 100%"
-      >
+      <ng-container>
+        <div class="m-font bold" #txtEle style="display: none; width: 100%; height: 360px;
+        align-items: center; justify-content: center; background-color: #F8F8F8">
+          이미지 로드에 실패했습니다.
+        </div>
+        <img
+          #imgEle
+          src="/assets/image/Rectangle_2380.png"
+          style="width: 100%;"
+          (error)="onError(imgEle, txtEle, $event)"
+        >
+      </ng-container>
     </div>
+
+
     <div style="margin-top: 30px; margin-left: 20px; margin-right: 20px;">
       <div
         style="width: 100%;
@@ -26,9 +41,17 @@
       </div>
       <div class="MAT20 MAB20" style="border: 1px solid #F3F6FB; transform: scaleY(0.5)">
       </div>
-      <div class="r-font">
-        <img src="/assets/image/mdi_map-marker-black.svg">
-        {{rstInfo.roadAddress}}
+      <div class="r-font" (click)="onCopy(rstInfo.roadAddress)">
+        <div style="display: flex; width: 100%;">
+          <img src="/assets/image/mdi_map-marker-black.svg">
+          {{rstInfo.roadAddress}}
+          <div class="MAL15" style="display: flex; color: #838895">
+            <img style="width: 15px;" src="/assets/image/material-symbols_content-copy-outline.svg">
+            <div class="r-font" style="width: 80px;">
+              복사하기
+            </div>
+          </div>
+        </div>
       </div>
       <div class="l-font MAL25" style="color: #B0B5BC; display: flex; align-items: center;">
         내 위치에서 {{rstInfo.distance | number: '1.1-2'}}KM 이내

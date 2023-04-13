@@ -13,21 +13,43 @@
   <div class="m-font bold MAL20 MAT30">
     저장한 핫플
   </div>
-  <div matRipple
-       class="MAL20 MAR20 MAT20" style="height: 120px;
+
+  <cdk-virtual-scroll-viewport #hotPlaceEle itemSize="50" class="MAT20"
+                               style="height: 73vh;">
+    <div matRipple
+         *ngFor="let item of items"
+         class="MAL20 MAR20 MAB20 bulr" style="height: 120px;
               border-radius: 10px; padding: 10px;
               display: flex; border: 1px solid #DEE1F3"
-       *ngFor="let item of items"
-      (click)="clickItem(item.id)">
-    <img style="width: 100px; height: 100px; border-radius: 10%" src="/assets/image/Rectangle_380.png">
-    <div class="MAL10" style="display: flex; flex-direction: column">
-      <div class="MAT3" style="display: flex; justify-content: space-between; align-items: center;">
-        <div class="m-font bold">{{item.name}}</div>
-        <app-like-button style="z-index: 100" [isHeartRegular]="item.liked" (onClick)="clickLike(item.id, $event)"></app-like-button>
+         (click)="clickItem(item.id)">
+      <img style="width: 100px; height: 100px; border-radius: 10%" src="/assets/image/Rectangle_380.png">
+      <div class="MAL10" style="display: flex; flex-direction: column">
+        <div class="MAT3" style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="m-font bold">{{item.name}}</div>
+          <app-like-button [isHeartRegular]="item.liked" (click)="$event.stopPropagation()" (onClick)="clickLike(item.id);"></app-like-button>
+        </div>
+        <div class="MAT16 r-font">웨이팅 있는 편 지난번에 시간 없어서 못 감ㅠ 담에 경대북문가면 꼭 가야지 저장저장</div>
       </div>
-      <div class="MAT16 r-font">웨이팅 있는 편 지난번에 시간 없어서 못 감ㅠ 담에 경대북문가면 꼭 가야지 저장저장</div>
     </div>
-  </div>
+    <div *ngIf="items.length === 0" class="MAT140" style="width: 100%; display: flex; align-items: center; flex-direction: column">
+      <div class="bm-font bold">아직 저장한 핫플이 없어요</div>
+      <div class="m-font MAT40">지금 내 근처의 핫플을 저장해보세요!</div>
+      <div matRipple
+           class="ion-activatable ripple-parent l-font MAT20 MAR20 MAL20"
+           style="
+          width: 90%;
+          height: 40px;
+          color: white;
+          border-radius: 5px;
+          background-color: black;
+          display: flex;
+          align-items: center;
+          justify-content: center;" (click)="moveMap()">
+        지도에서 핫플 보기
+      </div>
+    </div>
+    <div style="height: 120px;"></div>
+  </cdk-virtual-scroll-viewport>
 </div>
 <app-background-info
   style="

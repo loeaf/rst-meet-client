@@ -30,12 +30,14 @@ export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
   rstList: Restaurant[] = [];
   component: any;
   swiper: any;
+  isData: boolean = false;
   constructor(private router: Router,
               private rstListItemSvc: RstListItemService,
               private multiInfoSvc: RstService,) {
   }
 
   ngAfterViewInit(): void {
+    this.rstList.length > 0 ? this.isData = true : this.isData = false;
   }
 
   ngOnInit() {
@@ -75,4 +77,8 @@ export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy (): void {
   }
 
+  onError (imgEle: HTMLImageElement, txtEle: HTMLDivElement, $event: ErrorEvent) {
+    imgEle.style.display = 'none';
+    txtEle.style.display = 'flex';
+  }
 }

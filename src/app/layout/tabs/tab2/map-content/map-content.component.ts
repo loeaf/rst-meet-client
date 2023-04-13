@@ -6,9 +6,9 @@ import View from 'ol/View.js';
 import { Geolocation } from '@capacitor/geolocation';
 import { fromLonLat, Projection, transform } from 'ol/proj';
 import VectorLayer from 'ol/layer/Vector';
-import { Feature } from 'ol';
-import { Fill, Icon, Stroke, Style } from 'ol/style';
-import { Point } from 'ol/geom';
+import { Feature, Overlay } from 'ol';
+import { Fill, Icon, RegularShape, Stroke, Style } from 'ol/style';
+import { LineString, Point } from 'ol/geom';
 import VectorSource from 'ol/source/Vector';
 import CircleStyle from 'ol/style/Circle';
 import { unByKey } from 'ol/Observable';
@@ -69,14 +69,77 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     });
     if (selectClick !== null) {
       this.map.addInteraction(selectClick);
-      selectClick.on('select', async (e) => {
+      selectClick.on('select', async (e: any) => {
+        if(false) {
+          // const clickCoord = e.coordinate;
+          // 클릭한 위치에서 가장 가까운 feature를 찾아옴
+          const feature = this.map.forEachFeatureAtPixel(e.mapBrowserEvent.pixel, function (feature: any) {
+            return feature;
+          });
+
+          if (feature) {
+            // feature의 좌표
+            const featureCoord = feature.getGeometry().getCoordinates();
+
+            // 포물선을 그릴 스타일 설정
+            const style = new Style({
+              stroke: new Stroke({
+                color: '#ffcc33',
+                width: 3,
+              }),
+              fill: new Fill({
+                color: '#ffcc33',
+              }),
+            });
+
+            // 포물선의 시작점과 끝점을 연결하는 선을 그림
+            const line = new LineString([[this.longitude, this.latitude], featureCoord]);
+            const lineFeature: any = new Feature({
+              geometry: line,
+            });
+            lineFeature.setStyle(style);
+
+            // 포물선의 끝점에 화살표를 그림
+            const arrow = new RegularShape({
+              fill: new Fill({ color: 'red' }),
+              stroke: new Stroke({ color: 'red', width: 1 }),
+              points: 3,
+              radius: 10,
+              rotation: Math.PI / 2,
+              angle: Math.PI / 2
+            });
+            const arrowStyle: any = new Style({
+              image: arrow
+            });
+            const arrowFeature: any = new Feature({
+              geometry: new Point(featureCoord),
+            });
+            arrowFeature.setStyle(arrowStyle);
+
+            // Overlay를 이용하여 포물선과 화살표를 지도 위에 추가함
+            const overlay = new Overlay({
+              element: arrowFeature,
+              offset: [0, -30],
+              positioning: 'bottom-center',
+            });
+            this.map.addOverlay(overlay);
+
+            const lineOverlay = new Overlay({
+              element: lineFeature,
+              offset: [0, -30],
+              positioning: 'bottom-center',
+            });
+            this.map.addOverlay(lineOverlay);
+          }
+        }
+
         const obj: any = e.selected[0].getProperties();
         const queryParams = {
           rstInfo: obj.rstInfo.id
         };
         await this.router.navigate(['/rst-info'], { queryParams });
       });
-    }
+    };
   }
 
   private initMap () {
@@ -109,6 +172,10 @@ export class MapContentComponent implements OnInit, AfterViewInit {
         })
       }),
     });
+    const imageUrl = '/assets/img/marker.png';
+    const image = new Image();
+    image.src = imageUrl;
+
     const rstPoint: any = new VectorLayer({
       source: rstSource,
       style: new Style({
@@ -122,6 +189,11 @@ export class MapContentComponent implements OnInit, AfterViewInit {
             width: 4,
           }),
         }),
+        // image: new Icon({
+        //   img: image,
+        //   imgSize: image ? [image.width, image.height] : undefined,
+        //   offset: [0, -image.height / 2],
+        // }),
         text: new Text({
           text: '',
           font: 'bold 12px Pretendard',
@@ -172,46 +244,56 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     }
   }
   addRstFeature(datum: any) {
-    const geom = new Point([datum.longitude, datum.latitude]);
-    const feature = new Feature(geom);
-    debugger;
-    feature.setProperties({
-      rstInfo: datum,
-      text: datum.name
-    });
-    feature.setStyle(
-      new Style({
-        image: new CircleStyle({
-          radius: 6,
-          fill: new Fill({
-            color: 'rgba(255, 255, 255, 0.2)',
+    const imageUrl = '/assets/image/Group_826.png';
+    const image = new Image();
+    image.src = imageUrl;
+    image.onload = () => {
+      const geom = new Point([datum.longitude, datum.latitude]);
+      const feature = new Feature(geom);
+      feature.setProperties({
+        rstInfo: datum,
+        text: datum.name
+      });
+      feature.setStyle(
+        new Style({
+          // image: new CircleStyle({
+          //   radius: 6,
+          //   fill: new Fill({
+          //     color: 'rgba(255, 255, 255, 0.2)',
+          //   }),
+          //   stroke: new Stroke({
+          //     color: '#787efd',
+          //     width: 4,
+          //   }),
+          // }),
+          image: new Icon({
+            img: image,
+            imgSize: image ? [image.width, image.height] : undefined,
+            offset: [0, 1],
           }),
-          stroke: new Stroke({
-            color: '#787efd',
-            width: 4,
-          }),
-        }),
-        text: new Text({
-          text: datum.name,
-          font: 'bold 12px Pretendard',
-          fill: new Fill({
-            color: '#000000'
-          }),
-          stroke: new Stroke({
-            color: '#FFFFFF',
-            width: 2
-          }),
-          offsetY: 10,
-          textAlign: 'center',
-          textBaseline: 'top',
-          overflow: true,
-          maxAngle: Math.PI / 6,
-          exceedLength: true,
-          placement: 'point'
-        } as Options)
-      })
-    );
-    this.rstSource.addFeature(feature);
+
+          text: new Text({
+            text: datum.name,
+            font: 'bold 12px Pretendard',
+            fill: new Fill({
+              color: '#000000'
+            }),
+            stroke: new Stroke({
+              color: '#FFFFFF',
+              width: 2
+            }),
+            offsetY: 10,
+            textAlign: 'center',
+            textBaseline: 'top',
+            overflow: true,
+            maxAngle: Math.PI / 6,
+            exceedLength: true,
+            placement: 'point'
+          } as Options)
+        })
+      );
+      this.rstSource.addFeature(feature);
+    }
   }
   // removeRstFeature
   removeRstFeature() {
@@ -229,7 +311,7 @@ export class MapContentComponent implements OnInit, AfterViewInit {
   }
   animate(event: any) {
     const elapsed = Date.now() - this.start;
-    console.log(elapsed)
+    // console.log(elapsed)
     if (elapsed >= this.duration) {
       this.start = Date.now();
       return;
@@ -255,4 +337,30 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     // tell OpenLayers to continue postrender animation
     this.map.render();
   }
+
+  async onInit () {
+    const myPosition: any = await UtilesService.getGeolocation();
+    this.latitude = myPosition.coords.latitude;
+    this.longitude = myPosition.coords.longitude;
+    this.setMyLocationPoint();
+    this.renderRestaurants();
+    this.moveMap();
+  }
+  moveMap() {
+    const currentZoomLevel = this.map.getView().getZoom();
+    this.map.getView().animate({
+      center: [this.longitude, this.latitude], // 위도, 경도 좌표로 중심점 이동
+      zoom: currentZoomLevel, // 줌 레벨 이동
+      duration: 2000 // 애니메이션 지속 시간 (ms)
+    });
+  }
+  private setMyLocationPoint() {
+    const newCoords = [this.longitude, this.latitude];
+    const feature = new Feature({
+      geometry: new Point(newCoords),
+    });
+    this.myLocationSource.clear();
+    this.myLocationSource.addFeature(feature);
+  }
+
 }

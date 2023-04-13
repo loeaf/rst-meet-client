@@ -14,6 +14,8 @@ import { Location } from '@angular/common';
 import { ActionSheetController} from '@ionic/angular';
 import { RstService } from '../../../service/rst.service';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { Clipboard } from '@capacitor/clipboard';
+import { IonToastService } from '../../../utiles/ion-toast.service';
 
 // configure Swiper to use modules
 Swiper.use([Navigation, Pagination]);
@@ -34,6 +36,7 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
               private location: Location,
               public actionSheet: ActionSheetController,
               public rstSvc: RstService,
+              private ionToastService: IonToastService,
               private router: Router) { }
 
   ngOnInit() {
@@ -133,16 +136,18 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async moveLink () {
-    const action = await this.actionSheet.create({
-      buttons: [{
-        text: 'Open link',
-        icon: 'link-outline',
-        handler: () => {
-          window.open('https://map.naver.com/v5/smart-around/place/1567503530?c=15,0,0,0,dh');
-        }
-      }]
-    });
-    await action.present();
+    // const action = await this.actionSheet.create({
+    //   buttons: [{
+    //     text: 'Open link',
+    //     icon: 'link-outline',
+    //     handler: () => {
+    //       window.open('https://map.naver.com/v5/smart-around/place/1567503530?c=15,0,0,0,dh');
+    //     }
+    //   }]
+    // });
+
+    window.open('https://map.naver.com/v5/smart-around/place/1567503530?c=15,0,0,0,dh');
+    // await action.present();
   }
 
   async moveMap () {
@@ -160,5 +165,20 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
       UtilesService.moveLogin();
     }
     await this.rstSvc.likeToogleRst(this.rstInfo.id);
+  }
+
+  async onCopy (text: string) {
+    if (text === null) {
+      return;
+    }
+    await Clipboard.write({
+      string: text
+    });
+    await this.ionToastService.presentToast(`${text}를 복사합니다.`);
+  }
+
+  onError (imgEle: HTMLImageElement, txtEle: HTMLDivElement, $event: ErrorEvent) {
+    imgEle.style.display = 'none';
+    txtEle.style.display = 'flex';
   }
 }

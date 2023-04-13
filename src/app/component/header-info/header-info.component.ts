@@ -42,12 +42,25 @@ export class HeaderInfoComponent implements OnInit, AfterViewInit {
       longitude: p.coords.longitude,
       latitude: p.coords.latitude
     }
-    const result: any = await lastValueFrom(this.httpClient.post(environment.apiServer + '/geo/location',params));
-    this.myLocation = result.data.text;
+    try {
+      const result: any = await lastValueFrom(this.httpClient.post(environment.apiServer + '/geo/location',params));
+      this.myLocation = result.data.text;
+    } catch (e) {
+      this.myLocation = '';
+    }
   }
 
   async ngAfterViewInit () {
     await this.refresh();
+  }
+
+  getLocationText () {
+    return this.myLocation;
+    if(this.myLocation.length > 0) {
+      return this.myLocation + ' 근처 기준';
+    } else {
+      return '현재 위치 정보가 없습니다. 새로고침 해주세요.';
+    }
   }
 }
 

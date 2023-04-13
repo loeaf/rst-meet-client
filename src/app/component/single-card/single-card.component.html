@@ -1,15 +1,56 @@
 <div class="swiper mySwiper">
   <div class="swiper-wrapper">
-    <div [@cardAnimation] class="swiper-slide MAR20 ripple-container"
-         style="padding: 1.1em;background:rgba(255, 255, 255, 0.8);"
-         *ngFor="let item of rstList; let index" (click)="clickItem(item.id)">
+    <div *ngIf="isData"
+         class="swiper-slide bulr MAR20 ripple-container"
+         style="padding: 1.1em;background:rgba(255, 255, 255, 0.8); height: 40vh;
+         display: flex; align-items: center; justify-content: center; flex-direction: column;">
+      <div>
+        <div class="b-font">
+          지금 내 근처에는
+        </div>
+        <div class="b-font">
+          핫플이 없어요 😭
+        </div>
+        <div class="m-font" style="color: #909090">
+          아쉽지만 다른 지역에서 다시 이용해주세요
+        </div>
+      </div>
+    </div>
+    <div [@cardAnimation]  class="swiper-slide bulr MAR20 ripple-container"
+         *ngFor="let item of rstList; let index" (click)="clickItem(item.id)"
+         style="padding: 1.1em;background:rgba(255, 255, 255, 0.8);">
       <div style="display: flex; flex-direction: column; position: relative">
         <div style="display: flex; align-items: center; justify-content: center;">
-          <img class="content-img no-alpha"
-               alt="Silhouette of mountains"
-               src="/assets/image/{{item.imagePath}}"
-               onerror="this.src='/assets/image/noimage.jpg'"
-          />
+          <div class="PAL10 PAT10 PAR10 l-font"
+               style="position: absolute;
+                      top: 0;
+                      border-radius: 10px 10px 0 0;
+                      background: linear-gradient(to bottom, rgba(58,58,58,0.77), rgba(0, 0, 0, 0));
+                      height: 35px;
+                      width: 100%;
+                      display: flex;
+                      color: white;
+                      justify-content: space-between;">
+            <div>
+              @김도현
+            </div>
+            <div>
+              {{item.distance | number:'1.2-2'}}m 이내
+            </div>
+          </div>
+          <div class="content-img" style="display: flex; align-items: center; justify-content: center">
+            <ng-container>
+              <div class="m-font FontWeight500" #txtEle style="display: none">
+                이미지 로드에 실패했습니다.
+              </div>
+              <img #imgEle class="no-alpha"
+                   style="width: 100%; height: 100%; object-fit: cover;"
+                   alt="Silhouette of mountains"
+                   src="/assets/image/{{item.imagePath}}"
+                   (error)="onError(imgEle, txtEle, $event)"
+              />
+            </ng-container>
+          </div>
         </div>
         <div
           class="MAT40"

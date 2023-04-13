@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { MychatListContentModule } from '../mychat-list-content/mychat-list-content.module';
 import { LikeButtonModule } from '../../../../component/like-button/like-button.module';
 import { BackgroundInfoModule } from '../../../../component/background-info/background-info.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 
 

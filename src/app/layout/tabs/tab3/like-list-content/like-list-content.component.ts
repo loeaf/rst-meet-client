@@ -40,7 +40,7 @@ export class LikeListContentComponent implements OnInit {
 
   }
 
-  async clickLike (id: string, $event: any) {
+  async clickLike (id: string) {
     // 세션체크
     if (!UtilesService.isLogin()) {
       alert('로그인 페이지로 이동합니다');
@@ -58,5 +58,9 @@ export class LikeListContentComponent implements OnInit {
     // sleep 2
     await UtilesService.sleep(100);
     await this.router.navigate(['/rst-info'], { queryParams });
+  }
+
+  async moveMap () {
+    await this.router.navigate(['/tabs/tab2']);
   }
 }
