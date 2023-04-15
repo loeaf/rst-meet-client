@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SignupComponent } from './signup.component';
 import { IonicModule } from '@ionic/angular';
 import { AuthInterceptor } from '../../config/AuthInterceptor';
+import { BackgroundInfoModule } from '../../component/background-info/background-info.module';
 
 
 
@@ -10,7 +11,8 @@ import { AuthInterceptor } from '../../config/AuthInterceptor';
   declarations: [SignupComponent],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    BackgroundInfoModule
   ],
   exports: [SignupComponent],
   providers: [AuthInterceptor]

@@ -20,6 +20,7 @@ import {
 } from './layout/popup/create-taste-room-content/create-taste-room-content.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListContentModule } from './layout/tabs/tab2/list-content/list-content.module';
+import { MainLoginModule } from './layout/main-login/main-login.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +35,8 @@ import { ListContentModule } from './layout/tabs/tab2/list-content/list-content.
     UserNoticeModule,
     SelectLocationModule,
     RstInfoModule,
-    CreateTasteRoomContentModule
+    CreateTasteRoomContentModule,
+    MainLoginModule
   ],
   providers: [{
     provide: RouteReuseStrategy,

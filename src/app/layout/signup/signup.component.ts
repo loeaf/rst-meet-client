@@ -5,6 +5,7 @@ import { IonInput } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
 import { AuthInterceptor } from '../../config/AuthInterceptor';
 import { lastValueFrom } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
@@ -17,26 +18,12 @@ export class SignupComponent implements OnInit {
   @ViewChild('password1') password1?: IonInput;
   @ViewChild('password2') password2?: IonInput;
 
-  constructor(private router: Router, private httpClient: HttpClient, private authIntercept: AuthInterceptor) { }
+  constructor(private router: Router,
+              private httpClient: HttpClient,
+              private authIntercept: AuthInterceptor,
+              private location: Location) { }
 
   ngOnInit() {
-    this.mbtis = [
-      'ISTJ',
-      'ESTJ',
-      'ISTP',
-      'ISFJ',
-      'ISFP',
-      'ESTP',
-      'ESFJ',
-      'ESFP',
-      'INTJ',
-      'ENTP',
-      'INFP',
-      'INTP',
-      'INFJ',
-      'ENFJ',
-      '모름',
-    ]
   }
 
   async enterSignUp () {
@@ -79,5 +66,9 @@ export class SignupComponent implements OnInit {
 
   onBack () {
     this.router.navigate(['..']);
+  }
+
+  back () {
+    this.location.back();
   }
 }

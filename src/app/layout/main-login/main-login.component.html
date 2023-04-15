@@ -1,0 +1,67 @@
+<div class="m-font MAT40">
+  <div class="MAT180 m-font bold" style="width: 100%;">
+    <div style="text-align: center">
+      지금 가입하고
+    </div>
+    <div style="text-align: center">
+      나만의 핫플 리스트를 만들어 보세요.
+    </div>
+  </div>
+  <div class="r-font MAT60 FontWeight500" style="display: flex; flex-direction: column; align-items: center">
+    SNS 계정으로 시적하기
+    <div class="MAT20" style="display: flex; align-items: center; justify-content: center">
+      <div matRipple style="display: flex; align-items: center; flex-direction: column;">
+        <img src="/assets/image/Group-806.svg">
+        <div class="r-font MAT10">카카오</div>
+      </div>
+      <div matRipple class="MAL20" style="display: flex; align-items: center; flex-direction: column;">
+        <img src="/assets/image/Group-810.svg">
+        <div class="r-font MAT10">구글</div>
+      </div>
+      <div matRipple class="MAL20" style="display: flex; align-items: center; flex-direction: column;">
+        <img src="/assets/image/Group-808.svg">
+        <div class="r-font MAT10">네이버</div>
+      </div>
+      <!--      <div class="MAL20" style="display: flex; align-items: center; flex-direction: column;" (click)="moveLogin()">-->
+      <!--        <img src="/assets/image/Group-809.svg">-->
+      <!--        <div class="r-font MAT10">이메일</div>-->
+      <!--      </div>-->
+    </div>
+    <div matRipple class="ion-activatable ripple-parent r-font FontWeight500 bulr"
+         style="
+          height: 40px;
+          color: black;
+          width: 90%;
+          border-radius: 5px;
+          background-color: transparent;
+          border: 1px solid black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 20px;
+          margin-bottom: 60px;" (click)="moveLogin()">
+      <img class="PAR10" src="/assets/image/emailsvg.svg">
+      이메일로 시작하기
+    </div>
+    <div class="r-font MAT5" style="border-bottom: 1px solid black; width: fit-content; font-weight: 500;" (click)="onSignUp()" >
+      회원가입을 원하시나요?
+    </div>
+  </div>
+</div>
+
+<div class="l-font" style="position: absolute; bottom: 30px; width: 100%; font-weight: 500;">
+  <div style="text-align: center">
+    회원가입 필수 동의 항목인
+  </div>
+  <div style="text-align: center">
+    개인정보처리방침과 서비스 이용약관에 동의한 것으로 간주합니다
+  </div>
+</div>
+
+<app-background-info
+  style="
+    position: absolute;
+    width: 100%;
+    z-index: -1;
+    height: 100%;">
+</app-background-info>

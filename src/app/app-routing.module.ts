@@ -10,6 +10,7 @@ import { RstInfoComponent } from './layout/popup/rst-info/rst-info.component';
 import {
   CreateTasteRoomContentComponent
 } from './layout/popup/create-taste-room-content/create-taste-room-content.component';
+import { MainLoginComponent } from './layout/main-login/main-login.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'main-login',
+    component: MainLoginComponent,
   },
   {
     path: 'signup',

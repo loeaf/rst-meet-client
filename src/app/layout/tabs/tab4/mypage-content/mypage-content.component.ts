@@ -40,6 +40,14 @@ export class MypageContentComponent implements OnInit {
   }
 
   async onLogin () {
-    await this.router.navigate(['/login']);
+    await this.router.navigate(['/main-login']);
+  }
+
+  moveTermsUse () {
+    window.open('https://dt-dev.notion.site/5c2405c68a0f4d8190d9a8ad64f08669');
+  }
+
+  personalInfo () {
+    window.open('https://dt-dev.notion.site/cd0ca8158b27463c94ffb90b6713c466');
   }
 }
