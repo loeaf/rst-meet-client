@@ -4,6 +4,7 @@ import { RstService } from '../../../../service/rst.service';
 import { ListContentService } from './list-content.service';
 import { UtilesService } from '../../../../utiles/utiles.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-list-content',
@@ -12,10 +13,13 @@ import { Router } from '@angular/router';
 })
 export class ListContentComponent implements OnInit, AfterViewInit {
   nearRst: Restaurant[] = [];
+  objectServer: string = '';
 
   constructor(private rstService: RstService,
               private router: Router,
-              private listContentService: ListContentService) { }
+              private listContentService: ListContentService) {
+    this.objectServer = environment.objectServer;
+  }
 
   ngOnInit() {
     this.initList();

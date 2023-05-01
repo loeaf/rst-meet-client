@@ -184,4 +184,9 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
     imgEle.style.display = 'none';
     txtEle.style.display = 'flex';
   }
+
+  onLoad (imgEle: HTMLImageElement, txtEle: HTMLDivElement, $event: Event) {
+    imgEle.style.display = 'flex';
+    txtEle.style.display = 'none';
+  }
 }

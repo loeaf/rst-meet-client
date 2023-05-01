@@ -3,7 +3,8 @@ style="height: 100%; width: 100%;">
   <div matRipple class="PAT10 PAB10 PAL20 PAR20" style="display: flex; align-items: center; justify-content: space-between"
        *cdkVirtualFor="let item of nearRst" (click)="clickItem(item.id)">
     <div style="display: flex; align-items: center">
-      <img src="/assets/image/Rectangle_380.png" style="border-radius: 20%; width: 65px; height: 65px;">
+      <img src="{{objectServer}}{{item.imagePath}}/{{item.normalFileName}}"
+           style="border-radius: 20%; width: 65px; height: 65px;">
       <div class="m-font semi-bold" style="color: #000000; margin-left: 15px;">
         {{item.name}}
       </div>

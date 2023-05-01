@@ -44,7 +44,7 @@
                 이미지 로드에 실패했습니다.
               </div>
               <img #imgEle class="no-alpha"
-                   style="width: 100%; height: 100%; object-fit: cover;"
+                   style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;"
                    alt="Silhouette of mountains"
                    src="{{objectServer}}{{item.imagePath}}/{{item.normalFileName}}"
                    (error)="onError(imgEle, txtEle, $event)"
