@@ -31,9 +31,12 @@ export class SingleCardComponent implements OnInit, AfterViewInit, OnDestroy {
   component: any;
   swiper: any;
   isData: boolean = false;
+
+  objectServer: string = '';
   constructor(private router: Router,
               private rstListItemSvc: RstListItemService,
               private multiInfoSvc: RstService,) {
+    this.objectServer = environment.objectServer;
   }
 
   ngAfterViewInit(): void {

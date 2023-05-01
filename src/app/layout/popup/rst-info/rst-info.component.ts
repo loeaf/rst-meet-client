@@ -30,6 +30,7 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
   nearRst: Restaurant[] = [];
   @ViewChild('rstInfoEle') rstInfoEle?: ElementRef;
   @ViewChild('hotPlaceEle') hotPlaceEle?: CdkVirtualScrollViewport;
+  objectServer: string = '';
 
   constructor(private httpClient: HttpClient,
               private activatedRoute: ActivatedRoute,
@@ -37,7 +38,9 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
               public actionSheet: ActionSheetController,
               public rstSvc: RstService,
               private ionToastService: IonToastService,
-              private router: Router) { }
+              private router: Router) {
+    this.objectServer = environment.objectServer;
+  }
 
   ngOnInit() {
   }

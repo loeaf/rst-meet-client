@@ -13,11 +13,11 @@ export class UtilesService {
     if(true) {
       return new Promise((resolve, reject) => {
         // 126.497984, 33.488383 제주도
-        // 127.28982174876, 36.479895749037 서초
+        // 127.28982174876, 36.479895749037 세종
         const p: any = {
           coords: {
-            longitude: 126.497984,
-            latitude: 33.488383
+            longitude: 127.28982174876,
+            latitude: 36.479895749037
           }
         }
         resolve(p)

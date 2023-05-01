@@ -46,7 +46,7 @@
               <img #imgEle class="no-alpha"
                    style="width: 100%; height: 100%; object-fit: cover;"
                    alt="Silhouette of mountains"
-                   src="/assets/image/{{item.imagePath}}"
+                   src="{{objectServer}}{{item.imagePath}}/{{item.normalFileName}}"
                    (error)="onError(imgEle, txtEle, $event)"
               />
             </ng-container>

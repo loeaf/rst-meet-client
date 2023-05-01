@@ -40,6 +40,8 @@ export class Restaurant {
   tasteRooms: TasteRoom[] = [];
   imagePath: string = '';
   imageName: string = '';
+  normalFileName: string = '';
+  smallFileName: string = '';
   distance: number = 0;
   liked: boolean = false;
 }
