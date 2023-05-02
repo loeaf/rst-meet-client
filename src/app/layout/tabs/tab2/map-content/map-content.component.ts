@@ -343,7 +343,7 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     this.latitude = myPosition.coords.latitude;
     this.longitude = myPosition.coords.longitude;
     this.setMyLocationPoint();
-    this.renderRestaurants();
+    await this.renderRestaurants();
     this.moveMap();
   }
   moveMap() {

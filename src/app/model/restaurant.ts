@@ -30,6 +30,8 @@ export class Restaurant {
   holiday: string = '';
   // 대표메뉴
   representativeMenu: string = '';
+  // 대표메뉴
+  referenceUrl: string = '';
   // 이미지정보
   medias: string[] = [];
   // 메뉴정보

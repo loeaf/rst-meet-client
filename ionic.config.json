@@ -1,5 +1,5 @@
 {
-  "name": "rst-meet-client",
+  "name": "rst.service",
   "integrations": {
     "capacitor": {}
   },

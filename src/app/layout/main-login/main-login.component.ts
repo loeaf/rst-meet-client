@@ -20,6 +20,6 @@ export class MainLoginComponent implements OnInit {
 
   async onSignUp () {
     await UtilesService.sleep(1000);
-    await this.router.navigateByUrl('/signup');
+    await this.router.navigateByUrl('/tabs/tab1');
   }
 }

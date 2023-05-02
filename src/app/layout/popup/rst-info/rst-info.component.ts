@@ -149,7 +149,7 @@ export class RstInfoComponent implements OnInit, AfterViewInit, OnDestroy {
     //   }]
     // });
 
-    window.open('https://map.naver.com/v5/smart-around/place/1567503530?c=15,0,0,0,dh');
+    window.open(this.rstInfo.referenceUrl);
     // await action.present();
   }
 

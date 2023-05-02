@@ -10,7 +10,7 @@ export class UtilesService {
   constructor(private httpClient: HttpClient) { }
   static getGeolocation() {
     // 임시로 위치를 고정시킴
-    if(true) {
+    if(false) {
       return new Promise((resolve, reject) => {
         // 126.497984, 33.488383 제주도
         // 127.28982174876, 36.479895749037 세종
