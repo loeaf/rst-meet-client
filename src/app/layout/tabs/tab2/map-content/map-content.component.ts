@@ -22,6 +22,10 @@ import { RstService } from '../../../../service/rst.service';
 import { MapContentService } from './map-content.service';
 import Text from 'ol/style/Text';
 import { Options } from 'ol/style/Text';
+import XYZ from 'ol/source/XYZ';
+import { Tile } from 'ol/layer';
+import proj4 from 'proj4';
+
 @Component({
   selector: 'app-map-content',
   templateUrl: './map-content.component.html',
@@ -221,6 +225,9 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     this.myLocationPoint = myLocationPoint;
     this.rstPoint = rstPoint;
     this.tileLayer = tileLayer;
+    // google 좌표계
+    // proj4.defs('EPSG:3857', '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs');
+
     this.map = new Map({
       target: 'map',
       layers: [this.tileLayer, this.myLocationPoint, this.rstPoint],
@@ -231,6 +238,59 @@ export class MapContentComponent implements OnInit, AfterViewInit {
         multiWorld: true,
       }),
     });
+    // ------------------------------
+    // daum(kakao) layers
+    // ------------------------------
+    // var daumTileGrid = new ol.tilegrid.TileGrid({
+    //   extent : [(-30000-524288), (-60000-524288), (494288+524288), (988576+524288)],
+    //   tileSize : 256,
+    //   resolutions : [4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5, 0.25],
+    //   minZoom : 1
+    // });
+
+    // function getDaumTileUrlFunction(type: any) {
+    //
+    //   var tileUrlFunction = function(tileCoord: any, pixelRatio: any, projection: any) {
+    //
+    //     var res = this.getTileGrid().getResolutions();
+    //     var sVal = res[tileCoord[0]];
+    //
+    //     var yLength = 988576 - (-60000) + 524288 + 524288;
+    //     var yTile = yLength / (sVal * this.getTileGrid().getTileSize());
+    //
+    //     var tileGap = Math.pow(2, (tileCoord[0] -1));
+    //     yTile = yTile - tileGap;
+    //
+    //     var xTile = tileCoord[1] - tileGap;
+    //
+    //     if (type == 'base') {
+    //       return 'https://map' + Math.floor( (Math.random() * (4 - 1 + 1)) + 1 ) + '.daumcdn.net/map_2d_hd/2111ydg/L' + (15 - tileCoord[0]) + '/' + (yTile + tileCoord[2]) + '/' + xTile + '.png';
+    //     } else if (type == 'satellite') {
+    //       return 'https://map' + Math.floor( (Math.random() * (4 - 1 + 1)) + 1 ) + '.daumcdn.net/map_skyview_hd/L' + (15 - tileCoord[0]) + '/' + (yTile + tileCoord[2]) + '/' + xTile + '.jpg';
+    //     } else if (type == 'hybrid') {
+    //       return 'https://map' + Math.floor( (Math.random() * (4 - 1 + 1)) + 1 ) + '.daumcdn.net/map_hybrid_hd/2111ydg/L' + (15 - tileCoord[0]) + '/' + (yTile + tileCoord[2]) + '/' + xTile + '.png';
+    //     }
+    //
+    //   };
+
+    //   return tileUrlFunction;
+    //
+    // }
+
+
+    // daum base
+    // var daumBaseLayer = new Tile({
+    //   source: new XYZ({
+    //     projection : 'EPSG:5181',
+    //     tileGrid: daumTileGrid,
+    //     tileUrlFunction: getDaumTileUrlFunction('base'),
+    //     tilePixelRatio: 2,              // 타일사이즈 512일때 해상도 비율
+    //   }),
+    //   visible: false
+    // });
+    // this.map.addLayer(daumBaseLayer);
+
+
     rstPoint.on('click', (event: any) => {
       console.log('VectorLayer clicked!', event.coordinate);
       // Perform any other actions you need here

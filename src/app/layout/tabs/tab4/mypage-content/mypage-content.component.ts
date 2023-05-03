@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { UtilesService } from '../../../../utiles/utiles.service';
 import { AlertController } from '@ionic/angular';
+import { fromLonLat } from 'ol/proj';
 @Component({
   selector: 'app-mypage-content',
   templateUrl: './mypage-content.component.html',
@@ -19,14 +20,10 @@ export class MypageContentComponent implements OnInit {
   }
 
   async test () {
-    const p: any = await UtilesService.getGeolocation();
-    console.log(p.coords.longitude, ',',  p.coords.latitude);
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //   debugger;
-    //   console.log(position.coords.longitude, ',',  position.coords.latitude);
-    // }, (error) => {
-    //   console.log(error);
-    // });
+    const resp: any = await UtilesService.getGeolocation();
+    debugger;
+    console.log(resp);
+    const lonLat = [resp.coords.longitude, resp.coords.latitude];
   }
 
   async onLogout () {

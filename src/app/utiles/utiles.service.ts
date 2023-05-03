@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import PhraseGen from 'korean-random-words';
 import { HttpClient } from '@angular/common/http';
+import { fromLonLat } from 'ol/proj';
 const phraseGen = new PhraseGen();
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,13 @@ export class UtilesService {
         resolve(p)
       });
     }
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position);
+    }, () => {}, {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    });
     return Geolocation.getCurrentPosition();
   }
 
