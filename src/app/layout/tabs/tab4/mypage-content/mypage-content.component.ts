@@ -21,7 +21,6 @@ export class MypageContentComponent implements OnInit {
 
   async test () {
     const resp: any = await UtilesService.getGeolocation();
-    debugger;
     console.log(resp);
     const lonLat = [resp.coords.longitude, resp.coords.latitude];
   }

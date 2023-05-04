@@ -193,7 +193,6 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     }
   }
   addRstFeature(datum: any) {
-    debugger;
     let imageUrl = '/assets/image/Group_826.png';
     if (datum.foodTypeId === 1) {
       imageUrl = '/assets/image/Group_825.png';

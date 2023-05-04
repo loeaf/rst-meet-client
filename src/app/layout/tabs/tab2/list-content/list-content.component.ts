@@ -33,7 +33,6 @@ export class ListContentComponent implements OnInit, AfterViewInit {
 
   async initList() {
     const data = await this.rstService.getNearRstList();
-    debugger;
     this.nearRst = data;
   }
 
