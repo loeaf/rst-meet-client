@@ -48,6 +48,7 @@ export class MapContentComponent implements OnInit, AfterViewInit {
   constructor(private multiInfoSvc: RstService,
               private mapContentService: MapContentService,
               private router: Router) { }
+
   async ngOnInit() {
     this.mapContentService.mapRender.subscribe(async (p: any) => {
       this.removeRstFeature()
@@ -66,7 +67,6 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     this.listenerKey = this.tileLayer.on('postrender', this.animate.bind(this));
     this.clickMark();
   }
-
   private clickMark () {
     const selectClick = new Select({
       condition: click
@@ -74,69 +74,6 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     if (selectClick !== null) {
       this.map.addInteraction(selectClick);
       selectClick.on('select', async (e: any) => {
-        if(false) {
-          // const clickCoord = e.coordinate;
-          // 클릭한 위치에서 가장 가까운 feature를 찾아옴
-          const feature = this.map.forEachFeatureAtPixel(e.mapBrowserEvent.pixel, function (feature: any) {
-            return feature;
-          });
-
-          if (feature) {
-            // feature의 좌표
-            const featureCoord = feature.getGeometry().getCoordinates();
-
-            // 포물선을 그릴 스타일 설정
-            const style = new Style({
-              stroke: new Stroke({
-                color: '#ffcc33',
-                width: 3,
-              }),
-              fill: new Fill({
-                color: '#ffcc33',
-              }),
-            });
-
-            // 포물선의 시작점과 끝점을 연결하는 선을 그림
-            const line = new LineString([[this.longitude, this.latitude], featureCoord]);
-            const lineFeature: any = new Feature({
-              geometry: line,
-            });
-            lineFeature.setStyle(style);
-
-            // 포물선의 끝점에 화살표를 그림
-            const arrow = new RegularShape({
-              fill: new Fill({ color: 'red' }),
-              stroke: new Stroke({ color: 'red', width: 1 }),
-              points: 3,
-              radius: 10,
-              rotation: Math.PI / 2,
-              angle: Math.PI / 2
-            });
-            const arrowStyle: any = new Style({
-              image: arrow
-            });
-            const arrowFeature: any = new Feature({
-              geometry: new Point(featureCoord),
-            });
-            arrowFeature.setStyle(arrowStyle);
-
-            // Overlay를 이용하여 포물선과 화살표를 지도 위에 추가함
-            const overlay = new Overlay({
-              element: arrowFeature,
-              offset: [0, -30],
-              positioning: 'bottom-center',
-            });
-            this.map.addOverlay(overlay);
-
-            const lineOverlay = new Overlay({
-              element: lineFeature,
-              offset: [0, -30],
-              positioning: 'bottom-center',
-            });
-            this.map.addOverlay(lineOverlay);
-          }
-        }
-
         const obj: any = e.selected[0].getProperties();
         const queryParams = {
           rstInfo: obj.rstInfo.id
@@ -145,22 +82,45 @@ export class MapContentComponent implements OnInit, AfterViewInit {
       });
     };
   }
-
   private initMap () {
-    // Define the EPSG:4326 projection
+    // 배경 background 생성
+    this.initTiles();
+    // 레스토랑 위치 point 생성
+    this.initRstPoint();
+    // 내 위치 정보 생성
+    this.initMyLocation();
+    // 맵 생성
+    this.initMapInstance();
+  }
+  private initMapInstance() {
+    // google 좌표계
+    // proj4.defs('EPSG:3857', '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs');
     const proj4326 = new Projection({
       code: 'EPSG:4326',
       units: 'degrees',
     });
+    this.map = new Map({
+      target: 'map',
+      layers: [this.tileLayer, this.myLocationPoint, this.rstPoint],
+      view: new View({
+        center: [this.longitude, this.latitude],
+        zoom: 15,
+        projection: proj4326, // Set the projection as the default projection for the view
+        multiWorld: true,
+      }),
+    });
+  }
+  private initTiles() {
     const tileLayer = new TileLayer({
       source: new OSM(),
     })
+    this.tileLayer = tileLayer;
+  }
+  private initMyLocation() {
     const myLocationSource = new VectorSource({
       wrapX: false,
     });
-    const rstSource = new VectorSource({
-      wrapX: false,
-    });
+    this.myLocationSource = myLocationSource;
     const myLocationPoint = new VectorLayer({
       source: myLocationSource,
       style: new Style({
@@ -176,10 +136,13 @@ export class MapContentComponent implements OnInit, AfterViewInit {
         })
       }),
     });
-    const imageUrl = '/assets/img/marker.png';
-    const image = new Image();
-    image.src = imageUrl;
-
+    this.myLocationPoint = myLocationPoint;
+  }
+  private initRstPoint() {
+    const rstSource = new VectorSource({
+      wrapX: false,
+    });
+    this.rstSource = rstSource;
     const rstPoint: any = new VectorLayer({
       source: rstSource,
       style: new Style({
@@ -220,83 +183,9 @@ export class MapContentComponent implements OnInit, AfterViewInit {
         } as Options)
       }),
     });
-    this.myLocationSource = myLocationSource;
-    this.rstSource = rstSource;
-    this.myLocationPoint = myLocationPoint;
     this.rstPoint = rstPoint;
-    this.tileLayer = tileLayer;
-    // google 좌표계
-    // proj4.defs('EPSG:3857', '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs');
-
-    this.map = new Map({
-      target: 'map',
-      layers: [this.tileLayer, this.myLocationPoint, this.rstPoint],
-      view: new View({
-        center: [this.longitude, this.latitude],
-        zoom: 15,
-        projection: proj4326, // Set the projection as the default projection for the view
-        multiWorld: true,
-      }),
-    });
-    // ------------------------------
-    // daum(kakao) layers
-    // ------------------------------
-    // var daumTileGrid = new ol.tilegrid.TileGrid({
-    //   extent : [(-30000-524288), (-60000-524288), (494288+524288), (988576+524288)],
-    //   tileSize : 256,
-    //   resolutions : [4096, 2048, 1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1, 0.5, 0.25],
-    //   minZoom : 1
-    // });
-
-    // function getDaumTileUrlFunction(type: any) {
-    //
-    //   var tileUrlFunction = function(tileCoord: any, pixelRatio: any, projection: any) {
-    //
-    //     var res = this.getTileGrid().getResolutions();
-    //     var sVal = res[tileCoord[0]];
-    //
-    //     var yLength = 988576 - (-60000) + 524288 + 524288;
-    //     var yTile = yLength / (sVal * this.getTileGrid().getTileSize());
-    //
-    //     var tileGap = Math.pow(2, (tileCoord[0] -1));
-    //     yTile = yTile - tileGap;
-    //
-    //     var xTile = tileCoord[1] - tileGap;
-    //
-    //     if (type == 'base') {
-    //       return 'https://map' + Math.floor( (Math.random() * (4 - 1 + 1)) + 1 ) + '.daumcdn.net/map_2d_hd/2111ydg/L' + (15 - tileCoord[0]) + '/' + (yTile + tileCoord[2]) + '/' + xTile + '.png';
-    //     } else if (type == 'satellite') {
-    //       return 'https://map' + Math.floor( (Math.random() * (4 - 1 + 1)) + 1 ) + '.daumcdn.net/map_skyview_hd/L' + (15 - tileCoord[0]) + '/' + (yTile + tileCoord[2]) + '/' + xTile + '.jpg';
-    //     } else if (type == 'hybrid') {
-    //       return 'https://map' + Math.floor( (Math.random() * (4 - 1 + 1)) + 1 ) + '.daumcdn.net/map_hybrid_hd/2111ydg/L' + (15 - tileCoord[0]) + '/' + (yTile + tileCoord[2]) + '/' + xTile + '.png';
-    //     }
-    //
-    //   };
-
-    //   return tileUrlFunction;
-    //
-    // }
-
-
-    // daum base
-    // var daumBaseLayer = new Tile({
-    //   source: new XYZ({
-    //     projection : 'EPSG:5181',
-    //     tileGrid: daumTileGrid,
-    //     tileUrlFunction: getDaumTileUrlFunction('base'),
-    //     tilePixelRatio: 2,              // 타일사이즈 512일때 해상도 비율
-    //   }),
-    //   visible: false
-    // });
-    // this.map.addLayer(daumBaseLayer);
-
-
-    rstPoint.on('click', (event: any) => {
-      console.log('VectorLayer clicked!', event.coordinate);
-      // Perform any other actions you need here
-    });
+    return rstPoint;
   }
-
   async renderRestaurants() {
     const data = await this.multiInfoSvc.getNearRstList();
     for (const datum of data) {
@@ -304,7 +193,11 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     }
   }
   addRstFeature(datum: any) {
-    const imageUrl = '/assets/image/Group_826.png';
+    debugger;
+    let imageUrl = '/assets/image/Group_826.png';
+    if (datum.foodTypeId === 1) {
+      imageUrl = '/assets/image/Group_825.png';
+    }
     const image = new Image();
     image.src = imageUrl;
     image.onload = () => {
@@ -316,16 +209,6 @@ export class MapContentComponent implements OnInit, AfterViewInit {
       });
       feature.setStyle(
         new Style({
-          // image: new CircleStyle({
-          //   radius: 6,
-          //   fill: new Fill({
-          //     color: 'rgba(255, 255, 255, 0.2)',
-          //   }),
-          //   stroke: new Stroke({
-          //     color: '#787efd',
-          //     width: 4,
-          //   }),
-          // }),
           image: new Icon({
             img: image,
             imgSize: image ? [image.width, image.height] : undefined,
@@ -355,14 +238,12 @@ export class MapContentComponent implements OnInit, AfterViewInit {
       this.rstSource.addFeature(feature);
     }
   }
-  // removeRstFeature
   removeRstFeature() {
     if (this.rstSource === null) {
       return;
     }
     this.rstSource.clear();
   }
-
   addMyLocationFeature(lon: number, lat: number) {
     const geom = new Point([lon, lat]);
     const feature: any = new Feature(geom);
@@ -397,7 +278,6 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     // tell OpenLayers to continue postrender animation
     this.map.render();
   }
-
   async onInit () {
     const myPosition: any = await UtilesService.getGeolocation();
     this.latitude = myPosition.coords.latitude;
@@ -422,5 +302,4 @@ export class MapContentComponent implements OnInit, AfterViewInit {
     this.myLocationSource.clear();
     this.myLocationSource.addFeature(feature);
   }
-
 }
